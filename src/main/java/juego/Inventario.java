@@ -1,5 +1,7 @@
+package juego;
 import javax.management.ObjectName;
 import java.util.LinkedList;
+
 
 public class Inventario {
 

@@ -1,3 +1,4 @@
+package juego;
 public class Posicion {
 
     int x;
