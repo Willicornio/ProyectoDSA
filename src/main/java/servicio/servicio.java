@@ -12,6 +12,7 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -136,9 +137,9 @@ import java.util.List;
         })
         @Path("/{AñadirPartidaEnCurso}")
         @Produces(MediaType.APPLICATION_JSON)
-        public Response añadirPartidaEnCurso(@PathParam("id") String id, @PathParam("idPartida") String IdPartida) {
+        public Response añadirPartidaEnCurso(@PathParam("id") String id, @PathParam("idPartida") String IdPartida, Partida partida) {
             try {
-                this.i.añadirPartidaEnCurso(id, IdPartida);
+                this.i.añadirPartidaEnCurso(id, IdPartida, partida );
                 return Response.status(201).build();
 
             }catch (Exception e){
@@ -160,6 +161,32 @@ import java.util.List;
             try {
                 this.i.eliminarPartidaEnCurso(id, IdPartida);
                 return Response.status(201).build();
+
+            }catch (Exception e){
+                return Response.status(404).build();
+            }
+        }
+
+
+
+
+
+
+        @GET
+        @ApiOperation(value = "lista usuarios", notes = "asdasd")
+        @ApiResponses(value = {
+                @ApiResponse(code = 201, message = "Successful", response = Usuario.class, responseContainer = "LinkedList"),
+                @ApiResponse(code = 404, message = "No existe ninguna")
+        })
+        @Path("/{listausuario}")
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response construirMapa() {
+            try {
+
+                LinkedList<Usuario> lista = this.i.dameListaUsuarios();
+                GenericEntity<LinkedList<Usuario>> entity = new GenericEntity<LinkedList<Usuario>>(lista) {};
+
+                return Response.status(201).entity(lista).build();
 
             }catch (Exception e){
                 return Response.status(404).build();
@@ -215,7 +242,7 @@ import java.util.List;
 
 
 
-        @GET //En caso de no bool, se puede cambia por poner y ale
+        @GET //En caso de no bool, se puede cambiar por poner y ale
         @ApiOperation(value = "Habilitar Obejto", notes = "asdasd")
         @ApiResponses(value = {
                 @ApiResponse(code = 201, message = "Successful" ),
@@ -316,13 +343,25 @@ import java.util.List;
         }
 
 
+        @GET
+        @ApiOperation(value = "dame partida en curso", notes = "asdasd")
+        @ApiResponses(value = {
+                @ApiResponse(code = 201, message = "Successful", response = Partida.class),
+                @ApiResponse(code = 404, message = "No existe ninguna")
+        })
+        @Path("/{damePartidaEnCurso}")
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response damePartidaEnCusro(Partida p, @PathParam("idPartida") String IdPartida, @PathParam("idUsuario") String idUsuario) {
+            try {
+                Partida partida = null;
+                partida = this.i.damePartidaEnCurso(idUsuario, IdPartida);
 
+                return Response.status(201).entity(partida).build();
 
-
-
-
-
-
+            }catch (Exception e){
+                return Response.status(404).build();
+            }
+        }
 
 
 
