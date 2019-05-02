@@ -1,6 +1,7 @@
 package juego;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public interface Interfazcutre {
 
@@ -16,7 +17,9 @@ public interface Interfazcutre {
     public void eliminarPartidaEnCurso(String idUsuario, String idPartida);
     public void sumarPuntuacionFinal(String idUser,int puntuacion);
 
-    public void eliminarUsuario
+
+
+
 
 
     public LinkedList<Usuario> dameListaUsuarios ();
@@ -25,9 +28,20 @@ public interface Interfazcutre {
     public void añadirUsuario(String idUser, String pass);
 
 
-    public void habilitarObjeto(String objeto);
-    public void añadirVida(int vida);
-    public int dameVida(String userId, String partidaId);
+
+    //Inventario :
+    public List<Objetos> dameObjetos(String objeto);
+    public void activarmeObjeto(String idObjeto);
+    public void desactivarmeObjeto(String idObjecto);
+    public void crearInventario(String idUser);
+    public void destruirInventario(String idUser);
+
+
+    //Objetos :
+
+    public void crearObjetoNuevo(String nombre, String idObjeto, String puntos, String dinero);
+    public void eliminarObjeto(String idObjeto);
+
 
 
 
