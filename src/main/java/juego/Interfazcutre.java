@@ -5,20 +5,24 @@ import java.util.List;
 
 public interface Interfazcutre {
 
-
+   //Usuario
     public boolean login(String idUser, String pass);
     public boolean logout(String idUser, String pass);
-
-    public void añadirDinero(String idUser, int cantidad);
-    public void quitarDinero(String idUser, int cantidad);
+    public void eliminarUsuario(String idUser, String pass);
+    public void crearUsuario(String idUser, String pass, String nombre);
+    public void modificarDinero(String idUser, int cantidad);
     public boolean checkPartidaEnCurso(String idUser);
-    public boolean checkCantidadDinero(String idUsuario, int cantidad);
-    public  void añadirPartidaEnCurso(String idUsuario, String idPartida, Partida p);
+    public void guardarPartidaEnCurso(String idUsuario, String idPartida, Partida p);
     public void eliminarPartidaEnCurso(String idUsuario, String idPartida);
     public void sumarPuntuacionFinal(String idUser,int puntuacion);
 
 
-
+    //Partida
+    public void iniciarPartida (String idUser);
+    public void finalizarPartida (String idUser);
+    public void construirMapa (Mapa mapa, String idUser);
+    public void guardarPartida(String idUser);
+    public void moodificarVida(String idUser);
 
 
 
@@ -45,12 +49,7 @@ public interface Interfazcutre {
 
 
 
-    public Partida damePartidaEnCurso (String idUser, String idPartida);
-    public void IniciarPartida (String idUser);
-    public void finalizarPartida (String iduser);
-    public void construirMapa (Mapa mapa, String idPartida);
-    public void pararPartida(String idusuario);
-    public void mirarPartidaParada(String idUser);
+
 
 
 
