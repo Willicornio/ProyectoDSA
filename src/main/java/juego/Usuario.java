@@ -7,7 +7,7 @@ String nombre;
 String idUser;
 String pass;
 boolean partidaEnCurso;
-boolean
+String idPartidaEnCurso;
 int puntuacionTotal;
 
      public Usuario (String nombre, String pass){
@@ -15,6 +15,7 @@ int puntuacionTotal;
          this.nombre = nombre;
          this.pass = pass;
          this.idUser = "id" + nombre;
+         this.partidaEnCurso = false;
 
          puntuacionTotal = 0;
      }
@@ -51,12 +52,21 @@ int puntuacionTotal;
         this.puntuacionTotal = puntuacionTotal + puntuacionPartida;
         }
 
-        public LinkedList<Partida> getListaPartidas(){
-         return this.listaPartidas;
-        }
 
-        public void setListaPartidas (Partida p){
-         this.listaPartidas.add(p);
-        }
+    public boolean isPartidaEnCurso() {
+        return partidaEnCurso;
+    }
+
+    public void setPartidaEnCurso(boolean partidaEnCurso) {
+        this.partidaEnCurso = partidaEnCurso;
+    }
+
+    public String getIdPartidaEnCurso() {
+        return idPartidaEnCurso;
+    }
+
+    public void setIdPartidaEnCurso(String idPartidaEnCurso) {
+        this.idPartidaEnCurso = idPartidaEnCurso;
+    }
 }
  //hola

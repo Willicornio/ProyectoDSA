@@ -3,11 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="2028141c-7dba-4a9b-8197-b1c2a17a8622" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/src/main/java/juego/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/Usuario.java" afterDir="false" />
+=======
       <change beforePath="$PROJECT_DIR$/src/main/java/juego/Interfazcutre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/Interfazcutre.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/juego/Inventario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/Inventario.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/juego/Juego.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/Juego.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/juego/JuegoManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/JuegoManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/juego/Partida.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/juego/Partida.java" afterDir="false" />
+>>>>>>> 1a2339df3c6073fef64e3b50583352efa553c043
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -49,6 +53,19 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/juego/Usuario.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="170">
+              <caret line="10" column="20" lean-forward="true" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+              <folding>
+                <element signature="e#1236#1237#0" expanded="true" />
+                <element signature="e#1273#1274#0" expanded="true" />
+                <element signature="e#1334#1335#0" expanded="true" />
+                <element signature="e#1386#1387#0" expanded="true" />
+                <element signature="e#1429#1430#0" expanded="true" />
+                <element signature="e#1468#1469#0" expanded="true" />
+                <element signature="e#1532#1533#0" expanded="true" />
+                <element signature="e#1588#1589#0" expanded="true" />
+=======
             <state relative-caret-position="628">
               <caret line="61" column="7" selection-start-line="61" selection-start-column="7" selection-end-line="61" selection-end-column="7" />
             </state>
@@ -77,16 +94,22 @@
                 <element signature="e#658#659#0" expanded="true" />
                 <element signature="e#695#696#0" expanded="true" />
                 <element signature="e#727#728#0" expanded="true" />
+>>>>>>> 1a2339df3c6073fef64e3b50583352efa553c043
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/juego/Objetos.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="136">
+              <caret line="8" column="1" lean-forward="true" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+=======
             <state relative-caret-position="102">
               <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+>>>>>>> 1a2339df3c6073fef64e3b50583352efa553c043
             </state>
           </provider>
         </entry>
@@ -247,7 +270,11 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556790179652" />
+<<<<<<< HEAD
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556789624153" />
+=======
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556789853838" />
+>>>>>>> 1a2339df3c6073fef64e3b50583352efa553c043
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
@@ -300,7 +327,11 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
+<<<<<<< HEAD
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28294036" />
+=======
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14295302" />
+>>>>>>> 1a2339df3c6073fef64e3b50583352efa553c043
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -314,7 +345,11 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
+<<<<<<< HEAD
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.07020057" />
+=======
       <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.04249292" />
+>>>>>>> 1a2339df3c6073fef64e3b50583352efa553c043
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -437,6 +472,21 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/main/java/juego/Usuario.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="20" lean-forward="true" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+          <folding>
+            <element signature="e#1236#1237#0" expanded="true" />
+            <element signature="e#1273#1274#0" expanded="true" />
+            <element signature="e#1334#1335#0" expanded="true" />
+            <element signature="e#1386#1387#0" expanded="true" />
+            <element signature="e#1429#1430#0" expanded="true" />
+            <element signature="e#1468#1469#0" expanded="true" />
+            <element signature="e#1532#1533#0" expanded="true" />
+            <element signature="e#1588#1589#0" expanded="true" />
+=======
     <entry file="file://$PROJECT_DIR$/src/main/java/juego/Inventario.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -451,10 +501,17 @@
             <element signature="e#434#435#0" expanded="true" />
             <element signature="e#490#491#0" expanded="true" />
             <element signature="e#538#539#0" expanded="true" />
+>>>>>>> 1a2339df3c6073fef64e3b50583352efa553c043
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/main/java/juego/Objetos.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="1" lean-forward="true" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+=======
     <entry file="file://$PROJECT_DIR$/src/main/java/juego/Partida.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -484,6 +541,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="53" lean-forward="true" selection-start-line="7" selection-start-column="53" selection-end-line="7" selection-end-column="53" />
+>>>>>>> 1a2339df3c6073fef64e3b50583352efa553c043
         </state>
       </provider>
     </entry>
