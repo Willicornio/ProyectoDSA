@@ -322,7 +322,23 @@ import java.util.List;
             }
         }
 
+@DELETE
+@ApiOperation(value = "eliminar usuario")
+@ApiResponses(value = {
+        @ApiResponse(code = 201, message = "Successful" ),
+        @ApiResponse(code = 404, message = "No existe ninguna")
+})
+@Path("/{cambioMapa}")
+@Produces(MediaType.APPLICATION_JSON)
+public Response construirMapa(Mapa mapa, @PathParam("idPartida") String IdPartida) {
+    try {
+        this.i.construirMapa(mapa, IdPartida);
+        return Response.status(201).build();
 
+    }catch (Exception e){
+        return Response.status(404).build();
+    }
+}
 
         @GET
         @ApiOperation(value = "construir mapa", notes = "asdasd")

@@ -14,6 +14,7 @@ public interface Interfazcutre {
     public void eliminarPartidaEnCurso(String idUsuario, String idPartida);
     public void sumarPuntuacionFinal(String idUser,int puntuacion);
 
+    public void eliminarUsuario
 
 
     public LinkedList<Usuario> dameListaUsuarios ();

@@ -6,7 +6,8 @@ public class Usuario {
 String nombre;
 String idUser;
 String pass;
-LinkedList<Partida> listaPartidas;
+boolean partidaEnCurso;
+boolean
 int puntuacionTotal;
 
      public Usuario (String nombre, String pass){
@@ -14,7 +15,7 @@ int puntuacionTotal;
          this.nombre = nombre;
          this.pass = pass;
          this.idUser = "id" + nombre;
-         this.listaPartidas = new LinkedList<Partida>();
+
          puntuacionTotal = 0;
      }
 
