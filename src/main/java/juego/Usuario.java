@@ -69,3 +69,4 @@ int puntuacionTotal;
         this.idPartidaEnCurso = idPartidaEnCurso;
     }
 }
+ //hola

@@ -6,4 +6,21 @@ public class JuegoManager {
     public static Interfazcutre getInstance(){
         return instance;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

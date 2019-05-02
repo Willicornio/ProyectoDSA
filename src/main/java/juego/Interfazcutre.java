@@ -5,7 +5,9 @@ import java.util.LinkedList;
 public interface Interfazcutre {
 
 
-    public boolean verificarLogin(String idUser);
+    public boolean login(String idUser, String pass);
+    public boolean logout(String idUser, String pass);
+
     public void añadirDinero(String idUser, int cantidad);
     public void quitarDinero(String idUser, int cantidad);
     public boolean checkPartidaEnCurso(String idUser);
