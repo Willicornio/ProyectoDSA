@@ -9,6 +9,7 @@ String pass;
 boolean partidaEnCurso;
 String idPartidaEnCurso;
 int puntuacionTotal;
+Inventario inventario;
 
      public Usuario (String nombre, String pass){
 
@@ -16,6 +17,7 @@ int puntuacionTotal;
          this.pass = pass;
          this.idUser = "id" + nombre;
          this.partidaEnCurso = false;
+         inventario = null;
 
          puntuacionTotal = 0;
      }
@@ -67,6 +69,14 @@ int puntuacionTotal;
 
     public void setIdPartidaEnCurso(String idPartidaEnCurso) {
         this.idPartidaEnCurso = idPartidaEnCurso;
+    }
+
+    public Inventario getInventario() {
+        return inventario;
+    }
+
+    public void setInventario(Inventario inventario) {
+        this.inventario = inventario;
     }
 }
  //hola
