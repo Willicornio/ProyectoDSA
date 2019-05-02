@@ -26,15 +26,12 @@ public interface Interfazcutre {
 
 
 
-    public LinkedList<Usuario> dameListaUsuarios ();
-
-
-    public void añadirUsuario(String idUser, String pass);
+ public void añadirUsuario(String idUser, String pass);
 
 
 
     //Inventario :
-    public List<Objetos> dameObjetos(String objeto);
+    public List<Objetos> dameObjetos(String idUser) throws Exception;
     public void activarmeObjeto(String idObjeto);
     public void desactivarmeObjeto(String idObjecto);
     public void crearInventario(String idUser);

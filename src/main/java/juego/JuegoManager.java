@@ -2,8 +2,17 @@ package juego;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.HashMap;
 
 public class JuegoManager  implements  Interfazcutre{
+
+
+    private HashMap<String, Usuario> usuarios;
+    private List<Objetos> lisaObjetos;
+    private List<Inventario> listainventarios;
+    private List<Mapa> listaMapas;
+
+
 
     private static Interfazcutre instance;
     public static Interfazcutre getInstance(){
@@ -81,10 +90,7 @@ public class JuegoManager  implements  Interfazcutre{
 
     }
 
-    @Override
-    public LinkedList<Usuario> dameListaUsuarios() {
-        return null;
-    }
+
 
     @Override
     public void añadirUsuario(String idUser, String pass) {
@@ -92,12 +98,35 @@ public class JuegoManager  implements  Interfazcutre{
     }
 
     @Override
-    public List<Objetos> dameObjetos(String objeto) {
-        return null;
+    public List<Objetos> dameObjetos(String idUser) throws Exception {
+        LinkedList<Objetos> objetosList = null;
+        Usuario user = usuarios.get(idUser);
+        if(user != null){
+        for (int i=0; i<this.listainventarios.size();i++)
+        {
+            if(idUser.equals(this.listainventarios.get(i).getIdinventario()))
+            {
+
+                objetosList = this.listainventarios.get(i).getInventario();
+
+                return objetosList;
+        }
+
+        }
+
+
+
+        }else {
+            throw new Exception();
+        }
     }
 
     @Override
     public void activarmeObjeto(String idObjeto) {
+
+
+
+
 
     }
 
