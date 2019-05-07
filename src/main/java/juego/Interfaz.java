@@ -6,10 +6,10 @@ import java.util.List;
 public interface Interfaz {
 
    //Usuario
-    public boolean login(String idUser, String pass);
-    public boolean logout(String idUser, String pass);
+    public boolean login(String nombre, String pass);
+    public boolean logout(String nombre, String pass);
     public void eliminarUsuario(String idUser, String pass);
-    public void crearUsuario(String idUser, String pass, String nombre);
+    public Usuario crearUsuario(String nombre, String pass);
     public void modificarDinero(String idUser, int cantidad);
     public boolean checkPartidaEnCurso(String idUser);
     public void guardarPartidaEnCurso(String idUsuario, String idPartida, Partida p);

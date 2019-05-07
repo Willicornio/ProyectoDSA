@@ -3,13 +3,15 @@ import java.util.LinkedList;
 
 public class Usuario {
 
-String nombre;
+
 String idUser;
+String nombre;
 String pass;
+Inventario inventario;
 boolean partidaEnCurso;
 String idPartidaEnCurso;
 int puntuacionTotal;
-Inventario inventario;
+
 
      public Usuario (String nombre, String pass){
 
@@ -17,8 +19,7 @@ Inventario inventario;
          this.pass = pass;
          this.idUser = "id" + nombre;
          this.partidaEnCurso = false;
-         inventario = null;
-
+         inventario = new Inventario(idUser);
          puntuacionTotal = 0;
      }
 

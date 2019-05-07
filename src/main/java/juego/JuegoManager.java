@@ -21,7 +21,7 @@ public class JuegoManager  implements Interfaz {
 
 
     @Override
-    public boolean login(String idUser, String pass) {
+    public boolean login(String nombre, String pass) {
         return false;
     }
 
@@ -36,9 +36,13 @@ public class JuegoManager  implements Interfaz {
     }
 
     @Override
-    public void crearUsuario(String idUser, String pass, String nombre) {
+    public Usuario crearUsuario(String nombre, String pass) {
 
+        Usuario u = new Usuario(nombre,pass);
+
+        return u;
     }
+
 
     @Override
     public void modificarDinero(String idUser, int cantidad) {
