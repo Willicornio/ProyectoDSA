@@ -14,8 +14,18 @@ public class JuegoManager  implements Interfaz {
 
 
 
+    private JuegoManager(){
+        this.usuarios = new HashMap<>();
+        this.listaObjetos = new LinkedList<>();
+        //++++++++++++++++ OBJETOS POR DEFECTO++++++++++++++++++++++++++
+        this.listaObjetos.add(0, new Objetos("Linterna",0,1,5));
+        this.listaObjetos.add(1, new Objetos("Ganzua",1,1,10));
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    }
+
     private static Interfaz instance;
     public static Interfaz getInstance(){
+        if (instance == null) instance = new JuegoManager();
         return instance;
     }
 
@@ -31,16 +41,24 @@ public class JuegoManager  implements Interfaz {
     }
 
     @Override
-    public void eliminarUsuario(String idUser, String pass) {
+    public void eliminarUsuario(String idUser) {
+
+        this.usuarios.remove(idUser); //LO EQUIVALENTE EN DAO AL DELETE
 
     }
 
     @Override
-    public Usuario crearUsuario(String nombre, String pass) {
+    public void crearUsuario(String nombre, String pass, List<Objetos> listaObjetos) {
 
-        Usuario u = new Usuario(nombre,pass);
 
-        return u;
+        Inventario i = crearInventario(listaObjetos);
+
+        Usuario u = new Usuario(nombre,pass,i);
+
+
+        this.usuarios.put(u.idUser,u); //LO EQUIVALENTE EN DAO AL SAVE
+
+
     }
 
 
@@ -101,7 +119,7 @@ public class JuegoManager  implements Interfaz {
 
     }
 
-    @Override
+    /*@Override
     public List<Objetos> dameObjetos(String idUser) throws Exception {
         LinkedList<Objetos> objetosList = null;
         Usuario user = usuarios.get(idUser);
@@ -124,9 +142,9 @@ public class JuegoManager  implements Interfaz {
             throw new Exception();
         }
     }
-
+        */
     @Override
-    public void activarmeObjeto(String idObjeto) {
+    public void activarmeObjeto(String idObjeto, String idUser) {
 
 
 
@@ -135,22 +153,21 @@ public class JuegoManager  implements Interfaz {
     }
 
     @Override
-    public void desactivarmeObjeto(String idObjecto) {
+    public void desactivarmeObjeto(String idObjecto, String idUser) {
 
     }
 
     @Override
-    public void crearInventario(String idUser) {
+    public Inventario crearInventario(List<Objetos> listaObjetos) {
+
+        return new Inventario(listaObjetos);
 
     }
 
-    @Override
-    public void destruirInventario(String idUser) {
-
-    }
 
     @Override
-    public void crearObjetoNuevo(String nombre, String idObjeto, String puntos, String dinero) {
+    public void crearObjetoNuevo(Objetos objeto) {
+        this.listaObjetos.add(objeto);
 
     }
 

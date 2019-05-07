@@ -32,7 +32,7 @@ import java.util.LinkedList;
 
 
 
-        @GET
+        @POST
         @ApiOperation(value = "verificar loguin", notes = "asdasd")
         @ApiResponses(value = {
                 @ApiResponse(code = 201, message = "Successful", response =  boolean.class ),

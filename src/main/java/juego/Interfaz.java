@@ -8,8 +8,11 @@ public interface Interfaz {
    //Usuario
     public boolean login(String nombre, String pass);
     public boolean logout(String nombre, String pass);
-    public void eliminarUsuario(String idUser, String pass);
-    public Usuario crearUsuario(String nombre, String pass);
+    public void eliminarUsuario(String idUser);
+
+
+    public void crearUsuario(String nombre, String pass, List<Objetos> listaObjetos);
+
     public void modificarDinero(String idUser, int cantidad);
     public boolean checkPartidaEnCurso(String idUser);
     public void guardarPartidaEnCurso(String idUsuario, String idPartida, Partida p);
@@ -26,21 +29,26 @@ public interface Interfaz {
 
 
 
- public void añadirUsuario(String idUser, String pass);
+    public void añadirUsuario(String idUser, String pass);
 
 
 
     //Inventario :
-    public List<Objetos> dameObjetos(String idUser) throws Exception;
-    public void activarmeObjeto(String idObjeto);
-    public void desactivarmeObjeto(String idObjecto);
-    public void crearInventario(String idUser);
-    public void destruirInventario(String idUser);
+
+    public Inventario crearInventario(List<Objetos> listaObjetos);
+    //public List<Objetos> dameObjetos(String idUser) throws Exception;
+    public void activarmeObjeto(String idObjeto, String idUser);
+    public void desactivarmeObjeto(String idObjecto, String idUser);
+
+    //public void destruirInventario(String idUser); SE ELIMINA YA AL ELIMINAR UN USER
 
 
     //Objetos :
 
-    public void crearObjetoNuevo(String nombre, String idObjeto, String puntos, String dinero);
+
+
+
+    public void crearObjetoNuevo(Objetos objeto);
     public void eliminarObjeto(String idObjeto);
 
 

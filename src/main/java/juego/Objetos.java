@@ -2,13 +2,13 @@ package juego;
 public class Objetos {
 
     String Nombre;
-    String idObjeto;
+    int idObjeto;
     int puntos;
     int dinero;
     boolean actvivado;
 
 
-    public Objetos (String Nombre, String idObjeto, int puntos, int dinero){
+    public Objetos (String Nombre, int idObjeto, int puntos, int dinero){
 
         this.dinero = dinero;
         this.idObjeto = idObjeto;
@@ -25,11 +25,11 @@ public class Objetos {
         Nombre = nombre;
     }
 
-    public String getIdObjeto() {
+    public int getIdObjeto() {
         return idObjeto;
     }
 
-    public void setIdObjeto(String idObjeto) {
+    public void setIdObjeto(int idObjeto) {
         this.idObjeto = idObjeto;
     }
 

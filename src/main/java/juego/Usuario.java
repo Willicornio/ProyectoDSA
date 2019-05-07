@@ -8,28 +8,22 @@ String idUser;
 String nombre;
 String pass;
 Inventario inventario;
+int dinero;
 boolean partidaEnCurso;
 String idPartidaEnCurso;
 int puntuacionTotal;
 
 
-     public Usuario (String nombre, String pass){
+     public Usuario (String nombre, String pass, Inventario i){
 
          this.nombre = nombre;
          this.pass = pass;
          this.idUser = "id" + nombre;
+         this.dinero = 0;
          this.partidaEnCurso = false;
-         inventario = new Inventario(idUser);
+         inventario = i;
          puntuacionTotal = 0;
      }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 
     public String getIdUser() {
         return idUser;
@@ -37,6 +31,14 @@ int puntuacionTotal;
 
     public void setIdUser(String idUser) {
         this.idUser = idUser;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getPass() {
@@ -47,14 +49,21 @@ int puntuacionTotal;
         this.pass = pass;
     }
 
-    public int getPuntuacionTotal(){
-         return puntuacionTotal;
+    public Inventario getInventario() {
+        return inventario;
     }
 
-    public void setPuntuacionTotal(int puntuacionPartida) {
-        this.puntuacionTotal = puntuacionTotal + puntuacionPartida;
-        }
+    public void setInventario(Inventario inventario) {
+        this.inventario = inventario;
+    }
 
+    public int getDinero() {
+        return dinero;
+    }
+
+    public void setDinero(int dinero) {
+        this.dinero = dinero;
+    }
 
     public boolean isPartidaEnCurso() {
         return partidaEnCurso;
@@ -72,12 +81,12 @@ int puntuacionTotal;
         this.idPartidaEnCurso = idPartidaEnCurso;
     }
 
-    public Inventario getInventario() {
-        return inventario;
+    public int getPuntuacionTotal() {
+        return puntuacionTotal;
     }
 
-    public void setInventario(Inventario inventario) {
-        this.inventario = inventario;
+    public void setPuntuacionTotal(int puntuacionTotal) {
+        this.puntuacionTotal = puntuacionTotal;
     }
 }
  //hola

@@ -2,18 +2,24 @@ package juego;
 import javax.management.ObjectName;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 
 public class Inventario {
 
     Objetos[] inventario;
-    String idInventario;
 
-    public Inventario(String idUser) {
-        this.inventario = new Objetos[2]; // de momento pongo 2
-        this.inventario[0] = new Objetos("Linterna", "linterna",1,5);
-        this.inventario[1] = new Objetos("Ganzua", "ganzua",1,10);
-        this.idInventario = idUser;
+
+    public Inventario(List<Objetos> listaObjetos) {
+
+        this .inventario = new Objetos[listaObjetos.size()];
+        int contador = 0;
+
+        for(Objetos o: listaObjetos){
+            inventario[contador] = o;
+            contador++;
+        }
+
 
     }
 
@@ -23,14 +29,6 @@ public class Inventario {
 
     public void setInventario(Objetos[] inventario) {
         this.inventario = inventario;
-    }
-
-    public String getIdInventario() {
-        return idInventario;
-    }
-
-    public void setIdInventario(String idInventario) {
-        this.idInventario = idInventario;
     }
 }
 
