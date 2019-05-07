@@ -11,18 +11,14 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 
-
-
-    @Api(value = "/Proyecto", description = "Proyecto Service")
+@Api(value = "/Proyecto", description = "Proyecto Service")
     @Path("/proyecto")
     public class servicio {
 
-        private Interfazcutre i;
+        private Interfaz i;
 
         public servicio() {
             this.i = JuegoManager.getInstance();

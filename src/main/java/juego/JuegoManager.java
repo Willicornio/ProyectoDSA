@@ -4,18 +4,18 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.HashMap;
 
-public class JuegoManager  implements  Interfazcutre{
+public class JuegoManager  implements Interfaz {
 
 
     private HashMap<String, Usuario> usuarios;
-    private List<Objetos> lisaObjetos;
+    private List<Objetos> listaObjetos;
     private List<Inventario> listainventarios;
     private List<Mapa> listaMapas;
 
 
 
-    private static Interfazcutre instance;
-    public static Interfazcutre getInstance(){
+    private static Interfaz instance;
+    public static Interfaz getInstance(){
         return instance;
     }
 

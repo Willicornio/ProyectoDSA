@@ -3,7 +3,7 @@ package juego;
 import java.util.LinkedList;
 import java.util.List;
 
-public interface Interfazcutre {
+public interface Interfaz {
 
    //Usuario
     public boolean login(String idUser, String pass);
