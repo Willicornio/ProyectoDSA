@@ -1,4 +1,4 @@
-package servicio;
+/*package servicio;
 
 
 import juego.*;
@@ -381,5 +381,5 @@ public Response construirMapa(Mapa mapa, @PathParam("idPartida") String IdPartid
     }
 
 
-
+*/
 

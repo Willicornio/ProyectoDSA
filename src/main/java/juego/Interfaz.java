@@ -11,7 +11,7 @@ public interface Interfaz {
     public void eliminarUsuario(String idUser);
 
 
-    public void crearUsuario(String nombre, String pass, List<Objetos> listaObjetos);
+    public Usuario crearUsuario(String nombre, String pass, List<Objetos> listaObjetos);
 
     public void modificarDinero(String idUser, int cantidad);
     public boolean checkPartidaEnCurso(String idUser);
@@ -29,6 +29,7 @@ public interface Interfaz {
 
 
 
+
     public void añadirUsuario(String idUser, String pass);
 
 
@@ -36,7 +37,7 @@ public interface Interfaz {
     //Inventario :
 
     public Inventario crearInventario(List<Objetos> listaObjetos);
-    //public List<Objetos> dameObjetos(String idUser) throws Exception;
+
     public void activarmeObjeto(String idObjeto, String idUser);
     public void desactivarmeObjeto(String idObjecto, String idUser);
 
@@ -50,6 +51,7 @@ public interface Interfaz {
 
     public void crearObjetoNuevo(Objetos objeto);
     public void eliminarObjeto(String idObjeto);
+    public List<Objetos> dameObjetos();
 
 
 

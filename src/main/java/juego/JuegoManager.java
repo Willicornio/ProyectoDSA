@@ -48,7 +48,7 @@ public class JuegoManager  implements Interfaz {
     }
 
     @Override
-    public void crearUsuario(String nombre, String pass, List<Objetos> listaObjetos) {
+    public Usuario crearUsuario(String nombre, String pass, List<Objetos> listaObjetos) {
 
 
         Inventario i = crearInventario(listaObjetos);
@@ -57,6 +57,8 @@ public class JuegoManager  implements Interfaz {
 
 
         this.usuarios.put(u.idUser,u); //LO EQUIVALENTE EN DAO AL SAVE
+
+        return u;
 
 
     }
@@ -119,30 +121,12 @@ public class JuegoManager  implements Interfaz {
 
     }
 
-    /*@Override
-    public List<Objetos> dameObjetos(String idUser) throws Exception {
-        LinkedList<Objetos> objetosList = null;
-        Usuario user = usuarios.get(idUser);
-        if(user != null){
-        for (int i=0; i<this.listainventarios.size();i++)
-        {
-            if(idUser.equals(this.listainventarios.get(i).getIdinventario()))
-            {
+    @Override
+    public List<Objetos> dameObjetos(){
 
-                objetosList = this.listainventarios.get(i).getInventario();
-
-                return objetosList;
-        }
-
-        }
-
-
-
-        }else {
-            throw new Exception();
-        }
+        return this.listaObjetos;
     }
-        */
+
     @Override
     public void activarmeObjeto(String idObjeto, String idUser) {
 
