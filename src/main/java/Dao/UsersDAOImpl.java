@@ -28,6 +28,9 @@ public class UsersDAOImpl implements UsersDAO {
         }
     }
 
+    public int actualizarDinero( String idus)
+
+
     public void getUser(String id) {
         Session s = Factoria.getSession();
         //  Usuario u = s.get(Usuario.class, "ghj");

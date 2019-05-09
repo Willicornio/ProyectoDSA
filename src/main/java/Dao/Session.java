@@ -204,6 +204,10 @@ public class Session {
     }
 
 
+
+
+
+
     public Object get( String id, Class clase) throws Exception {
 
         Object o = clase.newInstance();
@@ -246,6 +250,8 @@ public class Session {
 
 
     }
+
+    private
 
 
     private Object writeResultSet(ResultSet resultSet, Object instancia) throws Exception {
