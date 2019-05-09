@@ -1,6 +1,5 @@
 package juego;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public interface Juego {
@@ -11,7 +10,7 @@ public interface Juego {
     public void eliminarUsuario(String idUser);
 
 
-    public Usuario crearUsuario(String nombre, String pass, List<Objetos> listaObjetos);
+    public Usuario crearUsuario(String nombre, String pass, List<Objeto> listaObjetos);
 
     public void modificarDinero(String idUser, int cantidad);
     public boolean checkPartidaEnCurso(String idUser);
@@ -36,7 +35,7 @@ public interface Juego {
 
     //Inventario :
 
-    public Inventario crearInventario(List<Objetos> listaObjetos, String idUser);
+    public Inventario crearInventario(List<Objeto> listaObjetos, String idUser);
 
     public void activarmeObjeto(String idObjeto, String idUser);
     public void desactivarmeObjeto(String idObjecto, String idUser);
@@ -44,14 +43,14 @@ public interface Juego {
     //public void destruirInventario(String idUser); SE ELIMINA YA AL ELIMINAR UN USER
 
 
-    //Objetos :
+    //Objeto :
 
 
 
 
-    public void crearObjetoNuevo(Objetos objeto);
+    public void crearObjetoNuevo(Objeto objeto);
     public void eliminarObjeto(String idObjeto);
-    public List<Objetos> dameObjetos();
+    public List<Objeto> dameObjetos();
 
 
 

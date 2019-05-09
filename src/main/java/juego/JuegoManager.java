@@ -8,7 +8,7 @@ public class JuegoManager  implements Juego {
 
 
     private HashMap<String, Usuario> usuarios;
-    private List<Objetos> listaObjetos;
+    private List<Objeto> listaObjetos;
     private List<Inventario> listainventarios;
     private List<Mapa> listaMapas;
 
@@ -18,8 +18,8 @@ public class JuegoManager  implements Juego {
         this.usuarios = new HashMap<>();
         this.listaObjetos = new LinkedList<>();
         //++++++++++++++++ OBJETOS POR DEFECTO++++++++++++++++++++++++++
-        this.listaObjetos.add(0, new Objetos("Linterna",0,1,5));
-        this.listaObjetos.add(1, new Objetos("Ganzua",1,1,10));
+        this.listaObjetos.add(0, new Objeto("Linterna",0,1,5));
+        this.listaObjetos.add(1, new Objeto("Ganzua",1,1,10));
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     }
 
@@ -48,7 +48,7 @@ public class JuegoManager  implements Juego {
     }
 
     @Override
-    public Usuario crearUsuario(String nombre, String pass, List<Objetos> listaObjetos) {
+    public Usuario crearUsuario(String nombre, String pass, List<Objeto> listaObjetos) {
 
         String idUser = "id"+nombre;
 
@@ -123,7 +123,7 @@ public class JuegoManager  implements Juego {
     }
 
     @Override
-    public List<Objetos> dameObjetos(){
+    public List<Objeto> dameObjetos(){
 
         return this.listaObjetos;
     }
@@ -143,7 +143,7 @@ public class JuegoManager  implements Juego {
     }
 
     @Override
-    public Inventario crearInventario(List<Objetos> listaObjetos, String idUser) {
+    public Inventario crearInventario(List<Objeto> listaObjetos, String idUser) {
 
         return new Inventario(listaObjetos,idUser);
 
@@ -151,7 +151,7 @@ public class JuegoManager  implements Juego {
 
 
     @Override
-    public void crearObjetoNuevo(Objetos objeto) {
+    public void crearObjetoNuevo(Objeto objeto) {
         this.listaObjetos.add(objeto);
 
     }

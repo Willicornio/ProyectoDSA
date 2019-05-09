@@ -1,6 +1,6 @@
 import juego.Juego;
 import juego.JuegoManager;
-import juego.Objetos;
+import juego.Objeto;
 import juego.Usuario;
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,7 +20,7 @@ public class test {
 
     @Test
     public void crearUsuario() {
-        List<Objetos> list = this.ju.dameObjetos();
+        List<Objeto> list = this.ju.dameObjetos();
 
         Usuario u = this.ju.crearUsuario("Adri","1234",list);
         Assert.assertEquals(2, u.getInventario().getObjetos().length);

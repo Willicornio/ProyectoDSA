@@ -1,5 +1,5 @@
 package juego;
-public class Objetos {
+public class Objeto {
 
     String Nombre;
     int idObjeto; //cambiar
@@ -8,7 +8,7 @@ public class Objetos {
     boolean actvivado;
 
 
-    public Objetos (String Nombre, int idObjeto, int puntos, int dinero){
+    public Objeto(String Nombre, int idObjeto, int puntos, int dinero){
 
         this.dinero = dinero;
         this.idObjeto = idObjeto;

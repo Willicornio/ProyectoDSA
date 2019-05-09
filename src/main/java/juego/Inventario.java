@@ -1,7 +1,4 @@
 package juego;
-import javax.management.ObjectName;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -9,15 +6,15 @@ public class Inventario {
 
     String id;
     String idUser;
-    Objetos[] objetos;
+    Objeto[] objetos;
 
 
-    public Inventario(List<Objetos> listaObjetos, String idUser) {
+    public Inventario(List<Objeto> listaObjetos, String idUser) {
 
-        this.objetos = new Objetos[listaObjetos.size()];
+        this.objetos = new Objeto[listaObjetos.size()];
         int contador = 0;
 
-        for(Objetos o: listaObjetos){
+        for(Objeto o: listaObjetos){
             objetos[contador] = o;
             contador++;
         }
@@ -28,11 +25,11 @@ public class Inventario {
 
     }
 
-    public Objetos[] getObjetos() {
+    public Objeto[] getObjetos() {
         return objetos;
     }
 
-    public void setObjetos(Objetos[] inventario) {
+    public void setObjetos(Objeto[] inventario) {
         this.objetos = inventario;
     }
 
