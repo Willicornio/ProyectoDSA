@@ -1,4 +1,4 @@
-/*package servicio;
+package servicio;
 
 
 import juego.*;
@@ -12,22 +12,41 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.LinkedList;
+import java.util.List;
 
 
 @Api(value = "/Proyecto", description = "Proyecto Service")
-    @Path("/proyecto")
-    public class servicio {
+    @Path("/")
+    public class ProyectoService {
 
-        private Juego i;
+    private Juego ju;
 
-        public servicio() {
-            this.i = JuegoManager.getInstance();
+    public ProyectoService() {
+        this.ju = JuegoManager.getInstance();
 
 
+    }
 
+    @POST
+    @ApiOperation(value = "Crear usuario", notes = "Creamos el usuario")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful"),
+            @ApiResponse(code = 404, message = "No se ha podido realizar")
+    })
+    @Path("/usuario/{nombre}/{pass}/{list}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response crearUsuario(@PathParam("nombre") String nombre, @PathParam("pass") String pass, @PathParam("list") List<Objeto> list ) {
+        try {
+            this.ju.crearUsuario(nombre, pass,list);
+            return Response.status(201).build();
+
+        } catch (Exception e) {
+            return Response.status(404).build();
         }
+    }
+}
 
-
+/*
 
 
 
@@ -214,23 +233,7 @@ import java.util.LinkedList;
 
 
 
-        @POST
-        @ApiOperation(value = "crear usuario", notes = "asdasd")
-        @ApiResponses(value = {
-                @ApiResponse(code = 201, message = "Successful" ),
-                @ApiResponse(code = 404, message = "No se ha podido realizar")
-        })
-        @Path("/{CrearUsuario}")
-        @Produces(MediaType.APPLICATION_JSON)
-        public Response crearUsuario(@PathParam("id") String id, @PathParam("pass") String pass) {
-            try {
-                this.i.añadirUsuario(id, pass);
-                return Response.status(201).build();
 
-            }catch (Exception e){
-                return Response.status(404).build();
-            }
-        }
 
 
 

@@ -18,8 +18,8 @@ public class JuegoManager  implements Juego {
         this.usuarios = new HashMap<>();
         this.listaObjetos = new LinkedList<>();
         //++++++++++++++++ OBJETOS POR DEFECTO++++++++++++++++++++++++++
-        this.listaObjetos.add(0, new Objeto("Linterna",0,1,5));
-        this.listaObjetos.add(1, new Objeto("Ganzua",1,1,10));
+        this.listaObjetos.add(0, new Objeto("Linterna","0",1,5));
+        this.listaObjetos.add(1, new Objeto("Ganzua","1",1,10));
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     }
 
