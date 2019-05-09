@@ -33,10 +33,11 @@ import java.util.List;
             @ApiResponse(code = 201, message = "Successful"),
             @ApiResponse(code = 404, message = "No se ha podido realizar")
     })
-    @Path("/usuario/{nombre}/{pass}/{list}")
+    @Path("/usuario/{nombre}/{pass}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response crearUsuario(@PathParam("nombre") String nombre, @PathParam("pass") String pass, @PathParam("list") List<Objeto> list ) {
+    public Response crearUsuario(@PathParam("nombre") String nombre, @PathParam("pass") String pass) {
         try {
+            List<Objeto> list = this.ju.dameObjetos();
             this.ju.crearUsuario(nombre, pass,list);
             return Response.status(201).build();
 
@@ -44,6 +45,8 @@ import java.util.List;
             return Response.status(404).build();
         }
     }
+
+
 }
 
 /*

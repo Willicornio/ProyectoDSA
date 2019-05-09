@@ -1,5 +1,6 @@
 package juego;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.HashMap;
@@ -58,10 +59,17 @@ public class JuegoManager  implements Juego {
 
 
         this.usuarios.put(u.idUser,u); //LO EQUIVALENTE EN DAO AL SAVE
-
         return u;
 
 
+    }
+
+    @Override
+    public List<Usuario> dameUsuarios() {
+
+       ArrayList u = new ArrayList(this.usuarios.values());
+
+        return u;
     }
 
 
@@ -158,6 +166,13 @@ public class JuegoManager  implements Juego {
 
     @Override
     public void eliminarObjeto(String idObjeto) {
+
+    }
+    @Override
+    public void clear() {
+
+        this.usuarios.clear();
+        this.listaObjetos.clear();
 
     }
 }
