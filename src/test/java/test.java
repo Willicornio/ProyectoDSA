@@ -1,7 +1,4 @@
-import juego.Juego;
-import juego.JuegoManager;
-import juego.Objeto;
-import juego.Usuario;
+import juego.*;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -33,7 +30,7 @@ public class test {
     @Test
     public void dameUsuarios() {
 
-        List<Usuario> list = this.ju.dameUsuarios();
+        List<UsuarioTO> list = this.ju.dameUsuarios();
 
         Assert.assertEquals(2, list.size());
     }

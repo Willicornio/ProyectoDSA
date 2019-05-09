@@ -65,11 +65,18 @@ public class JuegoManager  implements Juego {
     }
 
     @Override
-    public List<Usuario> dameUsuarios() {
+    public List<UsuarioTO> dameUsuarios() {
 
-       ArrayList u = new ArrayList(this.usuarios.values());
+       List<Usuario> u = new ArrayList(this.usuarios.values());
 
-        return u;
+       List<UsuarioTO> list = new ArrayList<>();
+
+       for(Usuario g: u){
+           list.add(new UsuarioTO(g.getIdUser(),g.getNombre(),g.getDinero(),g.getPuntuacionTotal()));
+
+       }
+
+        return list;
     }
 
 

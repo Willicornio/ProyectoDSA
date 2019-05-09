@@ -23,6 +23,9 @@ import java.util.List;
 
     public ProyectoService() {
         this.ju = JuegoManager.getInstance();
+        List<Objeto> list = this.ju.dameObjetos();
+        Usuario u = this.ju.crearUsuario("Julio","1234",list);
+        Usuario i = this.ju.crearUsuario("Pedro","1234",list);
 
 
     }
@@ -30,7 +33,7 @@ import java.util.List;
     @POST
     @ApiOperation(value = "Crear usuario", notes = "Creamos el usuario")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Successful"),
+            @ApiResponse(code = 201, message = "Successful",response = Usuario.class),
             @ApiResponse(code = 404, message = "No se ha podido realizar")
     })
     @Path("/usuario/{nombre}/{pass}")
@@ -44,6 +47,27 @@ import java.util.List;
         } catch (Exception e) {
             return Response.status(404).build();
         }
+    }
+
+    @GET
+    @ApiOperation(value = "get all users")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful", response = UsuarioTO.class, responseContainer="List"),
+            @ApiResponse(code = 404, message = "No se ha podido realizar")
+    })
+    @Path("/usuarios")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response dameUsuarios() {
+        try{
+
+            List<UsuarioTO> usuarios = this.ju.dameUsuarios();
+            GenericEntity<List<UsuarioTO>> entity = new GenericEntity<List<UsuarioTO>>(usuarios) {};
+            return Response.status(201).entity(entity).build()  ;
+
+        }catch (Exception e){
+            return Response.status(404).build();
+        }
+
     }
 
 

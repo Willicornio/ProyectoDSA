@@ -11,7 +11,7 @@ public interface Juego {
 
 
     public Usuario crearUsuario(String nombre, String pass, List<Objeto> listaObjetos);
-    public List<Usuario> dameUsuarios();
+    public List<UsuarioTO> dameUsuarios();
 
     public void modificarDinero(String idUser, int cantidad);
     public boolean checkPartidaEnCurso(String idUser);
