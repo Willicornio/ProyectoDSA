@@ -2,7 +2,7 @@ package juego;
 public class Objetos {
 
     String Nombre;
-    int idObjeto;
+    int idObjeto; //cambiar
     int puntos;
     int dinero;
     boolean actvivado;

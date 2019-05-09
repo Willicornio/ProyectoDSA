@@ -1,5 +1,4 @@
-import io.swagger.models.auth.In;
-import juego.Interfaz;
+import juego.Juego;
 import juego.JuegoManager;
 import juego.Objetos;
 import juego.Usuario;
@@ -11,7 +10,7 @@ import java.util.List;
 
 public class test {
 
-    private Interfaz ju;
+    private Juego ju;
 
     @Before
     public void setUp(){

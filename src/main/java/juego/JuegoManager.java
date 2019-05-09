@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.HashMap;
 
-public class JuegoManager  implements Interfaz {
+public class JuegoManager  implements Juego {
 
 
     private HashMap<String, Usuario> usuarios;
@@ -23,8 +23,8 @@ public class JuegoManager  implements Interfaz {
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     }
 
-    private static Interfaz instance;
-    public static Interfaz getInstance(){
+    private static Juego instance;
+    public static Juego getInstance(){
         if (instance == null) instance = new JuegoManager();
         return instance;
     }
@@ -50,8 +50,9 @@ public class JuegoManager  implements Interfaz {
     @Override
     public Usuario crearUsuario(String nombre, String pass, List<Objetos> listaObjetos) {
 
+        String idUser = "id"+nombre;
 
-        Inventario i = crearInventario(listaObjetos);
+        Inventario i = crearInventario(listaObjetos,idUser);
 
         Usuario u = new Usuario(nombre,pass,i);
 
@@ -142,9 +143,9 @@ public class JuegoManager  implements Interfaz {
     }
 
     @Override
-    public Inventario crearInventario(List<Objetos> listaObjetos) {
+    public Inventario crearInventario(List<Objetos> listaObjetos, String idUser) {
 
-        return new Inventario(listaObjetos);
+        return new Inventario(listaObjetos,idUser);
 
     }
 

@@ -7,10 +7,12 @@ import java.util.List;
 
 public class Inventario {
 
+    String id;
+    String idUser;
     Objetos[] objetos;
 
 
-    public Inventario(List<Objetos> listaObjetos) {
+    public Inventario(List<Objetos> listaObjetos, String idUser) {
 
         this.objetos = new Objetos[listaObjetos.size()];
         int contador = 0;
@@ -19,6 +21,9 @@ public class Inventario {
             objetos[contador] = o;
             contador++;
         }
+
+        this.idUser = idUser;
+        this.id = "inv"+ idUser;
 
 
     }
@@ -29,6 +34,22 @@ public class Inventario {
 
     public void setObjetos(Objetos[] inventario) {
         this.objetos = inventario;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 }
 

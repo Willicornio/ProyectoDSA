@@ -18,7 +18,7 @@ import java.util.LinkedList;
     @Path("/proyecto")
     public class servicio {
 
-        private Interfaz i;
+        private Juego i;
 
         public servicio() {
             this.i = JuegoManager.getInstance();
