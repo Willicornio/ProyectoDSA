@@ -1,36 +1,36 @@
 package juego;
 public class Objeto {
 
-    String Nombre;
-    int idObjeto; //cambiar
+    String id;
+    String nombre;
     int puntos;
     int dinero;
     boolean actvivado;
 
 
-    public Objeto(String Nombre, int idObjeto, int puntos, int dinero){
+    public Objeto(String Nombre, String id, int puntos, int dinero){
 
         this.dinero = dinero;
-        this.idObjeto = idObjeto;
-        this.Nombre = Nombre;
+        this.id = id;
+        this.nombre = Nombre;
         this.puntos = puntos;
         actvivado = false;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public void setNombre(String nombre) {
-        Nombre = nombre;
-    }
-
-    public int getIdObjeto() {
-        return idObjeto;
-    }
-
-    public void setIdObjeto(int idObjeto) {
-        this.idObjeto = idObjeto;
+        this.nombre = nombre;
     }
 
     public int getPuntos() {
