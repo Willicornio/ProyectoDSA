@@ -1,5 +1,7 @@
 package Dao;
 
+import sun.jvm.hotspot.oops.ObjArrayKlass;
+
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -268,11 +270,13 @@ public class Session {
 
             int i =0;
             String property = null;
+            Method m = instancia.getClass().getMethod(instancia.getClass().getSimpleName());
+
             while (i < nCols) {
                 // switch
 
                 property = rsmd.getColumnName(i);
-                setter(instancia, property, resultSet.getString(i));
+                setter(instancia, m, resultSet.getString(i),property);
             }
 
         /*
@@ -308,6 +312,12 @@ public class Session {
             System.out.println("no va");
             throw e;
         }
+    }
+
+    public Object setter (Object a, Method m, String result, String param) throws Exception{
+
+        m.invoke(a,param,result);
+        return a;
     }
 }
 

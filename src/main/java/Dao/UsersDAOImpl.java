@@ -28,8 +28,8 @@ public class UsersDAOImpl implements UsersDAO {
         }
     }
 
-    public void getUser(String id) {
+    public void getUser(String id) throws Exception {
         Session s = Factoria.getSession();
-        //  Usuario u = s.get(Usuario.class, "ghj");
+        Usuario u = s.get(id, Usuario.class);
     }
 }
