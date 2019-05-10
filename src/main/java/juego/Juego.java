@@ -11,6 +11,11 @@ public interface Juego {
 
 
     public Usuario crearUsuario(String nombre, String pass, List<Objeto> listaObjetos);
+    public List<UsuarioTO> dameUsuarios();
+
+
+
+    public UsuarioTO dameUsuarioById(String id);
 
     public void modificarDinero(String idUser, int cantidad);
     public boolean checkPartidaEnCurso(String idUser);
@@ -53,11 +58,5 @@ public interface Juego {
     public List<Objeto> dameObjetos();
 
 
-
-
-
-
-
-
-
+ void clear();
 }
