@@ -7,6 +7,9 @@ public class Objeto {
     int dinero;
     boolean actvivado;
 
+    public Objeto() {
+
+    }
 
     public Objeto(String Nombre, String id, int puntos, int dinero){
 

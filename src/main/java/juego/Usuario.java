@@ -7,21 +7,21 @@ public class Usuario {
 String idUser;
 String nombre;
 String pass;
-Inventario inventario;
 int dinero;
 boolean partidaEnCurso;
 String idPartidaEnCurso;
 int puntuacionTotal;
 
+    public Usuario() {
+    }
 
-     public Usuario (String nombre, String pass, Inventario i){
+    public Usuario (String nombre, String pass){
 
          this.nombre = nombre;
          this.pass = pass;
          this.idUser = "id" + nombre;
          this.dinero = 0;
          this.partidaEnCurso = false;
-         inventario = i;
          puntuacionTotal = 0;
      }
 
@@ -49,13 +49,7 @@ int puntuacionTotal;
         this.pass = pass;
     }
 
-    public Inventario getInventario() {
-        return inventario;
-    }
 
-    public void setInventario(Inventario inventario) {
-        this.inventario = inventario;
-    }
 
     public int getDinero() {
         return dinero;

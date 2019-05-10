@@ -21,11 +21,11 @@ import java.util.List;
 
     private Juego ju;
 
-    public ProyectoService() {
+    public ProyectoService() throws Exception {
         this.ju = JuegoManager.getInstance();
-        List<Objeto> list = this.ju.dameObjetos();
-        Usuario u = this.ju.crearUsuario("Julio","1234",list);
-        Usuario i = this.ju.crearUsuario("Pedro","1234",list);
+
+        Usuario u = this.ju.crearUsuario("Julio","1234");
+        Usuario i = this.ju.crearUsuario("Pedro","1234");
 
 
     }
@@ -39,14 +39,16 @@ import java.util.List;
     @Path("/usuario/{nombre}/{pass}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response crearUsuario(@PathParam("nombre") String nombre, @PathParam("pass") String pass) {
-        try {
-            List<Objeto> list = this.ju.dameObjetos();
-            this.ju.crearUsuario(nombre, pass,list);
-            return Response.status(201).build();
 
-        } catch (Exception e) {
-            return Response.status(404).build();
-        }
+            Usuario u = this.ju.crearUsuario(nombre,pass);
+
+            if(u != null){
+                return Response.status(201).build();
+            }else{
+                return Response.status(404).build();
+            }
+
+
     }
 
     @GET
@@ -60,7 +62,7 @@ import java.util.List;
     public Response dameUsuarios() {
         try{
 
-            List<UsuarioTO> usuarios = this.ju.dameUsuarios();
+            List<UsuarioTO> usuarios = this.ju.dameUsuariosTO();
             GenericEntity<List<UsuarioTO>> entity = new GenericEntity<List<UsuarioTO>>(usuarios) {};
             return Response.status(201).entity(entity).build()  ;
 
@@ -80,8 +82,6 @@ import java.util.List;
     @Produces(MediaType.APPLICATION_JSON)
     public Response dameUsuarioById(@PathParam("idUser") String id) {
         try{
-
-
             UsuarioTO uto = this.ju.dameUsuarioById(id);
             GenericEntity<UsuarioTO> entity = new GenericEntity<UsuarioTO>(uto) {};
             return Response.status(201).entity(entity).build()  ;
@@ -92,8 +92,39 @@ import java.util.List;
 
     }
 
+    @POST
+    @ApiOperation(value = "login usuario")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful"),
+            @ApiResponse(code = 404, message = "No se ha podido realizar")
+    })
+    @Path("/usuario/login/{nombre}/{pass}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response login(@PathParam("nombre") String nombre, @PathParam("pass") String pass) {
+        try{
+
+            List<Usuario> listUsers = this.ju.dameUsuarios();
+            boolean check = ju.login(nombre, pass);
+
+            if(check == true){
+                return Response.status(201).build();
+            }
+            else{
+                return Response.status(404).build();
+            }
+
+
+
+
+        }catch (Exception e){
+            return Response.status(404).build();
+        }
+
+    }
+
 
 }
+
 
 /*
 

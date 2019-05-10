@@ -7,7 +7,8 @@ public class UsuarioTO {
     int puntuacionTotal;
 
     public UsuarioTO() {
-        
+
+
     }
 
     public UsuarioTO(String idUser, String nombre, int dinero, int puntuacionTotal) {

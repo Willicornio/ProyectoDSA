@@ -10,8 +10,9 @@ public interface Juego {
     public void eliminarUsuario(String idUser);
 
 
-    public Usuario crearUsuario(String nombre, String pass, List<Objeto> listaObjetos);
-    public List<UsuarioTO> dameUsuarios();
+    public Usuario crearUsuario(String nombre, String pass);
+    public List<UsuarioTO> dameUsuariosTO();
+    public List<Usuario> dameUsuarios();
 
 
 
@@ -40,7 +41,7 @@ public interface Juego {
 
     //Inventario :
 
-    public Inventario crearInventario(List<Objeto> listaObjetos, String idUser);
+    public void crearInventario();
 
     public void activarmeObjeto(String idObjeto, String idUser);
     public void desactivarmeObjeto(String idObjecto, String idUser);

@@ -9,23 +9,23 @@ public class JuegoManager  implements Juego {
 
 
     private HashMap<String, Usuario> usuarios;
-    private List<Objeto> listaObjetos;
+    private List<Objeto> inventario;
     private List<Inventario> listainventarios;
     private List<Mapa> listaMapas;
+    private Usuario userActivo;
 
 
 
-    private JuegoManager(){
+    private JuegoManager() throws Exception {
         this.usuarios = new HashMap<>();
-        this.listaObjetos = new LinkedList<>();
-        //++++++++++++++++ OBJETOS POR DEFECTO++++++++++++++++++++++++++
-        this.listaObjetos.add(0, new Objeto("Linterna","0",1,5));
-        this.listaObjetos.add(1, new Objeto("Ganzua","1",1,10));
-        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        this.inventario = new LinkedList<>();
+
+
+
     }
 
     private static Juego instance;
-    public static Juego getInstance(){
+    public static Juego getInstance() throws Exception {
         if (instance == null) instance = new JuegoManager();
         return instance;
     }
@@ -33,8 +33,22 @@ public class JuegoManager  implements Juego {
 
     @Override
     public boolean login(String nombre, String pass) {
-        return false;
+
+        List<Usuario> u = this.dameUsuarios();
+        boolean check = false;
+
+        for (Usuario user : u) {
+
+            if (user.getIdUser().equals("id" + nombre)) {
+                this.userActivo = user;
+                this.crearInventario();
+                check = true;
+                break;
+            }
+        }
+        return check;
     }
+
 
     @Override
     public boolean logout(String idUser, String pass) {
@@ -49,32 +63,42 @@ public class JuegoManager  implements Juego {
     }
 
     @Override
-    public Usuario crearUsuario(String nombre, String pass, List<Objeto> listaObjetos) {
+    public Usuario crearUsuario(String nombre, String pass) {
 
-        String idUser = "id"+nombre;
+        UsuarioTO user = dameUsuarioById("id"+nombre);
 
-        Inventario i = crearInventario(listaObjetos,idUser);
+        if(user == null){
+            Usuario u = new Usuario(nombre,pass);
+            this.usuarios.put(u.idUser,u); //LO EQUIVALENTE EN DAO AL SAVE
+            return u;
+        }else{
 
-        Usuario u = new Usuario(nombre,pass,i);
-
-
-        this.usuarios.put(u.idUser,u); //LO EQUIVALENTE EN DAO AL SAVE
-        return u;
-
+            return null;
+        }
 
     }
 
     @Override
-    public List<UsuarioTO> dameUsuarios() {
+    public List<Usuario> dameUsuarios() {
 
-       List<Usuario> u = new ArrayList(this.usuarios.values());
+       List<Usuario> list = new ArrayList(this.usuarios.values());
 
-       List<UsuarioTO> list = new ArrayList<>();
 
-       for(Usuario g: u){
-           list.add(new UsuarioTO(g.getIdUser(),g.getNombre(),g.getDinero(),g.getPuntuacionTotal()));
 
-       }
+        return list;
+    }
+
+    @Override
+    public List<UsuarioTO> dameUsuariosTO() {
+
+        List<Usuario> u = this.dameUsuarios();
+
+        List<UsuarioTO> list = new ArrayList<>();
+
+        for(Usuario g: u){
+            list.add(new UsuarioTO(g.getIdUser(),g.getNombre(),g.getDinero(),g.getPuntuacionTotal()));
+
+        }
 
         return list;
     }
@@ -160,7 +184,7 @@ public class JuegoManager  implements Juego {
     @Override
     public List<Objeto> dameObjetos(){
 
-        return this.listaObjetos;
+        return this.inventario;
     }
 
     @Override
@@ -178,16 +202,17 @@ public class JuegoManager  implements Juego {
     }
 
     @Override
-    public Inventario crearInventario(List<Objeto> listaObjetos, String idUser) {
+    public void crearInventario() { //AQUÍ HABRÁ QUE IMPLIMENTAR EL SELECT PARA RELLENAR LA LIST INVENTARIO
 
-        return new Inventario(listaObjetos,idUser);
+        this.inventario.add(0, new Objeto("Linterna","0",1,5));
+        this.inventario.add(1, new Objeto("Ganzua","1",1,10));
 
     }
 
 
     @Override
     public void crearObjetoNuevo(Objeto objeto) {
-        this.listaObjetos.add(objeto);
+        this.inventario.add(objeto);
 
     }
 
@@ -199,7 +224,7 @@ public class JuegoManager  implements Juego {
     public void clear() {
 
         this.usuarios.clear();
-        this.listaObjetos.clear();
+        this.inventario.clear();
 
     }
 }
