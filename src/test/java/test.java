@@ -35,6 +35,15 @@ public class test {
         Assert.assertEquals(2, list.size());
     }
 
+    @Test
+    public void dameUsuariosById() {
+
+        List<UsuarioTO> list = this.ju.dameUsuarios();
+        UsuarioTO uto = ju.dameUsuarioById("idPedro");
+
+        Assert.assertEquals("Pedro", uto.getNombre());
+    }
+
     @After
     public void limpiar(){
 

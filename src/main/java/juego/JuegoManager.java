@@ -79,6 +79,26 @@ public class JuegoManager  implements Juego {
         return list;
     }
 
+    @Override
+    public UsuarioTO dameUsuarioById(String id) {
+
+        List<Usuario> u = new ArrayList(this.usuarios.values());
+        UsuarioTO uto = null;
+
+        for (Usuario usuario: u){
+            if(usuario.getIdUser().equals(id)){
+
+                uto = new UsuarioTO(usuario.getIdUser(),usuario.getNombre(), usuario.getDinero(),usuario.getPuntuacionTotal());
+                break;
+            }
+
+        }
+
+
+
+        return uto;
+    }
+
 
     @Override
     public void modificarDinero(String idUser, int cantidad) {
