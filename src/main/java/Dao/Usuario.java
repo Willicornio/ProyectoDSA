@@ -3,16 +3,29 @@ package Dao;
 
 public class Usuario {
 
+    String id;
     String Nombre;
     String Apellido;
 
 
+    public String getId() {
+        return id;
+    }
 
-    public Usuario (String nombre, String apellido){
+    public void setId(String id) {
+        this.id = id;
+    }
 
+    public Usuario (String id, String nombre, String apellido){
+
+        this.id = id;
         this.Nombre = nombre;
         this.Apellido = apellido;
     }
+
+    public Usuario(){}
+
+
     public String getNombre() {
         return Nombre;
     }

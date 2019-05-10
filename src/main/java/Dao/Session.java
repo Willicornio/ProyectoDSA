@@ -1,7 +1,5 @@
 package Dao;
 
-import sun.jvm.hotspot.oops.ObjArrayKlass;
-
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -216,7 +214,8 @@ public class Session {
         int contador = 1;
 
 
-        Field[] fields = o.getClass().getDeclaredFields();
+        //Field[] fields = o.getClass().getDeclaredFields();
+        Field[] fields = clase.getDeclaredFields();
 
         for (int i = 1; i <= fields.length; i++) {
             if (i == 1 || i != fields.length) {
@@ -238,7 +237,6 @@ public class Session {
         }*/
 
         resultSet = ps.executeQuery();
-
         o = writeResultSet(resultSet, o);
 
         ps.close();

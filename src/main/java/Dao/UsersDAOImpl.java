@@ -14,10 +14,10 @@ public class UsersDAOImpl implements UsersDAO {
     Factoria factoria;
 
 
-    public void addUSer(String nombre, String apellidos) throws Exception{
+    public void addUSer(String  id,String nombre, String apellidos) throws Exception{
         try  {
             Session a = Factoria.getSession();
-            Usuario u = new Usuario(nombre, apellidos);
+            Usuario u = new Usuario(id, nombre, apellidos);
             a.save(u);
 
 
@@ -28,8 +28,9 @@ public class UsersDAOImpl implements UsersDAO {
         }
     }
 
-    public void getUser(String id) throws Exception {
+    public Usuario getUser(String id) throws Exception {
         Session s = Factoria.getSession();
-        Usuario u = s.get(id, Usuario.class);
+        Usuario u= (Usuario)s.get(id, Usuario.class);
+        return u;
     }
 }
