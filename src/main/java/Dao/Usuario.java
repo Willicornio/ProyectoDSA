@@ -6,7 +6,15 @@ public class Usuario {
     String id;
     String Nombre;
     String Apellido;
+    String pass;
 
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
 
     public String getId() {
         return id;
@@ -40,5 +48,9 @@ public class Usuario {
 
     public void setApellido(String apellido) {
         Apellido = apellido;
+    }
+
+    public String toString() {
+        return this.getNombre()+" "+" "+this.Apellido;
     }
 }

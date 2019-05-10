@@ -7,6 +7,8 @@ import java.util.HashMap;
 public class JuegoManager  implements Juego {
 
 
+
+
     private HashMap<String, Usuario> usuarios;
     private List<Objeto> listaObjetos;
     private List<Inventario> listainventarios;
@@ -29,6 +31,9 @@ public class JuegoManager  implements Juego {
         return instance;
     }
 
+    public UsuarioTO dameUsuarioById(String id){
+        return null;
+    }
 
     @Override
     public boolean login(String nombre, String pass) {
@@ -62,6 +67,11 @@ public class JuegoManager  implements Juego {
         return u;
 
 
+    }
+
+    @Override
+    public List<UsuarioTO> dameUsuarios() {
+        return null;
     }
 
 
@@ -126,6 +136,11 @@ public class JuegoManager  implements Juego {
     public List<Objeto> dameObjetos(){
 
         return this.listaObjetos;
+    }
+
+    @Override
+    public void clear() {
+
     }
 
     @Override

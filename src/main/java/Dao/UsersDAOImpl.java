@@ -31,6 +31,7 @@ public class UsersDAOImpl implements UsersDAO {
     public Usuario getUser(String id) throws Exception {
         Session s = Factoria.getSession();
         Usuario u= (Usuario)s.get(id, Usuario.class);
+        System.out.println("DAO: "+u);
         return u;
     }
 }
