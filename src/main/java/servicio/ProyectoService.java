@@ -1,4 +1,4 @@
-/*package servicio;
+package servicio;
 
 
 import juego.*;
@@ -12,22 +12,68 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.LinkedList;
+import java.util.List;
 
 
 @Api(value = "/Proyecto", description = "Proyecto Service")
-    @Path("/proyecto")
-    public class servicio {
+    @Path("/")
+    public class ProyectoService {
 
-        private Juego i;
+    private Juego ju;
 
-        public servicio() {
-            this.i = JuegoManager.getInstance();
+    public ProyectoService() {
+        this.ju = JuegoManager.getInstance();
+        List<Objeto> list = this.ju.dameObjetos();
+        Usuario u = this.ju.crearUsuario("Julio","1234",list);
+        Usuario i = this.ju.crearUsuario("Pedro","1234",list);
 
 
+    }
 
+    @POST
+    @ApiOperation(value = "Crear usuario", notes = "Creamos el usuario")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful",response = Usuario.class),
+            @ApiResponse(code = 404, message = "No se ha podido realizar")
+    })
+    @Path("/usuario/{nombre}/{pass}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response crearUsuario(@PathParam("nombre") String nombre, @PathParam("pass") String pass) {
+        try {
+            List<Objeto> list = this.ju.dameObjetos();
+            this.ju.crearUsuario(nombre, pass,list);
+            return Response.status(201).build();
+
+        } catch (Exception e) {
+            return Response.status(404).build();
+        }
+    }
+
+    @GET
+    @ApiOperation(value = "get all users")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful", response = UsuarioTO.class, responseContainer="List"),
+            @ApiResponse(code = 404, message = "No se ha podido realizar")
+    })
+    @Path("/usuarios")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response dameUsuarios() {
+        try{
+
+            List<UsuarioTO> usuarios = this.ju.dameUsuarios();
+            GenericEntity<List<UsuarioTO>> entity = new GenericEntity<List<UsuarioTO>>(usuarios) {};
+            return Response.status(201).entity(entity).build()  ;
+
+        }catch (Exception e){
+            return Response.status(404).build();
         }
 
+    }
 
+
+}
+
+/*
 
 
 
@@ -214,23 +260,7 @@ import java.util.LinkedList;
 
 
 
-        @POST
-        @ApiOperation(value = "crear usuario", notes = "asdasd")
-        @ApiResponses(value = {
-                @ApiResponse(code = 201, message = "Successful" ),
-                @ApiResponse(code = 404, message = "No se ha podido realizar")
-        })
-        @Path("/{CrearUsuario}")
-        @Produces(MediaType.APPLICATION_JSON)
-        public Response crearUsuario(@PathParam("id") String id, @PathParam("pass") String pass) {
-            try {
-                this.i.añadirUsuario(id, pass);
-                return Response.status(201).build();
 
-            }catch (Exception e){
-                return Response.status(404).build();
-            }
-        }
 
 
 

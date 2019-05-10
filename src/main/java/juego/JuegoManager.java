@@ -1,5 +1,6 @@
 package juego;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.HashMap;
@@ -18,8 +19,8 @@ public class JuegoManager  implements Juego {
         this.usuarios = new HashMap<>();
         this.listaObjetos = new LinkedList<>();
         //++++++++++++++++ OBJETOS POR DEFECTO++++++++++++++++++++++++++
-        this.listaObjetos.add(0, new Objeto("Linterna",0,1,5));
-        this.listaObjetos.add(1, new Objeto("Ganzua",1,1,10));
+        this.listaObjetos.add(0, new Objeto("Linterna","0",1,5));
+        this.listaObjetos.add(1, new Objeto("Ganzua","1",1,10));
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     }
 
@@ -58,10 +59,24 @@ public class JuegoManager  implements Juego {
 
 
         this.usuarios.put(u.idUser,u); //LO EQUIVALENTE EN DAO AL SAVE
-
         return u;
 
 
+    }
+
+    @Override
+    public List<UsuarioTO> dameUsuarios() {
+
+       List<Usuario> u = new ArrayList(this.usuarios.values());
+
+       List<UsuarioTO> list = new ArrayList<>();
+
+       for(Usuario g: u){
+           list.add(new UsuarioTO(g.getIdUser(),g.getNombre(),g.getDinero(),g.getPuntuacionTotal()));
+
+       }
+
+        return list;
     }
 
 
@@ -158,6 +173,13 @@ public class JuegoManager  implements Juego {
 
     @Override
     public void eliminarObjeto(String idObjeto) {
+
+    }
+    @Override
+    public void clear() {
+
+        this.usuarios.clear();
+        this.listaObjetos.clear();
 
     }
 }
