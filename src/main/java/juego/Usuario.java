@@ -8,8 +8,6 @@ String idUser;
 String nombre;
 String pass;
 int dinero;
-boolean partidaEnCurso;
-String idPartidaEnCurso;
 int puntuacionTotal;
 
     public Usuario() {
@@ -21,9 +19,16 @@ int puntuacionTotal;
          this.pass = pass;
          this.idUser = "id" + nombre;
          this.dinero = 0;
-         this.partidaEnCurso = false;
-         puntuacionTotal = 0;
+         this.puntuacionTotal = 0;
      }
+
+    public Usuario(String idUser, String nombre, String pass, int dinero, int puntuacionTotal) {
+        this.idUser = idUser;
+        this.nombre = nombre;
+        this.pass = pass;
+        this.dinero = dinero;
+        this.puntuacionTotal = puntuacionTotal;
+    }
 
     public String getIdUser() {
         return idUser;
@@ -59,21 +64,7 @@ int puntuacionTotal;
         this.dinero = dinero;
     }
 
-    public boolean isPartidaEnCurso() {
-        return partidaEnCurso;
-    }
 
-    public void setPartidaEnCurso(boolean partidaEnCurso) {
-        this.partidaEnCurso = partidaEnCurso;
-    }
-
-    public String getIdPartidaEnCurso() {
-        return idPartidaEnCurso;
-    }
-
-    public void setIdPartidaEnCurso(String idPartidaEnCurso) {
-        this.idPartidaEnCurso = idPartidaEnCurso;
-    }
 
     public int getPuntuacionTotal() {
         return puntuacionTotal;

@@ -26,8 +26,8 @@ public class test {
     public void crearUsuario() throws Exception {
 
 
-        Usuario u = this.ju.crearUsuario("Manolo","1234");
-        Assert.assertEquals("Manolo",u.getNombre());
+        Usuario u = this.ju.crearUsuario("Jesus","1234");
+        Assert.assertEquals("Jesus",u.getNombre());
     }
 
     @Test
@@ -40,7 +40,7 @@ public class test {
     }
 
     @Test
-    public void dameUsuarios() {
+    public void dameUsuarios() throws Exception {
 
         List<UsuarioTO> list = this.ju.dameUsuariosTO();
 
@@ -48,7 +48,7 @@ public class test {
     }
 
     @Test
-    public void dameUsuariosById() {
+    public void dameUsuariosById() throws Exception {
 
         List<Usuario> list = this.ju.dameUsuarios();
         Usuario uto = ju.dameUsuarioById("idPedro");
@@ -57,7 +57,7 @@ public class test {
     }
 
     @Test
-    public void login() {
+    public void login() throws Exception {
 
         List<Usuario> list = this.ju.dameUsuarios();
         boolean check = ju.login("Manolo", "1234");
@@ -68,6 +68,7 @@ public class test {
 
 
     }
+
 
     @After
     public void limpiar(){

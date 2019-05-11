@@ -11,7 +11,7 @@ public class Objeto {
 
     }
 
-    public Objeto(String Nombre, String id, int puntos, int dinero){
+    public Objeto(String id,String Nombre, int puntos, int dinero){
 
         this.dinero = dinero;
         this.id = id;

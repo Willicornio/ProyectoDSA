@@ -1,5 +1,7 @@
 package Dao;
 
+import juego.Inventario;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
+import java.util.List;
 
 public class UsersDAOImpl implements UsersDAO {
 
@@ -34,4 +37,27 @@ public class UsersDAOImpl implements UsersDAO {
         System.out.println("DAO: "+u);
         return u;
     }
+
+    //--------------------------------------------PRUEBAS ADRI----------------------------------------
+
+    public static void addUser(juego.Usuario u) throws Exception{
+        try  {
+            Session a = Factoria.getSession();
+            a.save(u);
+
+
+
+
+        }catch (Exception e){
+            throw e;
+        }
+    }
+
+    public static List<juego.Usuario> dameListUsuarios() throws Exception {
+        Session s = Factoria.getSession();
+        return s.selecAllUsuarios();
+
+    }
+
+    //--------------------------------------------PRUEBAS ADRI----------------------------------------
 }

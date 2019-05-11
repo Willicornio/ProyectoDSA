@@ -1,5 +1,10 @@
 package Dao;
 
+import io.swagger.models.auth.In;
+import juego.Inventario;
+import juego.Objeto;
+import juego.Usuario;
+
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -32,9 +37,13 @@ public class Session {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
+           /*
             session = DriverManager
                     .getConnection("jdbc:mysql://localhost/feedback?"
                             + "user=root&password=dsa2019");
+            */
+           /* PARA USAR LA BASE DE DATOS QUE TENGO CREADA UTILIZAR ESTA LINIA Y CAMBIAR LA PASS*/
+           session = DriverManager.getConnection("jdbc:mysql://localhost/dsa", "root", "DSA2019");
 
             return session;
 
@@ -300,6 +309,57 @@ public class Session {
         m.invoke(a, result);
         return a;
     }
+
+
+
+
+//--------------------------------------------PRUEBAS ADRI-----------------------------------------------------
+
+
+
+    public List<Objeto> selecAllObjetos() throws Exception {
+
+        String select = "SELECT * FROM objeto";
+        Statement st = session.createStatement();
+        List<Objeto> list = new LinkedList<>();
+
+        ResultSet rs = st.executeQuery(select);
+        while (rs.next()) {
+            Objeto o = new Objeto(rs.getString("id"),rs.getString("nombre"),rs.getInt("puntos"),rs.getInt("dinero"));
+            list.add(o);
+        }
+        rs.close();
+        st.close();
+
+        return list;
+
+
+
+
+    }
+
+    public List<Usuario> selecAllUsuarios() throws Exception {
+
+        String select = "SELECT * FROM usuario";
+        Statement st = session.createStatement();
+        List<Usuario> list = new LinkedList<>();
+
+        ResultSet rs = st.executeQuery(select);
+        while (rs.next()) {
+            Usuario u = new Usuario(rs.getString("id"),rs.getString("nombre"),rs.getString("pass"),rs.getInt("dinero"),rs.getInt("puntuaciontotal"));
+            list.add(u);
+        }
+        rs.close();
+        st.close();
+
+        return list;
+
+
+
+
+    }
+
+    //----------------------------------------PRUEBAS ADRI-----------------------------------------------------
 }
 
 

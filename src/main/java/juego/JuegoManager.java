@@ -1,5 +1,11 @@
 package juego;
 
+import Dao.Factoria;
+import Dao.InventarioDAOImpl;
+import Dao.ObjetoDAOImpl;
+import Dao.UsersDAOImpl;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,8 +33,7 @@ public class JuegoManager  implements Juego {
 
         this.inventario = new LinkedList<>();
 
-        this.inventario.add(0, new Objeto("Linterna","adsf",1,5));
-        this.inventario.add(1, new Objeto("Ganzua","1",1,10));
+
 
 
     }
@@ -42,7 +47,7 @@ public class JuegoManager  implements Juego {
 
 
     @Override
-    public boolean login(String nombre, String pass) {
+    public boolean login(String nombre, String pass) throws Exception {
 
         List<Usuario> u = this.dameUsuarios();
         boolean check = false;
@@ -50,8 +55,7 @@ public class JuegoManager  implements Juego {
         for (Usuario user : u) {
 
             if (user.getIdUser().equals("id" + nombre)) {
-                this.userActivo = user;
-                this.crearInventario();
+
                 check = true;
                 break;
             }
@@ -73,13 +77,15 @@ public class JuegoManager  implements Juego {
     }
 
     @Override
-    public Usuario crearUsuario(String nombre, String pass) {
+    public Usuario crearUsuario(String nombre, String pass) throws Exception {
 
         Usuario user = dameUsuarioById("id"+nombre);
 
         if(user == null){
             Usuario u = new Usuario(nombre,pass);
-            this.usuarios.put(u.idUser,u); //LO EQUIVALENTE EN DAO AL SAVE
+            //this.usuarios.put(u.idUser,u); //LO EQUIVALENTE EN DAO AL SAVE
+            UsersDAOImpl.addUser(new Usuario(nombre,pass));
+            this.crearInventario(u.getIdUser(), ObjetoDAOImpl.dameListObjetos());
             return u;
         }else{
 
@@ -90,19 +96,15 @@ public class JuegoManager  implements Juego {
 
 
     @Override
-    public List<Usuario> dameUsuarios() {
+    public List<Usuario> dameUsuarios() throws Exception {
  
 
-       List<Usuario> list = new ArrayList(this.usuarios.values());
-
-
-
-        return list;
+       return UsersDAOImpl.dameListUsuarios();
     }
 
     @Override
 
-    public List<UsuarioTO> dameUsuariosTO() {
+    public List<UsuarioTO> dameUsuariosTO() throws Exception {
 
         List<Usuario> u = this.dameUsuarios();
 
@@ -117,9 +119,9 @@ public class JuegoManager  implements Juego {
     }
 
     @Override
-    public Usuario dameUsuarioById(String id) {
+    public Usuario dameUsuarioById(String id) throws Exception {
 
-        List<Usuario> list = new ArrayList(this.usuarios.values());
+        List<Usuario> list = UsersDAOImpl.dameListUsuarios();
         Usuario u = null;
 
         for (Usuario usuario : list) {
@@ -199,7 +201,12 @@ public class JuegoManager  implements Juego {
     @Override
     public List<Objeto> dameObjetos(){
 
-        return this.inventario;
+        List<Objeto> list = new LinkedList<>();
+
+        list.add(new Objeto("1","Linterna",3,5));
+        list.add(new Objeto("2","Ganzua",3,5));
+
+        return list;
     }
 
 
@@ -216,10 +223,19 @@ public class JuegoManager  implements Juego {
     }
 
     @Override
-    public void crearInventario() { //AQUÍ HABRÁ QUE IMPLIMENTAR EL SELECT PARA RELLENAR LA LIST INVENTARIO
+    public void crearInventario(String idUser, List<Objeto> listaObjetos) throws Exception {
 
-        this.inventario.add(0, new Objeto("Linterna","0",1,5));
-        this.inventario.add(1, new Objeto("Ganzua","1",1,10));
+        //SELECT * FROM objeto --> pasarlo a una lista de objetos
+         //simulo el select
+
+
+        for(Objeto o: listaObjetos){
+            Inventario i = new Inventario(idUser,o.getId());
+            InventarioDAOImpl.addInventario(i);
+
+        }
+
+
 
     }
 

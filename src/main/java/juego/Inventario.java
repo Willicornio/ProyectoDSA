@@ -4,31 +4,45 @@ import java.util.List;
 
 public class Inventario {
 
-    Objeto[] objetos;
+    String idUser;
+    String idObjeto;
+    String activado;
 
     public Inventario() {
 
 
     }
 
-    public Inventario(List<Objeto> listaObjetos) {
+    public Inventario(String idUser,String idObjeto) {
 
-        this.objetos = new Objeto[listaObjetos.size()];
-        int contador = 0;
-
-        for(Objeto o: listaObjetos){
-            objetos[contador] = o;
-            contador++;
-        }
+        this.idUser = idUser;
+        this.idObjeto = idObjeto;
+        this.activado = "false";
 
     }
 
-    public Objeto[] getObjetos() {
-        return objetos;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setObjetos(Objeto[] objetos) {
-        this.objetos = objetos;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getIdObjeto() {
+        return idObjeto;
+    }
+
+    public void setIdObjeto(String idObjeto) {
+        this.idObjeto = idObjeto;
+    }
+
+    public String getActivado() {
+        return activado;
+    }
+
+    public void setActivado(String activado) {
+        this.activado = activado;
     }
 }
 

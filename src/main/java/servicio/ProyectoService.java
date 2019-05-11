@@ -11,6 +11,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,8 +25,6 @@ import java.util.List;
     public ProyectoService() throws Exception {
         this.ju = JuegoManager.getInstance();
 
-        Usuario u = this.ju.crearUsuario("Julio","1234");
-        Usuario i = this.ju.crearUsuario("Pedro","1234");
 
 
     }
@@ -38,7 +37,7 @@ import java.util.List;
     })
     @Path("/usuario/{nombre}/{pass}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response crearUsuario(@PathParam("nombre") String nombre, @PathParam("pass") String pass) {
+    public Response crearUsuario(@PathParam("nombre") String nombre, @PathParam("pass") String pass) throws Exception {
 
             Usuario u = this.ju.crearUsuario(nombre,pass);
 
