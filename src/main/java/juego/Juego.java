@@ -16,7 +16,7 @@ public interface Juego {
 
 
 
-    public UsuarioTO dameUsuarioById(String id);
+    public Usuario dameUsuarioById(String id);
 
     public void modificarDinero(String idUser, int cantidad);
     public boolean checkPartidaEnCurso(String idUser);

@@ -8,6 +8,8 @@ import java.util.HashMap;
 public class JuegoManager  implements Juego {
 
 
+
+
     private HashMap<String, Usuario> usuarios;
     private List<Objeto> inventario;
     private List<Inventario> listainventarios;
@@ -18,8 +20,15 @@ public class JuegoManager  implements Juego {
 
     private JuegoManager() throws Exception {
         this.usuarios = new HashMap<>();
+
         this.inventario = new LinkedList<>();
 
+
+
+        this.inventario = new LinkedList<>();
+
+        this.inventario.add(0, new Objeto("Linterna","adsf",1,5));
+        this.inventario.add(1, new Objeto("Ganzua","1",1,10));
 
 
     }
@@ -29,6 +38,7 @@ public class JuegoManager  implements Juego {
         if (instance == null) instance = new JuegoManager();
         return instance;
     }
+
 
 
     @Override
@@ -65,7 +75,7 @@ public class JuegoManager  implements Juego {
     @Override
     public Usuario crearUsuario(String nombre, String pass) {
 
-        UsuarioTO user = dameUsuarioById("id"+nombre);
+        Usuario user = dameUsuarioById("id"+nombre);
 
         if(user == null){
             Usuario u = new Usuario(nombre,pass);
@@ -78,8 +88,10 @@ public class JuegoManager  implements Juego {
 
     }
 
+
     @Override
     public List<Usuario> dameUsuarios() {
+ 
 
        List<Usuario> list = new ArrayList(this.usuarios.values());
 
@@ -89,6 +101,7 @@ public class JuegoManager  implements Juego {
     }
 
     @Override
+
     public List<UsuarioTO> dameUsuariosTO() {
 
         List<Usuario> u = this.dameUsuarios();
@@ -104,24 +117,26 @@ public class JuegoManager  implements Juego {
     }
 
     @Override
-    public UsuarioTO dameUsuarioById(String id) {
+    public Usuario dameUsuarioById(String id) {
 
-        List<Usuario> u = new ArrayList(this.usuarios.values());
-        UsuarioTO uto = null;
+        List<Usuario> list = new ArrayList(this.usuarios.values());
+        Usuario u = null;
 
-        for (Usuario usuario: u){
-            if(usuario.getIdUser().equals(id)){
+        for (Usuario usuario : list) {
+            if (usuario.getIdUser().equals(id)) {
 
-                uto = new UsuarioTO(usuario.getIdUser(),usuario.getNombre(), usuario.getDinero(),usuario.getPuntuacionTotal());
+                u = usuario;
                 break;
             }
 
         }
 
 
+        return u;
 
-        return uto;
     }
+
+
 
 
     @Override
@@ -170,7 +185,7 @@ public class JuegoManager  implements Juego {
     }
 
     @Override
-    public void moodificarVida(String idUser) {
+    public void moodificarVida(String idUser){
 
     }
 
@@ -187,11 +202,10 @@ public class JuegoManager  implements Juego {
         return this.inventario;
     }
 
+
+
     @Override
     public void activarmeObjeto(String idObjeto, String idUser) {
-
-
-
 
 
     }
@@ -220,6 +234,7 @@ public class JuegoManager  implements Juego {
     public void eliminarObjeto(String idObjeto) {
 
     }
+
     @Override
     public void clear() {
 
@@ -227,4 +242,6 @@ public class JuegoManager  implements Juego {
         this.inventario.clear();
 
     }
+
+ 
 }

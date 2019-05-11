@@ -50,8 +50,8 @@ public class test {
     @Test
     public void dameUsuariosById() {
 
-        List<UsuarioTO> list = this.ju.dameUsuariosTO();
-        UsuarioTO uto = ju.dameUsuarioById("idPedro");
+        List<Usuario> list = this.ju.dameUsuarios();
+        Usuario uto = ju.dameUsuarioById("idPedro");
 
         Assert.assertEquals("Pedro", uto.getNombre());
     }

@@ -75,15 +75,15 @@ import java.util.List;
     @GET
     @ApiOperation(value = "Dame un usuario por su id")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Successful", response = UsuarioTO.class),
-            @ApiResponse(code = 404, message = "No se ha podido realizar")
+            @ApiResponse(code = 201, message = "Successful", response = Usuario.class),
+            @ApiResponse(code = 404, message = "No existe este usuario")
     })
     @Path("/usuario/{idUser}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response dameUsuarioById(@PathParam("idUser") String id) {
         try{
-            UsuarioTO uto = this.ju.dameUsuarioById(id);
-            GenericEntity<UsuarioTO> entity = new GenericEntity<UsuarioTO>(uto) {};
+            Usuario u = this.ju.dameUsuarioById(id);
+            GenericEntity<Usuario> entity = new GenericEntity<Usuario>(u) {};
             return Response.status(201).entity(entity).build()  ;
 
         }catch (Exception e){
