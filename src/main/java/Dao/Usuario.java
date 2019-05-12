@@ -5,7 +5,7 @@ public class Usuario {
 
     String id;
     String Nombre;
-    String Apellido;
+
     String pass;
 
     public String getPass() {
@@ -24,14 +24,18 @@ public class Usuario {
         this.id = id;
     }
 
-    public Usuario (String id, String nombre, String apellido){
+    public Usuario (String id, String nombre, String pass){
 
         this.id = id;
         this.Nombre = nombre;
-        this.Apellido = apellido;
+        this.pass = pass;
     }
 
-    public Usuario(){}
+    public Usuario(){
+        this.id = null;
+        this.Nombre = null;
+        this.pass = null;
+    }
 
 
     public String getNombre() {
@@ -42,15 +46,10 @@ public class Usuario {
         Nombre = nombre;
     }
 
-    public String getApellido() {
-        return Apellido;
-    }
 
-    public void setApellido(String apellido) {
-        Apellido = apellido;
-    }
+
 
     public String toString() {
-        return this.getNombre()+" "+" "+this.Apellido;
+        return this.getNombre()+" "+" "+this.pass;
     }
 }

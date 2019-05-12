@@ -315,7 +315,7 @@ public class Session {
 
 //--------------------------------------------PRUEBAS ADRI-----------------------------------------------------
 
-
+//Esto se pone directamente en el DAO de OBJETOS (TE AHORRAS MUCHO PONIENDOLO AHÍ)
 
     public List<Objeto> selecAllObjetos() throws Exception {
 
@@ -337,7 +337,7 @@ public class Session {
 
 
     }
-
+//ESTO ESTA EN EL DAO DE USUARIOS (TE AHORRAS MUCHO PONIENDOLO AHI)
     public List<Usuario> selecAllUsuarios() throws Exception {
 
         String select = "SELECT * FROM usuario";
@@ -359,8 +359,22 @@ public class Session {
 
     }
 
+
+
     //----------------------------------------PRUEBAS ADRI-----------------------------------------------------
+
+
+
+
+    public Statement getStatement () throws Exception{
+
+
+        Statement st = this.session.createStatement();
+        return st;
+
+    }
 }
+
 
 
 

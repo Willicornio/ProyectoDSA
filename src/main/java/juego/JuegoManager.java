@@ -85,7 +85,7 @@ public class JuegoManager  implements Juego {
             Usuario u = new Usuario(nombre,pass);
             //this.usuarios.put(u.idUser,u); //LO EQUIVALENTE EN DAO AL SAVE
             UsersDAOImpl.addUser(new Usuario(nombre,pass));
-            this.crearInventario(u.getIdUser(), ObjetoDAOImpl.dameListObjetos());
+            //this.crearInventario(u.getIdUser(), ObjetoDAOImpl.dameTodosObjetos);
             return u;
         }else{
 
@@ -96,10 +96,10 @@ public class JuegoManager  implements Juego {
 
 
     @Override
-    public List<Usuario> dameUsuarios() throws Exception {
+    public LinkedList<Usuario> dameUsuarios() throws Exception {
  
-
-       return UsersDAOImpl.dameListUsuarios();
+return null;
+      // return UsersDAOImpl.dameListUsuarios();
     }
 
     @Override
@@ -118,10 +118,10 @@ public class JuegoManager  implements Juego {
         return list;
     }
 
-    @Override
-    public Usuario dameUsuarioById(String id) throws Exception {
-
-        List<Usuario> list = UsersDAOImpl.dameListUsuarios();
+   // @Override
+  public Usuario dameUsuarioById(String id) throws Exception {
+/*
+        LinkedList<Usuario> list = UsersDAOImpl.dameListUsuarios();
         Usuario u = null;
 
         for (Usuario usuario : list) {
@@ -133,8 +133,9 @@ public class JuegoManager  implements Juego {
 
         }
 
-
-        return u;
+*/
+        //return u;
+      return null;
 
     }
 

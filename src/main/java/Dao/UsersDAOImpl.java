@@ -2,14 +2,9 @@ package Dao;
 
 import juego.Inventario;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Date;
-import java.util.List;
+
+import java.sql.*;
+import java.util.*;
 
 public class UsersDAOImpl implements UsersDAO {
 
@@ -53,11 +48,37 @@ public class UsersDAOImpl implements UsersDAO {
         }
     }
 
-    public static List<juego.Usuario> dameListUsuarios() throws Exception {
+    public LinkedList<Usuario> dameListUsuarios() throws Exception {
         Session s = Factoria.getSession();
-        return s.selecAllUsuarios();
+        Statement st = s.getStatement();
+        String query = "SELECT * FROM usuario";
+        LinkedList <Usuario> listaUsuarios = new LinkedList<Usuario>();
+        ResultSet rs = st.executeQuery(query);
 
+        try {
+            while (rs.next()){
+                 Usuario u = new Usuario();
+                ResultSetMetaData rsmd = rs.getMetaData();
+                int nCols = rsmd.getColumnCount();
+                for (int i = 1; i <= nCols;i++){
+
+                    if(i ==1) { u.setId(rs.getString(i)); }
+                    if(i ==2) { u.setNombre(rs.getString(i)); }
+                    if(i ==3) { u.setPass(rs.getString(i)); }
+
+                }
+                listaUsuarios.add(u);
+
+            }
+
+            return listaUsuarios;
+
+        }catch(Exception e){
+            throw e;
+        }
     }
+
+
 
     //--------------------------------------------PRUEBAS ADRI----------------------------------------
 }
