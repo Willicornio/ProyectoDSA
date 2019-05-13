@@ -53,8 +53,15 @@ public class ObjetoDAOImpl implements ObjetoDAO{
     @Override
     public Objeto getObjeto(String id) throws Exception {
         Session s = Factoria.getSession();
-        Objeto u= (Objeto) s.get(id, Objeto.class);
-        System.out.println("DAO: "+u);
+        Objeto u = new Objeto();
+        try {
+            u = (Objeto) s.get(id, Objeto.class);
+            System.out.println("DAO: " + u);
+        }catch (Exception e){
+            System.out.println("no existe ese objeto siusplau");
+        }finally {
+            s.close();
+        }
         return u;
     }
 
