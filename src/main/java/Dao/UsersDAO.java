@@ -7,4 +7,5 @@ public interface UsersDAO {
     public void addUSer(String id, String nombre, String apellidos) throws Exception;
     public Usuario getUser(String id) throws Exception;
     public  LinkedList<Usuario> dameListUsuarios() throws  Exception;
+    public boolean borrarUsuario (Usuario user) throws Exception;
 }

@@ -30,6 +30,10 @@ public class Main {
         String nombre3 = lista1.get(2).getNombre();
         System.out.println(nombre3);
 
+        Usuario abs = dao.getUser("Willi25");
+
+        dao.borrarUsuario(abs);
+
 
         /*Usuario u = new Usuario();
         u =dao.getUser("Willi");
