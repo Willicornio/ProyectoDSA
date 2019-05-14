@@ -1,7 +1,5 @@
 package Dao;
 
-import juego.Inventario;
-
 
 import java.sql.*;
 import java.util.*;
@@ -135,6 +133,49 @@ public class UsersDAOImpl implements UsersDAO {
 
     }
 ////////////////////////////////// Modicifar dinero/////////////////////////////
+
+
+    public String modificarDinero(String id, int cantidad) throws Exception {
+        Session s = Factoria.getSession();
+        Statement st = s.getStatement();
+        Usuario u = new Usuario();
+        u = (Usuario) s.get(id, Usuario.class);
+        String dinero1 = u.getDinero();
+        Integer entero = Integer.valueOf(dinero1);
+         int enterof = entero + cantidad;
+        String dineros = String.valueOf(enterof);
+        String query = "UPDATE  usuario set dinero ='" + dineros + "'WHERE ('id' = '"+id+"')";
+        st.executeUpdate(query);
+
+        return dineros;
+
+    }
+
 // //////////////////////////////// Modificar puntuacion/////////////////////////////
+
+    public String modificarPuntuacion(String id, int puntu) throws Exception {
+        Session s = Factoria.getSession();
+        Statement st = s.getStatement();
+        Usuario u = new Usuario();
+        u = (Usuario) s.get(id, Usuario.class);
+
+       String puntUs =  u.getPuntuacion();
+       Integer entero = Integer.valueOf(puntUs);
+        int enterof = entero + puntu;
+        String pranking = String.valueOf(enterof);
+
+
+        String query = "UPDATE  usuario set dinero ='" + pranking + "'WHERE ('id' = '"+id+"')";
+        st.executeUpdate(query);
+
+        return pranking;
+
+    }
+
+
+
+
+
+
 
 }

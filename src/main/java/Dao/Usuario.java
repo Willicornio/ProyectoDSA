@@ -6,9 +6,24 @@ public class Usuario {
     String id;
     String Nombre;
     String pass;
-    int dinero;
+    String dinero;
 
-    public int getDinero() {
+    String puntuacion;
+
+
+    public void setDinero(String dinero) {
+        this.dinero = dinero;
+    }
+
+    public String getPuntuacion() {
+        return puntuacion;
+    }
+
+    public void setPuntuacion(String puntuacion) {
+        this.puntuacion = puntuacion;
+    }
+
+    public String getDinero() {
         return dinero;
     }
 
@@ -39,12 +54,13 @@ public class Usuario {
         this.Nombre = nombre;
         this.pass = pass;
     }
-    public Usuario (String id, String nombre, String pass, int dinero){
+    public Usuario (String id, String nombre, String pass, String dinero, String puntuacion){
 
         this.id = id;
         this.Nombre = nombre;
         this.pass = pass;
         this.dinero = dinero;
+        this.puntuacion = puntuacion;
     }
     public Usuario(){
         this.id = null;
