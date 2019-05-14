@@ -1,4 +1,5 @@
 import juego.*;
+import org.glassfish.grizzly.utils.EchoFilter;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -10,30 +11,64 @@ public class test {
 
     private Juego ju;
 
+
+
     @Before
-    public void setUp(){
+    public void setUp() throws Exception {
         ju = JuegoManager.getInstance();
         List<Objeto> list = this.ju.dameObjetos();
-        Usuario u = this.ju.crearUsuario("Julio","1234",list);
-        Usuario i = this.ju.crearUsuario("Pedro","1234",list);
+        Usuario u = this.ju.crearUsuario("Julio","1234");
+        Usuario i = this.ju.crearUsuario("Pedro","1234");
 
     }
 
     @Test
-    public void crearUsuario() {
-        List<Objeto> list = this.ju.dameObjetos();
+    public void crearUsuario() throws Exception {
 
-        Usuario u = this.ju.crearUsuario("Adri","1234",list);
-        Assert.assertEquals(2, u.getInventario().getObjetos().length);
+
+        Usuario u = this.ju.crearUsuario("Jesus","1234");
+        Assert.assertEquals("Jesus",u.getNombre());
     }
 
     @Test
-    public void dameUsuarios() {
 
-        List<UsuarioTO> list = this.ju.dameUsuarios();
+        public void testfailCrearUsuario() throws Exception{
+
+             Usuario u = this.ju.crearUsuario("Julio","1234");
+             Assert.assertEquals(null, u);
+
+    }
+
+    @Test
+    public void dameUsuarios() throws Exception {
+
+        List<UsuarioTO> list = this.ju.dameUsuariosTO();
 
         Assert.assertEquals(2, list.size());
     }
+
+    @Test
+    public void dameUsuariosById() throws Exception {
+
+        List<Usuario> list = this.ju.dameUsuarios();
+        Usuario uto = ju.dameUsuarioById("idPedro");
+
+        Assert.assertEquals("Pedro", uto.getNombre());
+    }
+
+    @Test
+    public void login() throws Exception {
+
+        List<Usuario> list = this.ju.dameUsuarios();
+        boolean check = ju.login("Manolo", "1234");
+
+
+
+        Assert.assertEquals(false, check);
+
+
+    }
+
 
     @After
     public void limpiar(){

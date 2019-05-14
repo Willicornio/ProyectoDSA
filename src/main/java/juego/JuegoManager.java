@@ -1,5 +1,11 @@
 package juego;
 
+import Dao.Factoria;
+import Dao.InventarioDAOImpl;
+import Dao.ObjetoDAOImpl;
+import Dao.UsersDAOImpl;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,33 +14,55 @@ import java.util.HashMap;
 public class JuegoManager  implements Juego {
 
 
+
+
     private HashMap<String, Usuario> usuarios;
-    private List<Objeto> listaObjetos;
+    private List<Objeto> inventario;
     private List<Inventario> listainventarios;
     private List<Mapa> listaMapas;
+    private Usuario userActivo;
 
 
 
-    private JuegoManager(){
+    private JuegoManager() throws Exception {
         this.usuarios = new HashMap<>();
-        this.listaObjetos = new LinkedList<>();
-        //++++++++++++++++ OBJETOS POR DEFECTO++++++++++++++++++++++++++
-        this.listaObjetos.add(0, new Objeto("Linterna","0",1,5));
-        this.listaObjetos.add(1, new Objeto("Ganzua","1",1,10));
-        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        this.inventario = new LinkedList<>();
+
+
+
+        this.inventario = new LinkedList<>();
+
+
+
+
     }
 
     private static Juego instance;
-    public static Juego getInstance(){
+    public static Juego getInstance() throws Exception {
         if (instance == null) instance = new JuegoManager();
         return instance;
     }
 
 
+
     @Override
-    public boolean login(String nombre, String pass) {
-        return false;
+    public boolean login(String nombre, String pass) throws Exception {
+
+        List<Usuario> u = this.dameUsuarios();
+        boolean check = false;
+
+        for (Usuario user : u) {
+
+            if (user.getIdUser().equals("id" + nombre)) {
+
+                check = true;
+                break;
+            }
+        }
+        return check;
     }
+
 
     @Override
     public boolean logout(String idUser, String pass) {
@@ -49,35 +77,69 @@ public class JuegoManager  implements Juego {
     }
 
     @Override
-    public Usuario crearUsuario(String nombre, String pass, List<Objeto> listaObjetos) {
+    public Usuario crearUsuario(String nombre, String pass) throws Exception {
 
-        String idUser = "id"+nombre;
+        Usuario user = dameUsuarioById("id"+nombre);
 
-        Inventario i = crearInventario(listaObjetos,idUser);
+        if(user == null){
+            Usuario u = new Usuario(nombre,pass);
+            //this.usuarios.put(u.idUser,u); //LO EQUIVALENTE EN DAO AL SAVE
+            UsersDAOImpl.addUser(new Usuario(nombre,pass));
+            //this.crearInventario(u.getIdUser(), ObjetoDAOImpl.dameTodosObjetos);
+            return u;
+        }else{
 
-        Usuario u = new Usuario(nombre,pass,i);
+            return null;
+        }
+
+    }
 
 
-        this.usuarios.put(u.idUser,u); //LO EQUIVALENTE EN DAO AL SAVE
-        return u;
-
-
+    @Override
+    public LinkedList<Usuario> dameUsuarios() throws Exception {
+ 
+return null;
+      // return UsersDAOImpl.dameListUsuarios();
     }
 
     @Override
-    public List<UsuarioTO> dameUsuarios() {
 
-       List<Usuario> u = new ArrayList(this.usuarios.values());
+    public List<UsuarioTO> dameUsuariosTO() throws Exception {
 
-       List<UsuarioTO> list = new ArrayList<>();
+        List<Usuario> u = this.dameUsuarios();
 
-       for(Usuario g: u){
-           list.add(new UsuarioTO(g.getIdUser(),g.getNombre(),g.getDinero(),g.getPuntuacionTotal()));
+        List<UsuarioTO> list = new ArrayList<>();
 
-       }
+        for(Usuario g: u){
+            list.add(new UsuarioTO(g.getIdUser(),g.getNombre(),g.getDinero(),g.getPuntuacionTotal()));
+
+        }
 
         return list;
     }
+
+   // @Override
+  public Usuario dameUsuarioById(String id) throws Exception {
+/*
+        LinkedList<Usuario> list = UsersDAOImpl.dameListUsuarios();
+        Usuario u = null;
+
+        for (Usuario usuario : list) {
+            if (usuario.getIdUser().equals(id)) {
+
+                u = usuario;
+                break;
+            }
+
+        }
+
+*/
+        //return u;
+      return null;
+
+    }
+
+
 
 
     @Override
@@ -126,7 +188,7 @@ public class JuegoManager  implements Juego {
     }
 
     @Override
-    public void moodificarVida(String idUser) {
+    public void moodificarVida(String idUser){
 
     }
 
@@ -140,14 +202,18 @@ public class JuegoManager  implements Juego {
     @Override
     public List<Objeto> dameObjetos(){
 
-        return this.listaObjetos;
+        List<Objeto> list = new LinkedList<>();
+
+        list.add(new Objeto("1","Linterna",3,5));
+        list.add(new Objeto("2","Ganzua",3,5));
+
+        return list;
     }
+
+
 
     @Override
     public void activarmeObjeto(String idObjeto, String idUser) {
-
-
-
 
 
     }
@@ -158,16 +224,26 @@ public class JuegoManager  implements Juego {
     }
 
     @Override
-    public Inventario crearInventario(List<Objeto> listaObjetos, String idUser) {
+    public void crearInventario(String idUser, List<Objeto> listaObjetos) throws Exception {
 
-        return new Inventario(listaObjetos,idUser);
+        //SELECT * FROM objeto --> pasarlo a una lista de objetos
+         //simulo el select
+
+
+        for(Objeto o: listaObjetos){
+            Inventario i = new Inventario(idUser,o.getId());
+            InventarioDAOImpl.addInventario(i);
+
+        }
+
+
 
     }
 
 
     @Override
     public void crearObjetoNuevo(Objeto objeto) {
-        this.listaObjetos.add(objeto);
+        this.inventario.add(objeto);
 
     }
 
@@ -175,11 +251,14 @@ public class JuegoManager  implements Juego {
     public void eliminarObjeto(String idObjeto) {
 
     }
+
     @Override
     public void clear() {
 
         this.usuarios.clear();
-        this.listaObjetos.clear();
+        this.inventario.clear();
 
     }
+
+ 
 }

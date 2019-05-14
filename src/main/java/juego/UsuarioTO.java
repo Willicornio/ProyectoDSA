@@ -6,6 +6,11 @@ public class UsuarioTO {
     int dinero;
     int puntuacionTotal;
 
+    public UsuarioTO() {
+
+
+    }
+
     public UsuarioTO(String idUser, String nombre, int dinero, int puntuacionTotal) {
         this.idUser = idUser;
         this.nombre = nombre;

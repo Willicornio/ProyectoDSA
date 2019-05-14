@@ -1,61 +1,12 @@
 package Dao;
 
-import juego.Inventario;
 
 public class Usuario {
 
+    String id;
+    String Nombre;
 
-    String idUser;
-    String nombre;
     String pass;
-
-    public Usuario(String nombre, String apellidos) {
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-    }
-
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
-
-    String apellidos;
-    Inventario inventario;
-    int dinero;
-    boolean partidaEnCurso;
-    String idPartidaEnCurso;
-    int puntuacionTotal;
-
-
-    public Usuario (String nombre, String pass, Inventario i){
-
-        this.nombre = nombre;
-        this.pass = pass;
-        this.idUser = "id" + nombre;
-        this.dinero = 0;
-        this.partidaEnCurso = false;
-        inventario = i;
-        puntuacionTotal = 0;
-    }
-
-    public String getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 
     public String getPass() {
         return pass;
@@ -65,44 +16,40 @@ public class Usuario {
         this.pass = pass;
     }
 
-    public Inventario getInventario() {
-        return inventario;
+    public String getId() {
+        return id;
     }
 
-    public void setInventario(Inventario inventario) {
-        this.inventario = inventario;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public int getDinero() {
-        return dinero;
+    public Usuario (String id, String nombre, String pass){
+
+        this.id = id;
+        this.Nombre = nombre;
+        this.pass = pass;
     }
 
-    public void setDinero(int dinero) {
-        this.dinero = dinero;
+    public Usuario(){
+        this.id = null;
+        this.Nombre = null;
+        this.pass = null;
     }
 
-    public boolean isPartidaEnCurso() {
-        return partidaEnCurso;
+
+    public String getNombre() {
+        return Nombre;
     }
 
-    public void setPartidaEnCurso(boolean partidaEnCurso) {
-        this.partidaEnCurso = partidaEnCurso;
+    public void setNombre(String nombre) {
+        Nombre = nombre;
     }
 
-    public String getIdPartidaEnCurso() {
-        return idPartidaEnCurso;
-    }
 
-    public void setIdPartidaEnCurso(String idPartidaEnCurso) {
-        this.idPartidaEnCurso = idPartidaEnCurso;
-    }
 
-    public int getPuntuacionTotal() {
-        return puntuacionTotal;
-    }
 
-    public void setPuntuacionTotal(int puntuacionTotal) {
-        this.puntuacionTotal = puntuacionTotal;
+    public String toString() {
+        return this.getNombre()+" "+" "+this.pass;
     }
 }
-//hola

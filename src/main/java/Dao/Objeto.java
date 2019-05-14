@@ -1,13 +1,20 @@
-package juego;
+package Dao;
+
 public class Objeto {
 
     String id;
     String nombre;
     int puntos;
     int dinero;
-    boolean actvivado;
+    String actvivado;
 
     public Objeto() {
+
+        this.nombre = null;
+        this.id = null;
+        this.puntos = 0;
+        this.dinero = 0;
+        this.actvivado = "false";
 
     }
 
@@ -17,8 +24,10 @@ public class Objeto {
         this.id = id;
         this.nombre = Nombre;
         this.puntos = puntos;
-        actvivado = false;
+        this.actvivado = null;
     }
+
+
 
     public String getId() {
         return id;
@@ -52,11 +61,11 @@ public class Objeto {
         this.dinero = dinero;
     }
 
-    public boolean isActvivado() {
+    public String getActvivado() {
         return actvivado;
     }
 
-    public void setActvivado(boolean actvivado) {
+    public void setActvivado(String actvivado) {
         this.actvivado = actvivado;
     }
 }

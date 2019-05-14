@@ -1,5 +1,9 @@
 package Dao;
 
+import io.swagger.models.auth.In;
+import juego.Inventario;
+import juego.Objeto;
+import juego.Usuario;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
@@ -33,9 +37,13 @@ public class Session {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
+           ///*
             session = DriverManager
                     .getConnection("jdbc:mysql://localhost/feedback?"
                             + "user=root&password=dsa2019");
+            //*/
+           /* PARA USAR LA BASE DE DATOS QUE TENGO CREADA UTILIZAR ESTA LINIA Y CAMBIAR LA PASS*/
+           //session = DriverManager.getConnection("jdbc:mysql://localhost/dsa", "root", "DSA2019");
 
             return session;
 
@@ -219,20 +227,14 @@ public class Session {
         int contador = 1;
 
 
-        Field[] fields = o.getClass().getDeclaredFields();
+        //Field[] fields = o.getClass().getDeclaredFields();
+        Field[] fields = clase.getDeclaredFields();
 
-        for (int i = 1; i <= fields.length; i++) {
-            if (i == 1 || i != fields.length) {
-                preparedQuery = "?,";
-            } else {
-                preparedQuery += "?";
-            }
-        }
+        query = "SELECT * FROM " + table + " WHERE id =?";
 
-        query = "SELECT " + preparedQuery + " FROM " + table + "WHERE id =" + id;
-
-
+        System.out.println("query :"+query);
         PreparedStatement ps = this.session.prepareStatement(query);
+        ps.setString(1, id);
 /*
         for(Field f : fields){
             ps.setString(contador, new PropertyDescriptor(fields[contador - 1].getName(),o.getClass()).getReadMethod().invoke(o).toString() );
@@ -241,8 +243,10 @@ public class Session {
         }*/
 
         resultSet = ps.executeQuery();
-
-        o = writeResultSet(resultSet, o);
+        if (resultSet!=null) {
+            resultSet.next();
+            o = writeResultSet(resultSet, o);
+        }
 
         ps.close();
 
@@ -273,58 +277,110 @@ public class Session {
             System.out.println(rsmd.getColumnType(2));
 
 
-            int i =0;
+            int i =1;
             String property = null;
-            Method m = instancia.getClass().getMethod(instancia.getClass().getSimpleName());
-
-            while (i < nCols) {
+            Method m = null;
+            while (i <= nCols) {
                 // switch
-
                 property = rsmd.getColumnName(i);
-                setter(instancia, m, resultSet.getString(i),property);
+                m = findMethod(instancia.getClass(), property);
+                setter(instancia, m, resultSet.getString(i));
+                i++;
             }
 
-        /*
-        LinkedList<String> lista = new LinkedList<String>();
-        int i = 1;
-        Field[] fields = instancia.getClass().getDeclaredFields();
-        while(i<= fields.length){
-            lista.add(resultSet.getString(fields[i].getName()));
-            i++;
-        }
-
-
-
-
-        while (p < lista.size() ) {
-
-            String set = fields[p].getName();
-            String set2 = "set"+set;
-            // set.substring(0,1).toUpperCase()+set.substring(1);
-
-            Method m = instancia.getClass().getMethod(set2);
-            m.invoke(instancia, lista.get(p));
-
-            Object[] params = {instancia.getClass().getMethod("Usuario")};
-           Object a = m.invoke(instancia, "guillermo");
-
-
-          }
-*/
             return instancia;
 
         }catch (Exception e){
+            e.printStackTrace();
             System.out.println("no va");
             throw e;
         }
     }
 
-    public Object setter (Object a, Method m, String result, String param) throws Exception{
+    private Method findMethod(Class theClass, String property) {
+        Method[] methods = theClass.getDeclaredMethods();
+        String nombreMetodo = "set"+property.substring(0,1)
+        .toUpperCase()+property.substring(1);
 
-        m.invoke(a,param,result);
+        System.out.println("metodo a buscar "+nombreMetodo);
+
+        for (Method m: methods) {
+            if (m.getName().equals(nombreMetodo)) return m;
+        }
+        return null;
+    }
+
+    public Object setter (Object a, Method m, String result) throws Exception{
+
+        m.invoke(a, result);
         return a;
     }
+
+
+
+
+//--------------------------------------------PRUEBAS ADRI-----------------------------------------------------
+
+//Esto se pone directamente en el DAO de OBJETOS (TE AHORRAS MUCHO PONIENDOLO AHÍ)
+
+    public List<Objeto> selecAllObjetos() throws Exception {
+
+        String select = "SELECT * FROM objeto";
+        Statement st = session.createStatement();
+        List<Objeto> list = new LinkedList<>();
+
+        ResultSet rs = st.executeQuery(select);
+        while (rs.next()) {
+            Objeto o = new Objeto(rs.getString("id"),rs.getString("nombre"),rs.getInt("puntos"),rs.getInt("dinero"));
+            list.add(o);
+        }
+        rs.close();
+        st.close();
+
+        return list;
+
+
+
+
+    }
+//ESTO ESTA EN EL DAO DE USUARIOS (TE AHORRAS MUCHO PONIENDOLO AHI)
+    public List<Usuario> selecAllUsuarios() throws Exception {
+
+        String select = "SELECT * FROM usuario";
+        Statement st = session.createStatement();
+        List<Usuario> list = new LinkedList<>();
+
+        ResultSet rs = st.executeQuery(select);
+        while (rs.next()) {
+            Usuario u = new Usuario(rs.getString("id"),rs.getString("nombre"),rs.getString("pass"),rs.getInt("dinero"),rs.getInt("puntuaciontotal"));
+            list.add(u);
+        }
+        rs.close();
+        st.close();
+
+        return list;
+
+
+
+
+    }
+
+
+
+    //----------------------------------------PRUEBAS ADRI-----------------------------------------------------
+
+
+
+
+    public Statement getStatement () throws Exception{
+
+
+        Statement st = this.session.createStatement();
+        return st;
+
+    }
 }
+
 
 
 
