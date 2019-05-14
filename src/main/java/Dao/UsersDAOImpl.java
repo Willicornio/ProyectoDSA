@@ -112,10 +112,10 @@ public class UsersDAOImpl implements UsersDAO {
 
    ////////////////////////////////// CAMBIAR PASS/////////////////////////////
 
-    public void cambiarPass(String nombre, String pass, String newpass) throws  Exception{
+    public void cambiarPass(String nombre, String pass, String newpass, String id) throws  Exception{
         Session s = Factoria.getSession();
         Statement st = s.getStatement();
-         String id = "id"+nombre;
+
          Usuario u = new Usuario();
         u = (Usuario) s.get(id, Usuario.class);
         String contra = u.getPass();
@@ -127,7 +127,8 @@ public class UsersDAOImpl implements UsersDAO {
         }
     else
         {
-            throw new Exception();
+            throw new Exception("la contraseña fatal  o el usuario a saber escribe bien porfavor");
+
         }
 
 
@@ -141,7 +142,7 @@ public class UsersDAOImpl implements UsersDAO {
         Usuario u = new Usuario();
         u = (Usuario) s.get(id, Usuario.class);
         String dinero1 = u.getDinero();
-        Integer entero = Integer.valueOf(dinero1);
+        int entero = Integer.valueOf(dinero1);
          int enterof = entero + cantidad;
         String dineros = String.valueOf(enterof);
         String query = "UPDATE  usuario set dinero ='" + dineros + "'WHERE ('id' = '"+id+"')";

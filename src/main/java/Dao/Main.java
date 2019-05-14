@@ -9,18 +9,14 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-     /* UsersDAO dao = new UsersDAOImpl();
-         LinkedList<Usuario> lista = dao.dameListUsuarios();
-
-         String id1 = lista.get(0).getId();
-         System.out.println(id1);
-        String id2 = lista.get(1).getId();
-        System.out.println(id2);
-        String id3 = lista.get(2).getId();
-        System.out.println(id3);
+      UsersDAO dao = new UsersDAOImpl();
+//      dao.getUser("idRiquisimo");
 
 
-        ObjetoDAO dao1 = new ObjetoDAOImpl();
+     dao.cambiarPass("me", "gusta", "gustacion", "idRiquisimo");
+
+
+     /*   ObjetoDAO dao1 = new ObjetoDAOImpl();
         LinkedList<Objeto> lista1 = dao1.dameTodosObjetos();
 
         String nombre1 = lista1.get(0).getNombre();
@@ -49,7 +45,7 @@ public class Main {
 
 
 
-        PreparacionDeMapa pdm = new PreparacionDeMapaImpl();
+        /*PreparacionDeMapa pdm = new PreparacionDeMapaImpl();
 
       MapaCompleto mapismo =  pdm.CreaYdameMapa("1");
 
@@ -66,7 +62,7 @@ public class Main {
         System.out.println(y4);
 
 
-
+*/
     }
 
 

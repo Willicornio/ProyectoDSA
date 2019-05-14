@@ -10,4 +10,5 @@ public interface UsersDAO {
     public boolean borrarUsuario (Usuario user) throws Exception;
     public String modificarDinero(String id, int cantidad) throws Exception;
     public String modificarPuntuacion(String id, int puntuacion) throws Exception;
+    public void cambiarPass(String nombre, String pass, String newpass, String id) throws  Exception;
 }

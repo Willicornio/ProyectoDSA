@@ -32,6 +32,7 @@ public class Usuario {
         this.dinero = dinero;
     }
 
+
     public String getPass() {
         return pass;
     }
@@ -53,6 +54,8 @@ public class Usuario {
         this.id = id;
         this.Nombre = nombre;
         this.pass = pass;
+        this.dinero = "250";
+        this.puntuacion = "0";
     }
     public Usuario (String id, String nombre, String pass, String dinero, String puntuacion){
 
@@ -66,6 +69,8 @@ public class Usuario {
         this.id = null;
         this.Nombre = null;
         this.pass = null;
+        this.dinero = "250";
+        this.puntuacion = "0";
     }
 
 
