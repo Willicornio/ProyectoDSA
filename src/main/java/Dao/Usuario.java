@@ -5,8 +5,17 @@ public class Usuario {
 
     String id;
     String Nombre;
-
     String pass;
+    int dinero;
+
+    public int getDinero() {
+        return dinero;
+    }
+
+    public void setDinero() {
+
+        this.dinero = dinero;
+    }
 
     public String getPass() {
         return pass;
@@ -30,7 +39,13 @@ public class Usuario {
         this.Nombre = nombre;
         this.pass = pass;
     }
+    public Usuario (String id, String nombre, String pass, int dinero){
 
+        this.id = id;
+        this.Nombre = nombre;
+        this.pass = pass;
+        this.dinero = dinero;
+    }
     public Usuario(){
         this.id = null;
         this.Nombre = null;

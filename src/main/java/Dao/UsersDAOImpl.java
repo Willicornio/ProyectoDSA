@@ -42,10 +42,9 @@ public class UsersDAOImpl implements UsersDAO {
         }finally {
             s.close();
         }
-     return u;
+        return u;
     }
 
-    //--------------------------------------------PRUEBAS ADRI----------------------------------------
 
     public static void addUser(juego.Usuario u) throws Exception{
         try  {
@@ -94,7 +93,7 @@ public class UsersDAOImpl implements UsersDAO {
         }
     }
 
-
+///////////////////////////BORRAR USER////////////////////////////////////
     public boolean borrarUsuario (Usuario user) throws Exception {
         boolean resultado = false;
         Session s = Factoria.getSession();
@@ -113,5 +112,29 @@ public class UsersDAOImpl implements UsersDAO {
     }
 
 
-    //--------------------------------------------PRUEBAS ADRI----------------------------------------
+   ////////////////////////////////// CAMBIAR PASS/////////////////////////////
+
+    public void cambiarPass(String nombre, String pass, String newpass) throws  Exception{
+        Session s = Factoria.getSession();
+        Statement st = s.getStatement();
+         String id = "id"+nombre;
+         Usuario u = new Usuario();
+        u = (Usuario) s.get(id, Usuario.class);
+        String contra = u.getPass();
+        if ( contra == pass){
+
+            String query = "UPDATE  usuario set pass='" + newpass + "'WHERE ('id' = '"+id+"')";
+                    st.executeUpdate(query);
+
+        }
+    else
+        {
+            throw new Exception();
+        }
+
+
+    }
+////////////////////////////////// Modicifar dinero/////////////////////////////
+// //////////////////////////////// Modificar puntuacion/////////////////////////////
+
 }

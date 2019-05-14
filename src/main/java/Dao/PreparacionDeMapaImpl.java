@@ -7,16 +7,16 @@ public class PreparacionDeMapaImpl implements PreparacionDeMapa{
 
         MapaDAO daom = new MapaDAOImpl();
         Mapa mapa = daom.getMapa("2");
-        String mapilla = mapa.getMapatodo();
+        String nivel = mapa.getMapatodo();
         MapaCompleto supermapa = new MapaCompleto();
 
         int x = 1;
         int y = 1;
         int contador = 1;
         try {
-            for (int n= 0; n <mapilla.length ();n++){
+            for (int n= 0; n <nivel.length ();n++){
 
-                char c = mapilla.charAt(n);
+                char c = nivel.charAt(n);
                 String c2 = Character.toString(c);
                 Casilla casilla = new Casilla(c2, x,y);
                 supermapa.añadirCasilla(casilla);
