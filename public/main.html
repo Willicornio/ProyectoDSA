@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script>
+$(document).ready(function(){
+	$("button").click(function(){
+		$("#tabla").html(""); //primero vacio la tabla existente
+		$("#tablacompleta").show()
+		//var usuario = $("#text").val();
+		$.ajax({
+			type:'GET',
+			url:'http://localhost:8080/dsaApp/usuarios',
+			dataType: 'json',
+			success: function(data){
+			         console.log("data recibida", data);
+					$.each(data, function(index, valor){
+					$("#tabla").append("<tr><td>" + valor.idUser + "</td><td>" + valor.nombre + "</td><td>" + valor.dinero + "</td><td>" + valor.puntuacionTotal + "</td></tr>");
+				});
+			}
+		})	
+	});
+});	
+</script>
+</head>
+<body>
+<div class="row">
+  <div class="col-lg-2"></div>
+  <div class="col-lg-8">
+	<div class="container">
+	<h1>Ejercicio devolución tabla de repositorios de usuario de Github</h1>
+		</div>  
+  </div>
+  <div class="col-lg-2"></div>
+</div>
+<div class="row">
+  <div class="col-lg-2"></div>
+  <div class="col-lg-8">
+	  <h2>Repositorios</h2>
+  <p>Devuelvo los repositorios del usuario solicitado:</p>            
+  <table id="tablacompleta" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Usuario</th>
+		<th>Nombre del repositorio</th>
+        <th>Descripción</th>
+        <th>Seguidores</th>
+      </tr>
+    </thead>
+    <tbody id="tabla">     
+    </tbody>
+  </table>	
+  </div>
+  <div class="col-lg-2"></div>
+</div>
+<div class="row">
+  <div class="col-lg-4"></div>
+  <div class="col-lg-2">
+	<div class="container">
+	<input id="text" type="text" placeholder="Inserte nombre de usuario"></button>		
+	</div>  
+  </div>
+  <div class="col-lg-2">
+  	<div class="container">
+	<button id="btn" type="button" class="btn btn-primary">Consultar</button>		
+	</div> 
+  <div class="col-lg-4"></div>
+</div>
+</body>
+</html>

@@ -44,7 +44,7 @@ public class test {
 
         List<UsuarioTO> list = this.ju.dameUsuariosTO();
 
-        Assert.assertEquals(2, list.size());
+        Assert.assertEquals(7, list.size());
     }
 
     @Test
@@ -64,7 +64,7 @@ public class test {
 
 
 
-        Assert.assertEquals(false, check);
+        Assert.assertEquals(true, check);
 
 
     }
