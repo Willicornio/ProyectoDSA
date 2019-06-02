@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)file:///Users/adriamac/Desktop/login.html? -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>login</title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./login_files/bootstrap.min.css">
+  <script src="./login_files/jquery.min.js"></script>
+  <script src="./login_files/bootstrap.min.js"></script>
+  <script>
+$(document).ready(function(){
+	$("#btnLogin").click(function(){
+		var nombre = $("#nombre").val();
+        var password = $("#password").val();
+		$.ajax({
+			type:'GET',
+			url:'http://localhost:8080/dsaApp/usuarios',
+			dataType: 'json',
+			success: function(data){
+				$.each(data, function(index, valor){
+					$("#tabla").append("<tr><td>" + valor.idUser + "</td><td>" + valor.nombre + "</td><td>" + valor.dinero + "</td><td>" + valor.puntuacionTotal + "</td></tr>");
+				});
+			}
+		})
+	});
+});
+</script>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+  <h1>Proyecto DSA</h1>
+  <p>Anna Frias, Guillermo Manterola, Adrià Navarrete</p> 
+</div>
+
+<div class="container">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 col-sm-12">
+        <div class="jumbotron">
+            <form>
+                <div class="form-group">
+                    <input id="nombre" type="text" class="form-control" placeholder="Introduza tu nombre">
+                </div>
+                <div class="form-group">
+                    <input id="password" type="Password" class="form-control" placeholder="password">
+                </div>
+                
+
+                
+                <button id="btnLogin" type="sumbit" class="btn btn-primary form-control">Login</button>
+                <div class="form-group"></div>
+                <button id="btnRegister" type="sumbit" class="btn btn-warning form-control">¡ Create un usuario !</button>
+                
+            </form>
+            
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+
+</body></html>

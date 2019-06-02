@@ -5,8 +5,33 @@ public class Usuario {
 
     String id;
     String Nombre;
-    String Apellido;
     String pass;
+    String dinero;
+
+    String puntuacion;
+
+
+    public void setDinero(String dinero) {
+        this.dinero = dinero;
+    }
+
+    public String getPuntuacion() {
+        return puntuacion;
+    }
+
+    public void setPuntuacion(String puntuacion) {
+        this.puntuacion = puntuacion;
+    }
+
+    public String getDinero() {
+        return dinero;
+    }
+
+    public void setDinero() {
+
+        this.dinero = dinero;
+    }
+
 
     public String getPass() {
         return pass;
@@ -24,14 +49,29 @@ public class Usuario {
         this.id = id;
     }
 
-    public Usuario (String id, String nombre, String apellido){
+    public Usuario (String id, String nombre, String pass){
 
         this.id = id;
         this.Nombre = nombre;
-        this.Apellido = apellido;
+        this.pass = pass;
+        this.dinero = "250";
+        this.puntuacion = "0";
     }
+    public Usuario (String id, String nombre, String pass, String dinero, String puntuacion){
 
-    public Usuario(){}
+        this.id = id;
+        this.Nombre = nombre;
+        this.pass = pass;
+        this.dinero = dinero;
+        this.puntuacion = puntuacion;
+    }
+    public Usuario(){
+        this.id = null;
+        this.Nombre = null;
+        this.pass = null;
+        this.dinero = "250";
+        this.puntuacion = "0";
+    }
 
 
     public String getNombre() {
@@ -42,15 +82,10 @@ public class Usuario {
         Nombre = nombre;
     }
 
-    public String getApellido() {
-        return Apellido;
-    }
 
-    public void setApellido(String apellido) {
-        Apellido = apellido;
-    }
+
 
     public String toString() {
-        return this.getNombre()+" "+" "+this.Apellido;
+        return this.getNombre()+" "+" "+this.pass;
     }
 }

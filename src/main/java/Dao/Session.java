@@ -213,6 +213,10 @@ public class Session {
     }
 
 
+
+
+
+
     public Object get( String id, Class clase) throws Exception {
 
         Object o = clase.newInstance();
@@ -253,6 +257,8 @@ public class Session {
     }
 
 
+
+
     private Object writeResultSet(ResultSet resultSet, Object instancia) throws Exception {
         try{
             int contador = 1 ;
@@ -267,15 +273,16 @@ public class Session {
             System.out.println(rsmd.getColumnCount());
             System.out.println(rsmd.getColumnName(1));
             System.out.println(rsmd.getColumnName(2));
-            System.out.println(rsmd.getColumnType(1));
-            System.out.println(rsmd.getColumnType(2));
+            System.out.println(rsmd.getColumnTypeName(1));
+            System.out.println(rsmd.getColumnTypeName(2));
 
 
             int i =1;
             String property = null;
+
             Method m = null;
             while (i <= nCols) {
-                // switch
+
                 property = rsmd.getColumnName(i);
                 m = findMethod(instancia.getClass(), property);
                 setter(instancia, m, resultSet.getString(i));
@@ -315,52 +322,38 @@ public class Session {
 
 //--------------------------------------------PRUEBAS ADRI-----------------------------------------------------
 
-
-
-    public List<Objeto> selecAllObjetos() throws Exception {
-
-        String select = "SELECT * FROM objeto";
-        Statement st = session.createStatement();
-        List<Objeto> list = new LinkedList<>();
-
-        ResultSet rs = st.executeQuery(select);
-        while (rs.next()) {
-            Objeto o = new Objeto(rs.getString("id"),rs.getString("nombre"),rs.getInt("puntos"),rs.getInt("dinero"));
-            list.add(o);
-        }
-        rs.close();
-        st.close();
-
-        return list;
+//Esto se pone directamente en el DAO de OBJETOS (TE AHORRAS MUCHO PONIENDOLO AHÍ)
 
 
 
 
-    }
 
-    public List<Usuario> selecAllUsuarios() throws Exception {
 
-        String select = "SELECT * FROM usuario";
-        Statement st = session.createStatement();
-        List<Usuario> list = new LinkedList<>();
 
-        ResultSet rs = st.executeQuery(select);
-        while (rs.next()) {
-            Usuario u = new Usuario(rs.getString("id"),rs.getString("nombre"),rs.getString("pass"),rs.getInt("dinero"),rs.getInt("puntuaciontotal"));
-            list.add(u);
-        }
-        rs.close();
-        st.close();
-
-        return list;
+//ESTO ESTA EN EL DAO DE USUARIOS (TE AHORRAS MUCHO PONIENDOLO AHI)
 
 
 
 
-    }
+
+
+
+
 
     //----------------------------------------PRUEBAS ADRI-----------------------------------------------------
+
+
+
+
+    public Statement getStatement () throws Exception{
+
+
+        Statement st = this.session.createStatement();
+        return st;
+
+    }
 }
+
 
 
 
