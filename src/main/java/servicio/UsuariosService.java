@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Logger;
 
 
 @Api(value = "/Usuarios", description = "Servicio de usuarios")
@@ -94,21 +95,33 @@ import java.util.List;
     @POST
     @ApiOperation(value = "login usuario")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Successful"),
+            @ApiResponse(code = 201, message = "Successful", response = Usuario.class),
             @ApiResponse(code = 404, message = "No se ha encontrado al usuario")
     })
-    @Path("/login/{nombre}/{pass}")
+    @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response login(@PathParam("nombre") String nombre, @PathParam("pass") String pass) {
+    public Response login(Usuario user) {
+
+        Logger log = Logger.getLogger(UsuariosService.class.getName());
+
         try{
 
             List<Usuario> listUsers = this.ju.dameUsuarios();
-            boolean check = ju.login(nombre, pass);
+
+            boolean check = ju.login(user.getNombre(), user.getPass());
+
+            log.info(user.getNombre() + "-----" + user.getPass());
+
+
 
             if(check == true){
-                return Response.status(201).build();
+                log.info("201");
+                GenericEntity<Usuario> entity = new GenericEntity<Usuario>(user){};
+                return Response.status(201).entity(entity).build();
+
             }
             else{
+                log.info("404");
                 return Response.status(404).build();
             }
 

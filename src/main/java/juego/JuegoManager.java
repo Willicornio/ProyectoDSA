@@ -10,8 +10,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 public class JuegoManager  implements Juego {
+    private Logger log = Logger.getLogger(JuegoManager.class.getName());
+
 
 
 
