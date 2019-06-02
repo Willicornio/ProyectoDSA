@@ -22,13 +22,14 @@ int puntuacionTotal;
          this.puntuacionTotal = 0;
      }
 
-    public Usuario(String idUser, String nombre, String pass, int dinero, int puntuacionTotal) {
+    /*public Usuario(String idUser, String nombre, String pass, int dinero, int puntuacionTotal) {
         this.idUser = idUser;
         this.nombre = nombre;
         this.pass = pass;
         this.dinero = dinero;
         this.puntuacionTotal = puntuacionTotal;
-    }
+        }
+    */
 
     public String getIdUser() {
         return idUser;

@@ -6,7 +6,7 @@ public class Objeto {
     String nombre;
     int puntos;
     int dinero;
-    String actvivado;
+    String activado;
 
     public Objeto() {
 
@@ -14,19 +14,18 @@ public class Objeto {
         this.id = null;
         this.puntos = 0;
         this.dinero = 0;
-        this.actvivado = "false";
+        this.activado = "false";
 
     }
 
-    public Objeto(String id,String Nombre, int puntos, int dinero){
+    public Objeto(String id, String Nombre, int puntos, int dinero) {
 
         this.dinero = dinero;
         this.id = id;
         this.nombre = Nombre;
         this.puntos = puntos;
-        this.actvivado = null;
+        this.activado = null;
     }
-
 
 
     public String getId() {
@@ -61,11 +60,13 @@ public class Objeto {
         this.dinero = dinero;
     }
 
-    public String getActvivado() {
-        return actvivado;
+    public String getActivado() {
+        return activado;
     }
 
-    public void setActvivado(String actvivado) {
-        this.actvivado = actvivado;
+    public void setActivado(String activado) {
+        this.activado = activado;
     }
 }
+
+

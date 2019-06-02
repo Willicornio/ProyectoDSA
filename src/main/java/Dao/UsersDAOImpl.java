@@ -57,21 +57,21 @@ public class UsersDAOImpl implements UsersDAO {
         }
     }
 
-    public LinkedList<Usuario> dameListUsuarios() throws Exception {
+    public static LinkedList<juego.Usuario> dameListUsuarios() throws Exception {
         Session s = Factoria.getSession();
         Statement st = s.getStatement();
         String query = "SELECT * FROM usuario";
-        LinkedList <Usuario> listaUsuarios = new LinkedList<Usuario>();
+        LinkedList <juego.Usuario> listaUsuarios = new LinkedList<juego.Usuario>();
         ResultSet rs = st.executeQuery(query);
 
         try {
             while (rs.next()){
-                 Usuario u = new Usuario();
+                 juego.Usuario u = new juego.Usuario();
                 ResultSetMetaData rsmd = rs.getMetaData();
                 int nCols = rsmd.getColumnCount();
                 for (int i = 1; i <= nCols;i++){
 
-                    if(i ==1) { u.setId(rs.getString(i)); }
+                    if(i ==1) { u.setIdUser(rs.getString(i)); }
                     if(i ==2) { u.setNombre(rs.getString(i)); }
                     if(i ==3) { u.setPass(rs.getString(i)); }
 

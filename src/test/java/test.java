@@ -51,16 +51,16 @@ public class test {
     public void dameUsuariosById() throws Exception {
 
         List<Usuario> list = this.ju.dameUsuarios();
-        Usuario uto = ju.dameUsuarioById("idPedro");
+        Usuario uto = ju.dameUsuarioById("idManolo");
 
-        Assert.assertEquals("Pedro", uto.getNombre());
+        Assert.assertEquals("Manolo", uto.getNombre());
     }
 
     @Test
     public void login() throws Exception {
 
         List<Usuario> list = this.ju.dameUsuarios();
-        boolean check = ju.login("Manolo", "1234");
+        boolean check = ju.login("Adri", "1234");
 
 
 

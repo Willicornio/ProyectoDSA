@@ -5,7 +5,7 @@ public class Objeto {
     String nombre;
     int puntos;
     int dinero;
-    boolean actvivado;
+    String activado;
 
     public Objeto() {
 
@@ -17,7 +17,7 @@ public class Objeto {
         this.id = id;
         this.nombre = Nombre;
         this.puntos = puntos;
-        actvivado = false;
+        this.activado = "false";
     }
 
     public String getId() {
@@ -52,11 +52,11 @@ public class Objeto {
         this.dinero = dinero;
     }
 
-    public boolean isActvivado() {
-        return actvivado;
+    public String getActivado() {
+        return activado;
     }
 
-    public void setActvivado(boolean actvivado) {
-        this.actvivado = actvivado;
+    public void setActivado(String activado) {
+        this.activado = activado;
     }
 }

@@ -9,20 +9,27 @@
   <script src="./login_files/bootstrap.min.js"></script>
   <script>
 $(document).ready(function(){
-	$("#btnLogin").click(function(){
-		var nombre = $("#nombre").val();
+  $("#btnLogin").click(function(){
+    var nombre = $("#nombre").val();
         var password = $("#password").val();
-		$.ajax({
-			type:'GET',
-			url:'http://localhost:8080/dsaApp/usuarios',
-			dataType: 'json',
-			success: function(data){
-				$.each(data, function(index, valor){
-					$("#tabla").append("<tr><td>" + valor.idUser + "</td><td>" + valor.nombre + "</td><td>" + valor.dinero + "</td><td>" + valor.puntuacionTotal + "</td></tr>");
-				});
-			}
-		})
-	});
+        var url = 'http://localhost:8080/dsaApp/usuarios/login/'
+    $.ajax({
+      type:'POST',
+      url: url + nombre + '/' + password,
+
+      dataType: 'json',
+      success: function(data){
+        alert('horray! 200 status code!');
+      },
+      error: function(error){
+        if(error.status==404){
+          console.log(url);
+          alert("MAL");
+        }
+
+      }
+    })
+  });
 });
 </script>
 </head>
