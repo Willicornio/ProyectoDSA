@@ -1,43 +1,42 @@
 <!DOCTYPE html>
-<!-- saved from url=(0042)file:///Users/adriamac/Desktop/login.html? -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en">
+<head>
   <title>login</title>
-  
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="./login_files/bootstrap.min.css">
-  <script src="./login_files/jquery.min.js"></script>
-  <script src="./login_files/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <script>
 $(document).ready(function(){
-  $("#btnLogin").on('submit', function(e){
-    var obj = {
-            nombre: $("#nombre").val(),
-            pass: $("#password").val()
-
-    };
-
+  $('#btnLogin').click(function(e){
     e.preventDefault();
-    $.ajax({
-      headers: {'Content-Type': 'application/json'},
-      type:'POST',
-      url: '/dsaApp/usuarios/login',
-      data: JSON.stringify(obj),
-      dataType: 'json',
-      
+    console.log("CLICKED");
+   var obj = {
+            'nombre': $("#nombre").val(),
+            'pass': $("#password").val()
+        };
 
-      success: function(data){
-        location.href = "http://localhost:8080/index.html"
-      },
-      error: function(xhr, ajaxOptions, thrownError){
-        if(xhr.status===404){
-          alert("aiaiai");
-       }
-
-      }
+        $.ajax({
+            type: 'POST',
+            url: '/dsaApp/usuarios/login',
+            data: JSON.stringify(obj),
+            success: function(data) {
+                location.href = "http://localhost:8080/index.html";
+                
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                if(xhr.status==404){
+                    alert("Usuario no encontrado");
+                }
+            },
+            contentType: "application/json",
+            dataType: 'json'
+        });
 
     });
   });
-});
+
 </script>
 </head>
 <body>
@@ -60,11 +59,12 @@ $(document).ready(function(){
                 </div>
                 
 
-                
+                <div class="form-group">
                 <button id="btnLogin" type="sumbit" class="btn btn-primary form-control">Login</button>
-                <div class="form-group"></div>
-                <button id="btnRegister" type="sumbit" class="btn btn-warning form-control">¡ Create un usuario !</button>
-                
+                </div>
+                <div class="form-group">
+                <button id="btnRegister" type="sumbit" class="btn btn-warning form-control">¡Create un usuario !</button>
+                </div>
             </form>
             
         </div>

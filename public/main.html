@@ -18,9 +18,11 @@ $(document).ready(function(){
 			url:'http://localhost:8080/dsaApp/usuarios',
 			dataType: 'json',
 			success: function(data){
-			         console.log("data recibida", data);
+			         //console.log("data recibida", data);
+               alert("oihbwieodbwoi");
 					$.each(data, function(index, valor){
 					$("#tabla").append("<tr><td>" + valor.idUser + "</td><td>" + valor.nombre + "</td><td>" + valor.dinero + "</td><td>" + valor.puntuacionTotal + "</td></tr>");
+
 				});
 			}
 		})	

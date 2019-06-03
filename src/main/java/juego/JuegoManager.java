@@ -57,7 +57,7 @@ public class JuegoManager  implements Juego {
 
         for (Usuario user : u) {
 
-            if (user.getIdUser().equals("id" + nombre)) {
+            if (user.getIdUser().equals("id" + nombre) && user.getPass().equals(pass)) {
 
                 check = true;
                 break;
@@ -135,6 +135,26 @@ public class JuegoManager  implements Juego {
             if (usuario.getIdUser().equals(id)) {
 
                 u = usuario;
+                break;
+            }
+
+        }
+
+
+        return u;
+
+
+    }
+
+    public UsuarioTO dameUsuarioTOById(String id) throws Exception {
+
+        LinkedList<Usuario> list = UsersDAOImpl.dameListUsuarios();
+        UsuarioTO u = null;
+
+        for (Usuario usuario : list) {
+            if (usuario.getIdUser().equals(id)) {
+
+                u = new UsuarioTO(usuario.getIdUser(),usuario.getNombre(),usuario.getDinero(),usuario.getPuntuacionTotal());
                 break;
             }
 

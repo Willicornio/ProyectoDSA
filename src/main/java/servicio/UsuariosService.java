@@ -95,12 +95,12 @@ import java.util.logging.Logger;
     @POST
     @ApiOperation(value = "login usuario")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Successful", response = Usuario.class),
+            @ApiResponse(code = 201, message = "Successful", response = UsuarioTO.class),
             @ApiResponse(code = 404, message = "No se ha encontrado al usuario")
     })
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response login(Usuario user) {
+    public Response login(Auth a) {
 
         Logger log = Logger.getLogger(UsuariosService.class.getName());
 
@@ -108,15 +108,15 @@ import java.util.logging.Logger;
 
             List<Usuario> listUsers = this.ju.dameUsuarios();
 
-            boolean check = ju.login(user.getNombre(), user.getPass());
+            boolean check = ju.login(a.getNombre(), a.getPass());
 
-            log.info(user.getNombre() + "-----" + user.getPass());
+            log.info(a.getNombre() + "-----" + a.getPass());
 
-
+            UsuarioTO b = ju.dameUsuarioTOById("id"+a.getNombre());
 
             if(check == true){
                 log.info("201");
-                GenericEntity<Usuario> entity = new GenericEntity<Usuario>(user){};
+                GenericEntity<UsuarioTO> entity = new GenericEntity<UsuarioTO>(b){};
                 return Response.status(201).entity(entity).build();
 
             }
