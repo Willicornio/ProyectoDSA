@@ -15,16 +15,22 @@ public class Main {
 
 
 
-        juego.Usuario u = dao.getUser("WilliRico");
+dao.getUser("idJulio");
+       // juego.Usuario u = dao.getUser("WilliRico");
 
 
+
+        //InventarioDAO daoi = new InventarioDAOImpl();
+
+
+        //((UsersDAOImpl) dao).comprarObjeto("idJulio", "c3");
 
      // dao.modificarPuntuacion("WilliRico", 300);
-     // dao.modificarDinero("WilliRico", 250);
+     //dao.modificarDinero("idJulio", 20000);
 
        // dao.cambiarPass("Willi", "aa", "funciona", "WilliRico");
 
-        LinkedList<juego.Usuario> lista = dao.dameListUsuarios();
+      /*  LinkedList<juego.Usuario> lista = dao.dameListUsuarios();
 
         System.out.println(lista.get(0).getNombre());
         System.out.println(lista.get(1).getNombre());

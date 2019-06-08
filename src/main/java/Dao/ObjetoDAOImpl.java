@@ -67,4 +67,23 @@ public class ObjetoDAOImpl implements ObjetoDAO{
     }
 
 
-}
+    public void addObjeto (String id, String nombre, int puntos, int dinero) throws Exception{
+
+        Session a = Factoria.getSession();
+        juego.Objeto objeto = new juego.Objeto(id, nombre, puntos, dinero);
+        try  {
+            a.save(objeto);
+        }catch (Exception e){
+            throw e;
+        }finally {
+            a.close();
+        }
+    }
+
+
+
+
+    }
+
+
+

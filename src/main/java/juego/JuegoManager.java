@@ -1,23 +1,19 @@
 package juego;
 
-import Dao.Factoria;
-import Dao.InventarioDAOImpl;
-import Dao.ObjetoDAOImpl;
-import Dao.UsersDAOImpl;
+import Dao.*;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.mysql.jdbc.ExportControlled;
+import io.swagger.models.auth.In;
 
+
+import javax.swing.tree.ExpandVetoException;
+import java.security.spec.ECParameterSpec;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.HashMap;
+import java.util.*;
 import java.util.logging.Logger;
 
 public class JuegoManager  implements Juego {
     private Logger log = Logger.getLogger(JuegoManager.class.getName());
-
-
-
-
 
     private HashMap<String, Usuario> usuarios;
     private List<Objeto> inventario;
@@ -101,11 +97,6 @@ public class JuegoManager  implements Juego {
     @Override
     public LinkedList<Usuario> dameUsuarios() throws Exception {
 
-
-
-
-
-
       return UsersDAOImpl.dameListUsuarios1();
     }
 
@@ -170,31 +161,23 @@ public class JuegoManager  implements Juego {
 
 
     @Override
-    public void modificarDinero(String idUser, int cantidad) {
+    public void modificarDinero(String idUser, int cantidad) throws Exception{
+
+        UsersDAO dao =  new UsersDAOImpl();
+        dao.modificarDinero(idUser, cantidad);
+
 
     }
 
+
     @Override
-    public boolean checkPartidaEnCurso(String idUser) {
-        return false;
+    public void sumarPuntuacionFinal(String idUser, int puntuacion) throws Exception{
+
+        UsersDAO dao =  new UsersDAOImpl();
+        dao.modificarPuntuacion(idUser, puntuacion);
     }
 
-    @Override
-    public void guardarPartidaEnCurso(String idUsuario, String idPartida, Partida p) {
-
-    }
-
-    @Override
-    public void eliminarPartidaEnCurso(String idUsuario, String idPartida) {
-
-    }
-
-    @Override
-    public void sumarPuntuacionFinal(String idUser, int puntuacion) {
-
-    }
-
-    @Override
+   /* @Override
     public void iniciarPartida(String idUser) {
 
     }
@@ -203,12 +186,12 @@ public class JuegoManager  implements Juego {
     public void finalizarPartida(String idUser) {
 
     }
-
+*/
     @Override
     public void construirMapa(Mapa mapa, String idUser) {
 
     }
-
+/*
     @Override
     public void guardarPartida(String idUser) {
 
@@ -218,21 +201,18 @@ public class JuegoManager  implements Juego {
     public void moodificarVida(String idUser){
 
     }
+*/
 
 
-
-    @Override
+   /* @Override
     public void añadirUsuario(String idUser, String pass) {
 
     }
-
+*/
     @Override
-    public List<Objeto> dameObjetos(){
+    public LinkedList<Objeto> dameObjetos() throws Exception{
 
-        List<Objeto> list = new LinkedList<>();
-
-        list.add(new Objeto("1","Linterna",3,5));
-        list.add(new Objeto("2","Ganzua",3,5));
+        LinkedList<Objeto> list = ObjetoDAOImpl.dameTodosObjetos();
 
         return list;
     }
@@ -240,13 +220,17 @@ public class JuegoManager  implements Juego {
 
 
     @Override
-    public void activarmeObjeto(String idObjeto, String idUser) {
+    public void activarmeObjeto(String idObjeto, String idUser) throws Exception {
 
-
+        InventarioDAO dao = new InventarioDAOImpl();
+        dao.cambiarActivado(idUser, idObjeto);
     }
 
     @Override
-    public void desactivarmeObjeto(String idObjecto, String idUser) {
+    public void desactivarmeObjetos(String idUser) throws Exception{
+
+        InventarioDAO dao = new InventarioDAOImpl();
+        dao.desactivarObjetos(idUser);
 
     }
 
@@ -269,8 +253,13 @@ public class JuegoManager  implements Juego {
 
 
     @Override
-    public void crearObjetoNuevo(Objeto objeto) {
-        this.inventario.add(objeto);
+    public void crearObjetoNuevo(Objeto objeto) throws Exception{
+        ObjetoDAO dao = new ObjetoDAOImpl();
+
+        Objeto o = objeto;
+
+
+        dao.addObjeto(o.getId(),o.getNombre(),o.getPuntos(),o.getDinero());
 
     }
 
@@ -288,4 +277,47 @@ public class JuegoManager  implements Juego {
     }
 
 
+    public void comprarObjeto (String idUser, String idObjeto) throws Exception {
+
+        UsersDAO dao = new UsersDAOImpl();
+
+        ((UsersDAOImpl) dao).comprarObjeto(idUser, idObjeto);
+
+    }
+
+
+
+    public LinkedList<Inventario> dameInventarioPorID(String idUser) throws Exception{
+
+        InventarioDAO dao = new InventarioDAOImpl();
+        LinkedList<Inventario> lista = dao.dameInventario(idUser);
+        return lista;
+    }
+
+
+
+
+    public void addMapa(String id, String mapatodo) throws Exception{
+
+        MapaDAO dao = new MapaDAOImpl();
+
+        dao.addMapa(id, mapatodo);
+    }
+    public String getMapa(String id) throws Exception{
+
+
+        MapaDAO dao = new MapaDAOImpl();
+        Mapa mapa = dao.getMapa(id);
+        String mapatodo = mapa.getMapatodo();
+
+        return mapatodo;
+
+    }
+    public void borrarMapa (String idMapa) throws Exception{
+
+        MapaDAO dao = new MapaDAOImpl();
+        dao.borrarMapa(idMapa);
+
+
+    }
 }

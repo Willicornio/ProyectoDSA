@@ -1,7 +1,7 @@
 package Dao;
 
 import juego.Inventario;
-import sun.awt.image.ImageWatched;
+
 
 
 import java.sql.ResultSet;
@@ -27,8 +27,8 @@ public class InventarioDAOImpl implements InventarioDAO {
         LinkedList<juego.Inventario> inventarios = new LinkedList<Inventario>();
 
 
-        String query = "SELECT `idObjeto` FROM `inventario` WHERE (`id` = '" + idUser +"')";
-
+        //String query = "SELECT `idObjeto` FROM `inventario` WHERE (`id` = '" + idUser +  "')";
+        String query = "SELECT * FROM inventario";
         ResultSet rs = st.executeQuery(query);
 
         try {
@@ -63,12 +63,35 @@ public class InventarioDAOImpl implements InventarioDAO {
         Session s = Factoria.getSession();
         Statement st = s.getStatement();
 
-        String query = "UPDATE `inventario` SET `activado` = 'true' WHERE (`id` = '" + idUser +"' AND `id` = '" + idObjeto +"' )";
+        String query = "UPDATE `inventario` SET `activado` = 'true' WHERE (`iduser` = '" + idUser +"' AND `idobjeto` = '" + idObjeto +"' )";
 
         st.executeUpdate(query);
 
 
 
     }
+
+
+
+
+    public void desactivarObjetos (String idUser) throws Exception{
+
+    Session s =Factoria.getSession();
+    Statement st = s.getStatement();
+
+    LinkedList<juego.Inventario> inventarios = dameInventario(idUser);
+
+    for (int i =0; i < inventarios.size(); i++){
+
+        String idObjeto = inventarios.get(i).getIdObjeto();
+
+        String query = "UPDATE `inventario` SET `activado` = 'false' WHERE (`iduser` = '" + idUser +"' AND `idobjeto` = '" + idObjeto +"' )";
+
+        st.executeUpdate(query);
+
+    }
+    }
+
+
     }
 

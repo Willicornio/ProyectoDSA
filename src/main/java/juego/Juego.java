@@ -1,6 +1,13 @@
 package juego;
 
+
+
+
+import io.swagger.models.auth.In;
+
+
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 
 public interface Juego {
@@ -20,24 +27,24 @@ public interface Juego {
 
     public Usuario dameUsuarioById(String id) throws Exception;
 
-    public void modificarDinero(String idUser, int cantidad);
-    public boolean checkPartidaEnCurso(String idUser);
-    public void guardarPartidaEnCurso(String idUsuario, String idPartida, Partida p);
-    public void eliminarPartidaEnCurso(String idUsuario, String idPartida);
-    public void sumarPuntuacionFinal(String idUser,int puntuacion);
+    public void modificarDinero(String idUser, int cantidad) throws Exception;
+    //public boolean checkPartidaEnCurso(String idUser);
+    //public void guardarPartidaEnCurso(String idUsuario, String idPartida, Partida p);
+   // public void eliminarPartidaEnCurso(String idUsuario, String idPartida);
+    public void sumarPuntuacionFinal(String idUser,int puntuacion) throws Exception;
 
 
     //Partida
-    public void iniciarPartida (String idUser);
-    public void finalizarPartida (String idUser);
+   // public void iniciarPartida (String idUser);
+    // public void finalizarPartida (String idUser);
     public void construirMapa (Mapa mapa, String idUser);
-    public void guardarPartida(String idUser);
-    public void moodificarVida(String idUser);
+    // public void guardarPartida(String idUser);
+    // public void moodificarVida(String idUser);
 
 
 
 
-    public void añadirUsuario(String idUser, String pass);
+    //public void añadirUsuario(String idUser, String pass);
 
 
 
@@ -45,8 +52,9 @@ public interface Juego {
 
     public void crearInventario(String idUser, List<Objeto> listaObjetos) throws Exception;
 
-    public void activarmeObjeto(String idObjeto, String idUser);
-    public void desactivarmeObjeto(String idObjecto, String idUser);
+    public LinkedList<Inventario> dameInventarioPorID(String idUser) throws Exception;
+    public void activarmeObjeto(String idObjeto, String idUser) throws Exception;
+    public void desactivarmeObjetos(String idUser) throws Exception;
 
     //public void destruirInventario(String idUser); SE ELIMINA YA AL ELIMINAR UN USER
 
@@ -56,9 +64,20 @@ public interface Juego {
 
 
 
-    public void crearObjetoNuevo(Objeto objeto);
+    public void crearObjetoNuevo(Objeto objeto) throws Exception;
     public void eliminarObjeto(String idObjeto);
-    public List<Objeto> dameObjetos();
+    public LinkedList<Objeto> dameObjetos() throws Exception;
+ public void comprarObjeto (String idUser, String idObjeto) throws Exception;
+
+
+
+
+
+
+
+ public void addMapa(String id, String mapatodo) throws Exception;
+ public String getMapa(String id) throws Exception;
+ public void borrarMapa (String idMapa) throws Exception;
 
 
  void clear();

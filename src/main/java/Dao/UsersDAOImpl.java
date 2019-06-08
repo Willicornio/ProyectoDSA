@@ -2,7 +2,7 @@ package Dao;
 
 
 import juego.Objeto;
-import sun.awt.image.ImageWatched;
+
 
 import java.sql.*;
 import java.util.*;
@@ -156,35 +156,39 @@ public class UsersDAOImpl implements UsersDAO {
 
    ////////////////////////////////// CAMBIAR PASS/////////////////////////////
 
-    public void cambiarPass(String nombre, String pass, String newpass, String id) throws  Exception{
+    public void cambiarPass(String nombre, String pass, String newpass, String id) throws  Exception {
         Session s = Factoria.getSession();
         Statement st = s.getStatement();
+        try {
+            juego.Usuario u = new juego.Usuario();
+            u = (juego.Usuario) s.get(id, juego.Usuario.class);
+            String contra = u.getPass();
+            System.out.println("La contraseña actual es :" + contra);
+            System.out.println("La que pones tu para confimar es :" + pass);
+            if (contra.equals(pass)) {
 
-        juego.Usuario u = new juego.Usuario();
-        u = (juego.Usuario) s.get(id, juego.Usuario.class);
-        String contra = u.getPass();
-        System.out.println("La contraseña actual es :" +contra);
-        System.out.println("La que pones tu para confimar es :" + pass);
-        if ( contra.equals(pass)){
+                String query = "UPDATE `usuario` SET `pass` = '" + newpass + "' WHERE (`id` = '" + id + "')";
+                st.executeUpdate(query);
 
-            String query = "UPDATE `usuario` SET `pass` = '" + newpass + "' WHERE (`id` = '" + id +"')";
-                    st.executeUpdate(query);
+            }
 
+        } catch (Exception e) {
+
+            throw new Exception("No se ha podido realizar");
+
+        } finally {
+            st.close();
+            s.close();
         }
-    else
-        {
-            throw new Exception("la contraseña fatal  o el usuario a saber escribe bien porfavor");
-
-        }
-
-
     }
+
 ////////////////////////////////// Modicifar dinero/////////////////////////////
 
 
     public int modificarDinero(String id, int cantidad) throws Exception {
         Session s = Factoria.getSession();
         Statement st = s.getStatement();
+        try{
         juego.Usuario u = new juego.Usuario();
         u = (juego.Usuario) s.get(id, juego.Usuario.class);
         System.out.println("Dinero antes :" + u.getDinero());
@@ -198,6 +202,15 @@ public class UsersDAOImpl implements UsersDAO {
 
         return dinero1;
 
+    }catch (Exception e){
+
+        throw new Exception("No se ha podido realizar");
+
+    }
+            finally {
+        st.close();
+        s.close();
+    }
     }
 
 // //////////////////////////////// Modificar puntuacion/////////////////////////////
@@ -205,6 +218,8 @@ public class UsersDAOImpl implements UsersDAO {
     public int modificarPuntuacion(String id, int puntu) throws Exception {
         Session s = Factoria.getSession();
         Statement st = s.getStatement();
+
+        try{
         juego.Usuario u = new juego.Usuario();
         u = (juego.Usuario) s.get(id, juego.Usuario.class);
         System.out.println("Puntuación antes de update :" + u.getPuntuacion());
@@ -222,7 +237,24 @@ public class UsersDAOImpl implements UsersDAO {
        System.out.println("Puntuación después del update: " + a.getPuntuacion());
         return puntUs;
 
+    }catch (Exception e){
+
+        throw new Exception("No se ha podido realizar");
+
     }
+            finally {
+        st.close();
+        s.close();
+    }
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -240,22 +272,34 @@ public class UsersDAOImpl implements UsersDAO {
 
         for (int i=0; i<inventarios.size(); i++){
 
-            if ( idObjeto.equals(inventarios.get(i).getIdObjeto())){
+            try {
 
-                int dineroUsuario = u.getDinero();
+                if (idObjeto.equals(inventarios.get(i).getIdObjeto())) {
 
-               Objeto objeto = b.getObjeto(inventarios.get(i).getIdObjeto());
+                    int dineroUsuario = u.getDinero();
 
-               int dineroObjeto = objeto.getDinero();
+                    Objeto objeto = b.getObjeto(inventarios.get(i).getIdObjeto());
 
-               if(dineroUsuario > dineroObjeto){
-                   int dinerooperacion = dineroUsuario - dineroObjeto;
+                    int dineroObjeto = objeto.getDinero();
 
-                   modificarDinero(idUser, dinerooperacion);
-                   a.cambiarActivado(u.getId(), objeto.getId());
+                    if (dineroUsuario > dineroObjeto) {
+                        int dinerooperacion = 0 - dineroObjeto;
 
-               }
+                        modificarDinero(idUser, dinerooperacion);
+                        a.cambiarActivado(u.getId(), objeto.getId());
 
+                    }
+
+                }
+            }catch (Exception e){
+
+            throw new Exception("No hay dinerillos o el objeto no existe o el usuario tampoco o todo a la vez");
+
+                    }
+            finally {
+                st.close();
+                s.close();
+            }
             }
         }
 
@@ -267,4 +311,3 @@ public class UsersDAOImpl implements UsersDAO {
 
 
 
-}

@@ -1,10 +1,12 @@
 import juego.*;
+import Dao.*;
 import org.glassfish.grizzly.utils.EchoFilter;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class test {
@@ -12,6 +14,7 @@ public class test {
     private Juego ju;
 
 
+    UsersDAO dao = new UsersDAOImpl();
 
     @Before
     public void setUp() throws Exception {
@@ -68,6 +71,43 @@ public class test {
 
 
     }
+
+    @Test
+    public void modificarDinero() throws Exception{
+        ju.modificarDinero("idJulio", 500);
+    }
+
+    @Test
+    public void modificarpuntuacion() throws Exception{
+        ju.sumarPuntuacionFinal("idJulio", 500);
+    }
+
+
+    @Test
+    public void comprarObjeto() throws Exception{
+        ju.comprarObjeto("idJulio", "c3");
+
+        Usuario u = ju.dameUsuarioById("idJulio");
+
+        LinkedList<Inventario> i = ju.dameInventarioPorID("idJulio");
+
+        Assert.assertEquals("true", i.get(1).getActivado());
+    }
+
+    @Test
+    public void desactivarInventario() throws Exception{
+
+        ju.desactivarmeObjetos("idJulio");
+        Usuario u = ju.dameUsuarioById("idJulio");
+
+        LinkedList<Inventario> i = ju.dameInventarioPorID("idJulio");
+
+        Assert.assertEquals("false", i.get(1).getActivado());
+    }
+
+
+
+
 
 
     @After

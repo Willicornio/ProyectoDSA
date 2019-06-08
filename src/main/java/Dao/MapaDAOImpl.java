@@ -13,7 +13,7 @@ public class MapaDAOImpl implements MapaDAO {
 
 
         Session a = Factoria.getSession();
-        Mapa mapa = new Mapa(id, mapatodo);
+        juego.Mapa mapa = new juego.Mapa(id, mapatodo);
         try  {
             a.save(mapa);
         }catch (Exception e){
@@ -24,11 +24,11 @@ public class MapaDAOImpl implements MapaDAO {
     }
 
 
-    public Mapa getMapa(String id) throws Exception {
+    public juego.Mapa getMapa(String id) throws Exception {
         Session s = Factoria.getSession();
-        Mapa u = new Mapa();
+        juego.Mapa u = new juego.Mapa();
         try {
-            u = (Mapa) s.get(id, Mapa.class);
+            u = (juego.Mapa) s.get(id, juego.Mapa.class);
             System.out.println("DAO: " + u);
 
         }catch (Exception e){
@@ -40,12 +40,12 @@ public class MapaDAOImpl implements MapaDAO {
     }
 
 
-    public boolean borrarMapa (juego.Usuario user) throws Exception {
+    public boolean borrarMapa (String idMapa) throws Exception {
         boolean resultado = false;
         Session s = Factoria.getSession();
         Statement st = s.getStatement();
         try {
-            String query = "DELETE FROM mapa WHERE id='" + user.getId() + "'";
+            String query = "DELETE FROM mapa WHERE id='" + idMapa + "'";
             st.executeUpdate(query);
             resultado = true;
         } catch (SQLException ex) {
