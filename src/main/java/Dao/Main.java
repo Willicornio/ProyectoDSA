@@ -9,27 +9,50 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws Exception {
+
+
       UsersDAO dao = new UsersDAOImpl();
-//      dao.getUser("idRiquisimo");
 
 
-     dao.cambiarPass("me", "gusta", "gustacion", "idRiquisimo");
+
+        juego.Usuario u = dao.getUser("WilliRico");
 
 
-     /*   ObjetoDAO dao1 = new ObjetoDAOImpl();
-        LinkedList<Objeto> lista1 = dao1.dameTodosObjetos();
 
-        String nombre1 = lista1.get(0).getNombre();
-        System.out.println(nombre1);
-        String nombre2 = lista1.get(1).getNombre();
-        System.out.println(nombre2);
-        String nombre3 = lista1.get(2).getNombre();
-        System.out.println(nombre3);
+     // dao.modificarPuntuacion("WilliRico", 300);
+     // dao.modificarDinero("WilliRico", 250);
 
-        Usuario abs = dao.getUser("Willi25");
+       // dao.cambiarPass("Willi", "aa", "funciona", "WilliRico");
 
-        dao.borrarUsuario(abs);
-*/
+        LinkedList<juego.Usuario> lista = dao.dameListUsuarios();
+
+        System.out.println(lista.get(0).getNombre());
+        System.out.println(lista.get(1).getNombre());
+        System.out.println(lista.get(2).getNombre());
+        System.out.println(lista.get(3).getNombre());
+        System.out.println(lista.get(4).getNombre());
+        System.out.println(lista.get(5).getNombre());
+        System.out.println(lista.get(6).getNombre());
+        System.out.println(lista.get(0).getPuntuacion());
+        System.out.println(lista.get(6).getPuntuacion());
+
+
+
+
+
+
+
+
+
+
+
+
+        ObjetoDAO dao1 = new ObjetoDAOImpl();
+
+       dao1.getObjeto("c2");
+
+
+
 
         /*Usuario u = new Usuario();
         u =dao.getUser("Willi");

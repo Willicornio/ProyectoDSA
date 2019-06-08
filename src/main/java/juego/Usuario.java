@@ -4,11 +4,11 @@ import java.util.LinkedList;
 public class Usuario {
 
 
-String idUser;
+String id;
 String nombre;
 String pass;
 int dinero;
-int puntuacionTotal;
+int puntuacion;
 
     public Usuario() {
     }
@@ -17,9 +17,9 @@ int puntuacionTotal;
 
          this.nombre = nombre;
          this.pass = pass;
-         this.idUser = "id" + nombre;
+         this.id = "id" + nombre;
          this.dinero = 0;
-         this.puntuacionTotal = 0;
+         this.puntuacion = 0;
      }
 
     /*public Usuario(String idUser, String nombre, String pass, int dinero, int puntuacionTotal) {
@@ -31,12 +31,12 @@ int puntuacionTotal;
         }
     */
 
-    public String getIdUser() {
-        return idUser;
+    public String getId() {
+        return id;
     }
 
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
+    public void setId(String idUser) {
+        this.id = idUser;
     }
 
     public String getNombre() {
@@ -67,12 +67,12 @@ int puntuacionTotal;
 
 
 
-    public int getPuntuacionTotal() {
-        return puntuacionTotal;
+    public int getPuntuacion() {
+        return puntuacion;
     }
 
-    public void setPuntuacionTotal(int puntuacionTotal) {
-        this.puntuacionTotal = puntuacionTotal;
+    public void setPuntuacion(int puntuacionTotal) {
+        this.puntuacion = puntuacionTotal;
     }
 }
  //hola

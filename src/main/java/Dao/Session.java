@@ -43,7 +43,7 @@ public class Session {
                             + "user=root&password=dsa2019");
             */
            /* PARA USAR LA BASE DE DATOS QUE TENGO CREADA UTILIZAR ESTA LINIA Y CAMBIAR LA PASS*/
-           session = DriverManager.getConnection("jdbc:mysql://localhost/dsa", "root", "DSA2019");
+           session = DriverManager.getConnection("jdbc:mysql://localhost/feedback", "root", "dsa2019");
 
             return session;
 
@@ -57,7 +57,7 @@ public class Session {
 
 
     public void close() throws Exception {
-        session.close();
+        //session.close();
     }
 
 
@@ -233,6 +233,7 @@ public class Session {
         query = "SELECT * FROM " + table + " WHERE id =?";
 
         System.out.println("query :"+query);
+        System.out.println(id);
         PreparedStatement ps = this.session.prepareStatement(query);
         ps.setString(1, id);
 /*
@@ -244,8 +245,12 @@ public class Session {
 
         resultSet = ps.executeQuery();
         if (resultSet!=null) {
-            resultSet.next();
-            o = writeResultSet(resultSet, o);
+            if (resultSet.next()) {
+                o = writeResultSet(resultSet, o);
+            }
+            else {
+                System.out.println("resulset VACIO!!!!!!");
+            }
         }
 
         ps.close();
@@ -275,6 +280,7 @@ public class Session {
             System.out.println(rsmd.getColumnName(2));
             System.out.println(rsmd.getColumnTypeName(1));
             System.out.println(rsmd.getColumnTypeName(2));
+            System.out.println(rsmd.getColumnTypeName(3));
 
 
             int i =1;
@@ -285,7 +291,22 @@ public class Session {
 
                 property = rsmd.getColumnName(i);
                 m = findMethod(instancia.getClass(), property);
-                setter(instancia, m, resultSet.getString(i));
+                int type = rsmd.getColumnType(i);
+                Object result = null;
+                switch (type) {
+                    case Types.VARCHAR:
+                        result = resultSet.getString(i);
+                        break;
+                    case Types.INTEGER:
+                        result = resultSet.getInt(i);
+                        System.out.println("INT "+result);
+                        break;
+                    case Types.DATE:
+                        result = resultSet.getDate(i);
+                        break;
+                }
+
+                setter(instancia, m, result);
                 i++;
             }
 
@@ -311,8 +332,10 @@ public class Session {
         return null;
     }
 
-    public Object setter (Object a, Method m, String result) throws Exception{
+    public Object setter (Object a, Method m, Object result) throws Exception{
 
+        if (m!=null) System.out.println(m.getName()+" result"+ result);
+        else System.out.println("método no encontrado!!");
         m.invoke(a, result);
         return a;
     }

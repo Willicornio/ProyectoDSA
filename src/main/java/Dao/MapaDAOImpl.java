@@ -40,7 +40,7 @@ public class MapaDAOImpl implements MapaDAO {
     }
 
 
-    public boolean borrarMapa (Usuario user) throws Exception {
+    public boolean borrarMapa (juego.Usuario user) throws Exception {
         boolean resultado = false;
         Session s = Factoria.getSession();
         Statement st = s.getStatement();

@@ -1,6 +1,9 @@
 package Dao;
 
 
+import juego.Objeto;
+import sun.awt.image.ImageWatched;
+
 import java.sql.*;
 import java.util.*;
 
@@ -10,9 +13,9 @@ public class UsersDAOImpl implements UsersDAO {
     Factoria factoria;
 
 
-    public void addUSer(String  id,String nombre, String apellidos) throws Exception{
+    public void addUSer(String nombre, String apellidos) throws Exception{
         Session a = Factoria.getSession();
-        Usuario u = new Usuario(id, nombre, apellidos);
+        juego.Usuario u = new juego.Usuario(nombre, apellidos);
         try  {
 
             a.save(u);
@@ -28,12 +31,13 @@ public class UsersDAOImpl implements UsersDAO {
         }
     }
 
-    public Usuario getUser(String id) throws Exception {
+    public juego.Usuario getUser(String id) throws Exception {
         Session s = Factoria.getSession();
-        Usuario u = new Usuario();
+        juego.Usuario u = new juego.Usuario();
         try {
-            u = (Usuario) s.get(id, Usuario.class);
+            u = (juego.Usuario) s.get(id, juego.Usuario.class);
             System.out.println("DAO: " + u);
+            System.out.println("nombre: " +u.getNombre());
 
         }catch (Exception e){
             System.out.println("no existe ese usuario");
@@ -57,7 +61,7 @@ public class UsersDAOImpl implements UsersDAO {
         }
     }
 
-    public static LinkedList<juego.Usuario> dameListUsuarios() throws Exception {
+    public static LinkedList<juego.Usuario> dameListUsuarios1() throws Exception {
         Session s = Factoria.getSession();
         Statement st = s.getStatement();
         String query = "SELECT * FROM usuario";
@@ -66,14 +70,54 @@ public class UsersDAOImpl implements UsersDAO {
 
         try {
             while (rs.next()){
-                 juego.Usuario u = new juego.Usuario();
+                juego.Usuario u = new juego.Usuario();
                 ResultSetMetaData rsmd = rs.getMetaData();
                 int nCols = rsmd.getColumnCount();
                 for (int i = 1; i <= nCols;i++){
 
-                    if(i ==1) { u.setIdUser(rs.getString(i)); }
+                    if(i ==1) { u.setId(rs.getString(i)); }
                     if(i ==2) { u.setNombre(rs.getString(i)); }
                     if(i ==3) { u.setPass(rs.getString(i)); }
+                    if(i==4) { u.setDinero(rs.getInt(i)); }
+                    if(i==5) { u.setPuntuacion(rs.getInt(i)); }
+
+
+                }
+                listaUsuarios.add(u);
+
+            }
+
+            return listaUsuarios;
+
+        }catch(Exception e){
+            throw e;
+        }
+        finally {
+            st.close();
+            s.close();
+        }
+    }
+
+    public  LinkedList<juego.Usuario> dameListUsuarios() throws Exception {
+        Session s = Factoria.getSession();
+        Statement st = s.getStatement();
+        String query = "SELECT * FROM usuario";
+        LinkedList <juego.Usuario> listaUsuarios = new LinkedList<juego.Usuario>();
+        ResultSet rs = st.executeQuery(query);
+
+        try {
+            while (rs.next()){
+                juego.Usuario u = new juego.Usuario();
+                ResultSetMetaData rsmd = rs.getMetaData();
+                int nCols = rsmd.getColumnCount();
+                for (int i = 1; i <= nCols;i++){
+
+                    if(i ==1) { u.setId(rs.getString(i)); }
+                    if(i ==2) { u.setNombre(rs.getString(i)); }
+                    if(i ==3) { u.setPass(rs.getString(i)); }
+                    if(i==4) { u.setDinero(rs.getInt(i)); }
+                    if(i==5) { u.setPuntuacion(rs.getInt(i)); }
+
 
                 }
                 listaUsuarios.add(u);
@@ -92,7 +136,7 @@ public class UsersDAOImpl implements UsersDAO {
     }
 
 ///////////////////////////BORRAR USER////////////////////////////////////
-    public boolean borrarUsuario (Usuario user) throws Exception {
+    public boolean borrarUsuario (juego.Usuario user) throws Exception {
         boolean resultado = false;
         Session s = Factoria.getSession();
         Statement st = s.getStatement();
@@ -116,12 +160,14 @@ public class UsersDAOImpl implements UsersDAO {
         Session s = Factoria.getSession();
         Statement st = s.getStatement();
 
-         Usuario u = new Usuario();
-        u = (Usuario) s.get(id, Usuario.class);
+        juego.Usuario u = new juego.Usuario();
+        u = (juego.Usuario) s.get(id, juego.Usuario.class);
         String contra = u.getPass();
-        if ( contra == pass){
+        System.out.println("La contraseña actual es :" +contra);
+        System.out.println("La que pones tu para confimar es :" + pass);
+        if ( contra.equals(pass)){
 
-            String query = "UPDATE  usuario set pass='" + newpass + "'WHERE ('id' = '"+id+"')";
+            String query = "UPDATE `usuario` SET `pass` = '" + newpass + "' WHERE (`id` = '" + id +"')";
                     st.executeUpdate(query);
 
         }
@@ -136,43 +182,85 @@ public class UsersDAOImpl implements UsersDAO {
 ////////////////////////////////// Modicifar dinero/////////////////////////////
 
 
-    public String modificarDinero(String id, int cantidad) throws Exception {
+    public int modificarDinero(String id, int cantidad) throws Exception {
         Session s = Factoria.getSession();
         Statement st = s.getStatement();
-        Usuario u = new Usuario();
-        u = (Usuario) s.get(id, Usuario.class);
-        String dinero1 = u.getDinero();
-        int entero = Integer.valueOf(dinero1);
-         int enterof = entero + cantidad;
-        String dineros = String.valueOf(enterof);
-        String query = "UPDATE  usuario set dinero ='" + dineros + "'WHERE ('id' = '"+id+"')";
-        st.executeUpdate(query);
+        juego.Usuario u = new juego.Usuario();
+        u = (juego.Usuario) s.get(id, juego.Usuario.class);
+        System.out.println("Dinero antes :" + u.getDinero());
+        int dinero1 = u.getDinero();
+         dinero1 = dinero1 + cantidad;
 
-        return dineros;
+        String query = "UPDATE `usuario` SET `dinero` = '" + dinero1 + "' WHERE (`id` = '" + id +"')";
+        st.executeUpdate(query);
+        juego.Usuario a = (juego.Usuario) s.get(id, juego.Usuario.class);
+        System.out.println("Dinero después :" + a.getDinero());
+
+        return dinero1;
 
     }
 
 // //////////////////////////////// Modificar puntuacion/////////////////////////////
 
-    public String modificarPuntuacion(String id, int puntu) throws Exception {
+    public int modificarPuntuacion(String id, int puntu) throws Exception {
         Session s = Factoria.getSession();
         Statement st = s.getStatement();
-        Usuario u = new Usuario();
-        u = (Usuario) s.get(id, Usuario.class);
+        juego.Usuario u = new juego.Usuario();
+        u = (juego.Usuario) s.get(id, juego.Usuario.class);
+        System.out.println("Puntuación antes de update :" + u.getPuntuacion());
 
-       String puntUs =  u.getPuntuacion();
-       Integer entero = Integer.valueOf(puntUs);
-        int enterof = entero + puntu;
-        String pranking = String.valueOf(enterof);
+       int puntUs =  u.getPuntuacion();
 
+         puntUs = puntUs + puntu;
 
-        String query = "UPDATE  usuario set dinero ='" + pranking + "'WHERE ('id' = '"+id+"')";
+        String query = "UPDATE `usuario` SET `puntuacion` = '" + puntUs + "' WHERE (`id` = '" + id +"')";
+                /*"UPDATE  usuario SET puntuacion ='" + puntUs + "'WHERE ('id' = '"+id+"')";
+        */
         st.executeUpdate(query);
+        juego.Usuario a = (juego.Usuario) s.get(id, juego.Usuario.class);
 
-        return pranking;
+       System.out.println("Puntuación después del update: " + a.getPuntuacion());
+        return puntUs;
 
     }
 
+
+
+    public void comprarObjeto (String idUser, String idObjeto) throws Exception{
+
+        Session s = Factoria.getSession();
+        Statement st = s.getStatement();
+        juego.Usuario u = new juego.Usuario();
+        u =(juego.Usuario) s.get(idUser, juego.Usuario.class);
+
+        ObjetoDAO b = new ObjetoDAOImpl();
+
+        InventarioDAO a = new InventarioDAOImpl();
+        LinkedList<juego.Inventario> inventarios = a.dameInventario(idUser);
+
+        for (int i=0; i<inventarios.size(); i++){
+
+            if ( idObjeto.equals(inventarios.get(i).getIdObjeto())){
+
+                int dineroUsuario = u.getDinero();
+
+               Objeto objeto = b.getObjeto(inventarios.get(i).getIdObjeto());
+
+               int dineroObjeto = objeto.getDinero();
+
+               if(dineroUsuario > dineroObjeto){
+                   int dinerooperacion = dineroUsuario - dineroObjeto;
+
+                   modificarDinero(idUser, dinerooperacion);
+                   a.cambiarActivado(u.getId(), objeto.getId());
+
+               }
+
+            }
+        }
+
+
+    }
 
 
 

@@ -57,7 +57,7 @@ public class JuegoManager  implements Juego {
 
         for (Usuario user : u) {
 
-            if (user.getIdUser().equals("id" + nombre) && user.getPass().equals(pass)) {
+            if (user.getId().equals("id" + nombre) && user.getPass().equals(pass)) {
 
                 check = true;
                 break;
@@ -88,7 +88,7 @@ public class JuegoManager  implements Juego {
             Usuario u = new Usuario(nombre,pass);
             //this.usuarios.put(u.idUser,u); //LO EQUIVALENTE EN DAO AL SAVE
             UsersDAOImpl.addUser(new Usuario(nombre,pass));
-            this.crearInventario(u.getIdUser(), ObjetoDAOImpl.dameTodosObjetos());
+            this.crearInventario(u.getId(), ObjetoDAOImpl.dameTodosObjetos());
             return u;
         }else{
 
@@ -106,7 +106,7 @@ public class JuegoManager  implements Juego {
 
 
 
-      return UsersDAOImpl.dameListUsuarios();
+      return UsersDAOImpl.dameListUsuarios1();
     }
 
     @Override
@@ -118,7 +118,7 @@ public class JuegoManager  implements Juego {
         List<UsuarioTO> list = new ArrayList<>();
 
         for(Usuario g: u){
-            list.add(new UsuarioTO(g.getIdUser(),g.getNombre(),g.getDinero(),g.getPuntuacionTotal()));
+            list.add(new UsuarioTO(g.getId(),g.getNombre(),g.getDinero(),g.getPuntuacion()));
 
         }
 
@@ -128,11 +128,11 @@ public class JuegoManager  implements Juego {
    // @Override
   public Usuario dameUsuarioById(String id) throws Exception {
 
-        LinkedList<Usuario> list = UsersDAOImpl.dameListUsuarios();
+        LinkedList<Usuario> list = UsersDAOImpl.dameListUsuarios1();
         Usuario u = null;
 
         for (Usuario usuario : list) {
-            if (usuario.getIdUser().equals(id)) {
+            if (usuario.getId().equals(id)) {
 
                 u = usuario;
                 break;
@@ -148,13 +148,13 @@ public class JuegoManager  implements Juego {
 
     public UsuarioTO dameUsuarioTOById(String id) throws Exception {
 
-        LinkedList<Usuario> list = UsersDAOImpl.dameListUsuarios();
+        LinkedList<Usuario> list = UsersDAOImpl.dameListUsuarios1();
         UsuarioTO u = null;
 
         for (Usuario usuario : list) {
-            if (usuario.getIdUser().equals(id)) {
+            if (usuario.getId().equals(id)) {
 
-                u = new UsuarioTO(usuario.getIdUser(),usuario.getNombre(),usuario.getDinero(),usuario.getPuntuacionTotal());
+                u = new UsuarioTO(usuario.getId(),usuario.getNombre(),usuario.getDinero(),usuario.getPuntuacion());
                 break;
             }
 
@@ -287,5 +287,5 @@ public class JuegoManager  implements Juego {
 
     }
 
- 
+
 }

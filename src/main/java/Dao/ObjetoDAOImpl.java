@@ -51,12 +51,13 @@ public class ObjetoDAOImpl implements ObjetoDAO{
     }
 
     @Override
-    public Objeto getObjeto(String id) throws Exception {
+    public juego.Objeto getObjeto(String id) throws Exception {
         Session s = Factoria.getSession();
-        Objeto u = new Objeto();
+        juego.Objeto u = new juego.Objeto();
         try {
-            u = (Objeto) s.get(id, Objeto.class);
+            u = (juego.Objeto) s.get(id, juego.Objeto.class);
             System.out.println("DAO: " + u);
+            System.out.println("nombre: " +u.getNombre());
         }catch (Exception e){
             System.out.println("no existe ese objeto siusplau");
         }finally {
