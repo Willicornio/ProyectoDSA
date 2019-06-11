@@ -20,8 +20,7 @@ public class test {
     public void setUp() throws Exception {
         ju = JuegoManager.getInstance();
         List<Objeto> list = this.ju.dameObjetos();
-        Usuario u = this.ju.crearUsuario("Julio","1234");
-        Usuario i = this.ju.crearUsuario("Pedro","1234");
+
 
     }
 
@@ -29,15 +28,15 @@ public class test {
     public void crearUsuario() throws Exception {
 
 
-        Usuario u = this.ju.crearUsuario("Jesus","1234");
-        Assert.assertEquals("Jesus",u.getNombre());
+        UsuarioTO u = this.ju.crearUsuario(new Auth("Neus","1234"));
+        Assert.assertEquals("Neus",u.getNombre());
     }
 
     @Test
 
         public void testfailCrearUsuario() throws Exception{
 
-             Usuario u = this.ju.crearUsuario("Julio","1234");
+             UsuarioTO u = this.ju.crearUsuario(new Auth("Julio","1234"));
              Assert.assertEquals(null, u);
 
     }
@@ -47,7 +46,7 @@ public class test {
 
         List<UsuarioTO> list = this.ju.dameUsuariosTO();
 
-        Assert.assertEquals(7, list.size());
+        Assert.assertEquals(5, list.size());
     }
 
     @Test

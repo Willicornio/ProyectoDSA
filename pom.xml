@@ -36,16 +36,6 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.6</version>
-        </dependency>
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc14</artifactId>
-            <version>10.2.0.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
             <version>5.1.47</version>
         </dependency>
         <dependency>
@@ -100,7 +90,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>edu.upc.dsa.Main</mainClass>
+                    <mainClass>juego.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>

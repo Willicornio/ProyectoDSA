@@ -18,7 +18,7 @@ public interface Juego {
     public void eliminarUsuario(String idUser);
 
 
-    public Usuario crearUsuario(String nombre, String pass) throws Exception;
+    public UsuarioTO crearUsuario(Auth a) throws Exception;
     public List<UsuarioTO> dameUsuariosTO() throws Exception;
     public List<Usuario> dameUsuarios() throws Exception;
     public UsuarioTO dameUsuarioTOById(String id) throws Exception;

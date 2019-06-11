@@ -76,16 +76,19 @@ public class JuegoManager  implements Juego {
     }
 
     @Override
-    public Usuario crearUsuario(String nombre, String pass) throws Exception {
+    public UsuarioTO crearUsuario(Auth a) throws Exception {
 
-        Usuario user = dameUsuarioById("id"+nombre);
+        Usuario user = dameUsuarioById("id"+a.getNombre());
 
         if(user == null){
-            Usuario u = new Usuario(nombre,pass);
+            Usuario u = new Usuario(a.getNombre(),a.getPass());
             //this.usuarios.put(u.idUser,u); //LO EQUIVALENTE EN DAO AL SAVE
-            UsersDAOImpl.addUser(new Usuario(nombre,pass));
+            UsersDAOImpl.addUser(new Usuario(a.getNombre(),a.getPass()));
             this.crearInventario(u.getId(), ObjetoDAOImpl.dameTodosObjetos());
-            return u;
+
+
+            return dameUsuarioTOById(u.getId());
+
         }else{
 
             return null;

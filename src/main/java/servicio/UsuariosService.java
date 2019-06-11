@@ -33,21 +33,23 @@ import java.util.logging.Logger;
     @POST
     @ApiOperation(value = "Crear usuario", notes = "Creamos el usuario")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Successful",response = Usuario.class),
+            @ApiResponse(code = 201, message = "Successful",response = UsuarioTO.class),
             @ApiResponse(code = 404, message = "No se ha podido realizar")
     })
-    @Path("/crear/{nombre}/{pass}")
+    @Path("/crear")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response crearUsuario(@PathParam("nombre") String nombre, @PathParam("pass") String pass) throws Exception {
+    public Response crearUsuario(Auth a) throws Exception {
 
-            Usuario u = this.ju.crearUsuario(nombre,pass);
+            UsuarioTO u = this.ju.crearUsuario(a);
 
-            if(u != null){
-                return Response.status(201).build();
-            }else{
-                return Response.status(404).build();
-            }
+        if(u != null){
+            GenericEntity<UsuarioTO> entity = new GenericEntity<UsuarioTO>(u){};
+            return Response.status(201).entity(entity).build();
 
+        }
+        else{
+            return Response.status(404).build();
+        }
 
     }
 
