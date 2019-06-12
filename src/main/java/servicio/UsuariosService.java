@@ -53,6 +53,36 @@ import java.util.logging.Logger;
 
     }
 
+
+
+
+
+
+    @POST
+    @ApiOperation(value = "modificar dinero", notes = "suma o resta")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful",response = UsuarioTO.class),
+            @ApiResponse(code = 404, message = "No se ha podido realizar")
+    })
+    @Path("/modificardinero/{idUser}/{dinero}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response modificarDinero(@PathParam("idUser") String id, @PathParam("dinero") int dinero) throws Exception {
+
+        ju.modificarDinero(id, dinero);
+        UsuarioTO u= ju.dameUsuarioTOById(id);
+
+        if(u != null){
+            GenericEntity<UsuarioTO> entity = new GenericEntity<UsuarioTO>(u){};
+            return Response.status(201).entity(entity).build();
+
+        }
+        else{
+            return Response.status(404).build();
+        }
+
+    }
+
+
     @GET
     @ApiOperation(value = "get all users")
     @ApiResponses(value = {
@@ -93,6 +123,10 @@ import java.util.logging.Logger;
         }
 
     }
+
+
+
+
 
     @POST
     @ApiOperation(value = "login usuario")

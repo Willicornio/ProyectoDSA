@@ -2,10 +2,19 @@ package servicio;
 
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import juego.Juego;
 import juego.JuegoManager;
+import juego.Objeto;
+import juego.UsuarioTO;
 
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
+import javax.ws.rs.core.GenericEntity;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.List;
 
 
 @Api(value = "/Objetos", description = "Servicio de objetos")
@@ -20,6 +29,80 @@ import javax.ws.rs.Path;
 
 
     }
+
+
+    @POST
+    @ApiOperation(value = "Comprar obejeto", notes = "Compramos el objeto")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful",response = Objeto.class),
+            @ApiResponse(code = 404, message = "No se ha podido realizar")
+    })
+    @Path("/comprarObjeto/{idUser}/{idObjeto}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response comprarObjeto(@PathParam("idUser") String idUser, @PathParam("idObjeto") String idObjeto) throws Exception {
+
+        ju.comprarObjeto(idUser, idObjeto);
+        Objeto u= ju.dameObjetoPorId(idObjeto);
+
+        if(u != null){
+            GenericEntity<Objeto> entity = new GenericEntity<Objeto>(u){};
+            return Response.status(201).entity(entity).build();
+
+        }
+        else{
+            return Response.status(404).build();
+        }
+
+    }
+
+
+    @GET
+    @ApiOperation(value = "dame obejeto", notes = "dame el objeto")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful",response = Objeto.class),
+            @ApiResponse(code = 404, message = "No se ha podido realizar")
+    })
+    @Path("/dame/{idObjeto}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response dameObjetoId(@PathParam("idObjeto") String idObjeto) throws Exception {
+
+        ju.dameObjetoPorId(idObjeto);
+        Objeto u= ju.dameObjetoPorId(idObjeto);
+
+        if(u != null){
+            GenericEntity<Objeto> entity = new GenericEntity<Objeto>(u){};
+            return Response.status(201).entity(entity).build();
+
+        }
+        else{
+            return Response.status(404).build();
+        }
+
+    }
+
+
+    @GET
+    @ApiOperation(value = "get all obejtos")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful", response = Objeto.class, responseContainer="List"),
+            @ApiResponse(code = 404, message = "No se ha podido realizar")
+    })
+    @Path("/")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response dameUsuarios() {
+        try{
+
+            List<Objeto> objetos = this.ju.dameObjetos();
+            GenericEntity<List<Objeto>> entity = new GenericEntity<List<Objeto>>(objetos) {};
+            return Response.status(201).entity(entity).build()  ;
+
+        }catch (Exception e){
+            return Response.status(404).build();
+        }
+
+    }
+
+
 
 
 

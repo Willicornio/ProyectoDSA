@@ -1,9 +1,13 @@
 package juego;
+
+import javax.print.DocFlavor;
+
 public class Objeto {
 
     String id;
     String nombre;
-    int puntos;
+    String descripcion;
+    String foto;
     int dinero;
     String activado;
 
@@ -11,12 +15,13 @@ public class Objeto {
 
     }
 
-    public Objeto(String id,String Nombre, int puntos, int dinero){
+    public Objeto(String id, String Nombre, String descripcion, int dinero, String foto){
 
         this.dinero = dinero;
         this.id = id;
         this.nombre = Nombre;
-        this.puntos = puntos;
+        this.descripcion = descripcion;
+        this.foto=this.foto;
         this.activado = "false";
     }
 
@@ -36,13 +41,7 @@ public class Objeto {
         this.nombre = nombre;
     }
 
-    public int getPuntos() {
-        return puntos;
-    }
 
-    public void setPuntos(int puntos) {
-        this.puntos = puntos;
-    }
 
     public int getDinero() {
         return dinero;
@@ -58,5 +57,21 @@ public class Objeto {
 
     public void setActivado(String activado) {
         this.activado = activado;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 }

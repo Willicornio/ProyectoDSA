@@ -97,6 +97,15 @@ public class JuegoManager  implements Juego {
     }
 
 
+    public Objeto dameObjetoPorId(String id) throws Exception{
+
+        ObjetoDAO dao =  new ObjetoDAOImpl();
+       return dao.getObjeto(id);
+
+
+    }
+
+
     @Override
     public LinkedList<Usuario> dameUsuarios() throws Exception {
 
@@ -262,7 +271,7 @@ public class JuegoManager  implements Juego {
         Objeto o = objeto;
 
 
-        dao.addObjeto(o.getId(),o.getNombre(),o.getPuntos(),o.getDinero());
+        dao.addObjeto(o.getId(),o.getNombre(),o.getDescripcion(), o.getFoto(), o.getDinero());
 
     }
 
@@ -306,14 +315,12 @@ public class JuegoManager  implements Juego {
 
         dao.addMapa(id, mapatodo);
     }
-    public String getMapa(String id) throws Exception{
-
+    public Mapa getMapa(String id) throws Exception{
 
         MapaDAO dao = new MapaDAOImpl();
         Mapa mapa = dao.getMapa(id);
-        String mapatodo = mapa.getMapatodo();
 
-        return mapatodo;
+        return mapa;
 
     }
     public void borrarMapa (String idMapa) throws Exception{

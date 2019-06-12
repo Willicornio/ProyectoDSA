@@ -6,7 +6,7 @@ import java.util.LinkedList;
 public interface UsersDAO {
     public void addUSer(String nombre, String apellidos) throws Exception;
     public juego.Usuario getUser(String id) throws Exception;
-    public  LinkedList<juego.Usuario> dameListUsuarios() throws  Exception;
+
 
 
     public boolean borrarUsuario (juego.Usuario user) throws Exception;

@@ -30,7 +30,7 @@ dao.getUser("idJulio");
 
        // dao.cambiarPass("Willi", "aa", "funciona", "WilliRico");
 
-      /*  LinkedList<juego.Usuario> lista = dao.dameListUsuarios();
+LinkedList<juego.Usuario> lista = UsersDAOImpl.dameListUsuarios1();
 
         System.out.println(lista.get(0).getNombre());
         System.out.println(lista.get(1).getNombre());
@@ -53,9 +53,9 @@ dao.getUser("idJulio");
 
 
 
-        ObjetoDAO dao1 = new ObjetoDAOImpl();
+      //  ObjetoDAO dao1 = new ObjetoDAOImpl();
 
-       dao1.getObjeto("c2");
+      // dao1.getObjeto("c2");
 
 
 

@@ -1,4 +1,5 @@
 package servicio;
+import juego.*;
 
 
 import io.swagger.annotations.Api;
@@ -28,8 +29,34 @@ import java.util.List;
 
 
 
+
+
+
+
+
     }
 
+
+
+    @GET
+    @ApiOperation(value = "Dame un mapa por su id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful", response = Mapa.class),
+            @ApiResponse(code = 404, message = "No existe este mapa")
+    })
+    @Path("/{idMapa}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response dameMapaById(@PathParam("idMapa") String id) {
+        try{
+            Mapa u = this.ju.getMapa(id);
+            GenericEntity<Mapa> entity = new GenericEntity<Mapa>(u) {};
+            return Response.status(201).entity(entity).build()  ;
+
+        }catch (Exception e){
+            return Response.status(404).build();
+        }
+
+    }
 
 
 

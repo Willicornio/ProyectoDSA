@@ -20,7 +20,7 @@ public interface Juego {
 
     public UsuarioTO crearUsuario(Auth a) throws Exception;
     public List<UsuarioTO> dameUsuariosTO() throws Exception;
-    public List<Usuario> dameUsuarios() throws Exception;
+    public LinkedList<Usuario> dameUsuarios() throws Exception;
     public UsuarioTO dameUsuarioTOById(String id) throws Exception;
 
 
@@ -72,11 +72,11 @@ public interface Juego {
 
 
 
-
+public Objeto dameObjetoPorId(String id) throws Exception;
 
 
  public void addMapa(String id, String mapatodo) throws Exception;
- public String getMapa(String id) throws Exception;
+ public Mapa getMapa(String id) throws Exception;
  public void borrarMapa (String idMapa) throws Exception;
 
 

@@ -31,9 +31,10 @@ public class ObjetoDAOImpl implements ObjetoDAO{
 
                     if(i ==1) { o.setId(rs.getString(i)); }
                     if(i ==2) { o.setNombre(rs.getString(i)); }
-                    if(i ==3) { o.setPuntos(rs.getInt(i)); }
+                    if(i ==3) { o.setDescripcion(rs.getString(i)); }
                     if(i ==4) { o.setDinero(rs.getInt(i)); }
                     if(i ==5) { o.setActivado(rs.getString(i)); }
+                    if(i ==5) { o.setFoto(rs.getString(i)); }
 
                 }
 
@@ -67,10 +68,10 @@ public class ObjetoDAOImpl implements ObjetoDAO{
     }
 
 
-    public void addObjeto (String id, String nombre, int puntos, int dinero) throws Exception{
+    public void addObjeto (String id, String nombre, String descripcion, String foto, int dinero) throws Exception{
 
         Session a = Factoria.getSession();
-        juego.Objeto objeto = new juego.Objeto(id, nombre, puntos, dinero);
+        juego.Objeto objeto = new juego.Objeto(id, nombre, descripcion, dinero ,foto);
         try  {
             a.save(objeto);
         }catch (Exception e){

@@ -97,9 +97,9 @@
     </build>
 
     <properties>
-    <jersey.version>2.24</jersey.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <swagger-jersey2-jaxrs.version>1.5.9</swagger-jersey2-jaxrs.version>
+        <jersey.version>2.24</jersey.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <swagger-jersey2-jaxrs.version>1.5.9</swagger-jersey2-jaxrs.version>
     </properties>
 
 
