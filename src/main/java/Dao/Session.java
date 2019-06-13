@@ -43,7 +43,7 @@ public class Session {
                             + "user=root&password=dsa2019");
             */
            /* PARA USAR LA BASE DE DATOS QUE TENGO CREADA UTILIZAR ESTA LINIA Y CAMBIAR LA PASS*/
-           session = DriverManager.getConnection("jdbc:mysql://localhost/feedback", "root", "dsa2019");
+           session = DriverManager.getConnection("jdbc:mysql://localhost/dsa", "root", "DSA2019");
 
             return session;
 
@@ -304,7 +304,7 @@ public class Session {
                         break;
                 }
 
-                setter(instancia, m, result);
+                    setter(instancia, m, result);
                 i++;
             }
 

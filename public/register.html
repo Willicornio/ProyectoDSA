@@ -9,7 +9,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <script>
 $(document).ready(function(){
-  $('#btnLogin').click(function(e){
+  $('#btnRegister').click(function(e){
     e.preventDefault();
     
    var obj = {
@@ -19,11 +19,11 @@ $(document).ready(function(){
 
         $.ajax({
             type: 'POST',
-            url: '/dsaApp/usuarios/login',
+            url: '/dsaApp/usuarios/crear',
             data: JSON.stringify(obj),
             success: function(data) {
                 console.log(data);
-                
+
                 if (localStorage.length > 0 ) {
                    localStorage.clear();
                   } 
@@ -31,16 +31,18 @@ $(document).ready(function(){
                localStorage.setItem("idUser", data.idUser);
                localStorage.setItem("dinero", data.dinero);
                localStorage.setItem("nombre", data.nombre);
-               localStorage.setItem("puntuacionTotal", data.puntuacionTotal);     
+               localStorage.setItem("puntuacionTotal", data.puntuacionTotal);
                
-               location.href = "/main.html";
+                location.href = "/main.html";
+
+               
                console.log(localStorage);
 
                 
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 if(xhr.status==404){
-                    alert("Usuario no encontrado");
+                    alert("¡Este usuario ya existe!");
                 }
             },
             contentType: "application/json",
@@ -48,13 +50,7 @@ $(document).ready(function(){
         });
 
     });
-  $('#btnRegister').click(function(e){
-    e.preventDefault();
-    location.href = "/register.html";    
-
-    });
   });
-  
 
 </script>
 </head>
@@ -62,7 +58,7 @@ $(document).ready(function(){
 
 <div class="jumbotron text-center">
   <h1>Museo DSA</h1>
-  <p>Anna Frias, Guillermo Manterola, Adrià Navarrete</p> 
+  <p>Create un usuario</p> 
 </div>
 
 <div class="container">
@@ -76,13 +72,8 @@ $(document).ready(function(){
                 <div class="form-group">
                     <input id="password" type="Password" class="form-control" placeholder="password">
                 </div>
-                
-
                 <div class="form-group">
-                <button id="btnLogin" type="sumbit" class="btn btn-primary form-control">Login</button>
-                </div>
-                <div class="form-group">
-                <button id="btnRegister" type="sumbit" class="btn btn-warning form-control">¡Create un usuario !</button>
+                <button id="btnRegister" type="sumbit" class="btn btn-warning form-control">Crear</button>
                 </div>
             </form>
             

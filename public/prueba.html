@@ -9,47 +9,33 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <script>
-	$(document).ready(function(){
+$(document).ready(function(){
   
 
-		$("#nombre").append("Nombre: " + localStorage.getItem("nombre"));
-		$("#idUser").append("ID usuario: " + localStorage.getItem("idUser"));
-		$("#dinero").append("Dinero disponible: " + localStorage.getItem("dinero"));
-		$("#puntuacion").append("Puntuación total: " + localStorage.getItem("puntuacionTotal"));
+    $("#nombre").append("Nombre: " + localStorage.getItem("nombre"));
+    $("#idUser").append("ID usuario: " + localStorage.getItem("idUser"));
+    $("#dinero").append("Dinero disponible: " + localStorage.getItem("dinero"));
+    $("#puntuacion").append("Puntuación total: " + localStorage.getItem("puntuacionTotal"));
   
 
 
 
-  $('#btnDinero').click(function(e){
-  		e.preventDefault();
+  //$("#btnDinero").click(function(e){
+    //e.preventDefault();
 
-  		var añadirDinero = $("#añadirDinero").val();
+  // var añadirDinero = $("#añadirDinero").val();
 
    
-  		var params = localStorage.getItem("idUser")+"/"+ añadirDinero;
-   		console.log(params); 
-    	
-    
+  // var params = localStorage.getItem("idUser")+"/"+ añadirDinero;
+   //console.log(params); 
+    //var usuario = $("#text").val();
+    /*
         $.ajax({
             type: 'POST',
-            url: '/dsaApp/usuarios/modificardinero/' + params,
-            
+            url: '/dsaApp//usuarios/modificardinero/' + params,
+            data: myParams,
             success: function(data) {
                 console.log(data);
-
-                if (localStorage.length > 0 ) {
-                   localStorage.clear();
-                  } 
-
-               localStorage.setItem("idUser", data.idUser);
-               localStorage.setItem("dinero", data.dinero);
-               localStorage.setItem("nombre", data.nombre);
-               localStorage.setItem("puntuacionTotal", data.puntuacionTotal);
-
-               $("#dinero").empty();
-               $("#dinero").append("Dinero disponible: " + localStorage.getItem("dinero"));
-
-
                                
             },
             error: function (xhr, ajaxOptions, thrownError) {
@@ -59,29 +45,14 @@
             },
             contentType: "application/json",
             dataType: 'json'
-        });  
-  });
-
-    $('#cerrarSesion').click(function(e){
-  		e.preventDefault();
-
-  		if (localStorage.length > 0 ) {
-               localStorage.clear();
-            } 
-
-        location.href = "/login.html";
-
-
-
-  		
-  });
+        });  */
+  //});
 
 
 
 
 }); 
 </script>
-
 </head>
 <body>
 <div class="container emp-profile">
@@ -107,15 +78,13 @@
                             <p>Añadir Dinero</p>
                             <form>
                                 <div class="form-group">
-                                    <input id="añadirDinero" type="text" class="form-control" placeholder="¿Cuanto dinero sumo?">
+                                    <input id="añadirDinero" type="text" class="form-control" placeholder="Cuanto dinero sumo?">
                                 </div>
                                                                
 
                                 <div class="form-group">
                                 <button id="btnDinero" type="sumbit" class="btn btn-primary form-control">Añadir</button>
                                 </div>
-                                
-                                
                                 
                             </form>
                             
@@ -140,36 +109,19 @@
                         </div></td>
                                 <td>Anna</td>
                                 <td>Pitt</td>
-                                <td><div class="form-group"><button id="btn1" type="sumbit" class="btn btn-primary form-control">Comprar</button></div></td>
+                                <td><div class="form-group"><button id="btnDinero" type="sumbit" class="btn btn-primary form-control">Comprar</button></div></td>
                               </tr>
                               <tr>
                                 <td>1</td>
                                 <td>Anna</td>
-                                <td><div class="form-group"><button id="btn2" type="sumbit" class="btn btn-primary form-control">Comprar</button></div></td>
-                                <td> <div class="form-group"><button id="btn3" type="sumbit" class="btn btn-primary form-control">Comprar</button></div></td>
+                                <td><div class="form-group"><button id="btnDinero" type="sumbit" class="btn btn-primary form-control">Comprar</button></div></td>
+                                <td> <div class="form-group"><button id="btnDinero" type="sumbit" class="btn btn-primary form-control">Comprar</button></div></td>
                               </tr>
                             </tbody>
                           </table>
-                          
-                      </div>                       
+                          </div>                       
                     </div>
                 </div>
-                <div class="row-top-buffer"></div>
-                <div class="row"> </div>
-                <div class="row"></div>
-                <div class="row">
-                	<form>
-		                <div class="col-md-4">
-		                	<div class="profile-work">
-		                		<form>
-                                <div class="form-group">
-                                    <button id="cerrarSesion" type="sumbit" class="btn btn-danger form-control">Cerrar Sesión</button>
-                                </div>
-                            	</form>
-                        	</div>
-		                </div>
-	            	</form>
-            	</div>
             </form>           
         </div>
 </body>
