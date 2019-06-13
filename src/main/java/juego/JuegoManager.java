@@ -107,7 +107,7 @@ public class JuegoManager  implements Juego {
 
 
     @Override
-    public LinkedList<Usuario> dameUsuarios() throws Exception {
+    public List<Usuario> dameUsuarios() throws Exception {
 
       return UsersDAOImpl.dameListUsuarios1();
     }
@@ -131,7 +131,7 @@ public class JuegoManager  implements Juego {
    // @Override
   public Usuario dameUsuarioById(String id) throws Exception {
 
-        LinkedList<Usuario> list = UsersDAOImpl.dameListUsuarios1();
+        List<Usuario> list = UsersDAOImpl.dameListUsuarios1();
         Usuario u = null;
 
         for (Usuario usuario : list) {
@@ -151,7 +151,7 @@ public class JuegoManager  implements Juego {
 
     public UsuarioTO dameUsuarioTOById(String id) throws Exception {
 
-        LinkedList<Usuario> list = UsersDAOImpl.dameListUsuarios1();
+        List<Usuario> list = UsersDAOImpl.dameListUsuarios1();
         UsuarioTO u = null;
 
         for (Usuario usuario : list) {

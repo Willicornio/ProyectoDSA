@@ -2,6 +2,7 @@ package Dao;
 
 
 import juego.Objeto;
+import juego.Usuario;
 
 
 import java.sql.*;
@@ -11,6 +12,9 @@ public class UsersDAOImpl implements UsersDAO {
 
 
     Factoria factoria;
+
+
+
 
 
     public void addUSer(String nombre, String apellidos) throws Exception{
@@ -61,7 +65,7 @@ public class UsersDAOImpl implements UsersDAO {
         }
     }
 
-    public static LinkedList<juego.Usuario> dameListUsuarios1() throws Exception {
+    public static List<juego.Usuario> dameListUsuarios1() throws Exception {
         Session s = Factoria.getSession();
         Statement st = s.getStatement();
         String query = "SELECT * FROM usuario";
@@ -87,7 +91,16 @@ public class UsersDAOImpl implements UsersDAO {
 
             }
 
-            return listaUsuarios;
+            List<juego.Usuario> lista = new ArrayList<juego.Usuario>(listaUsuarios);
+            Collections.sort(lista, new Comparator<juego.Usuario>(){
+                public int compare( juego.Usuario p1, juego.Usuario p2){
+                    return  (int)(-p1.getPuntuacion()+p2.getPuntuacion());
+                }
+            });
+
+            return lista;
+
+
 
         }catch(Exception e){
             throw e;

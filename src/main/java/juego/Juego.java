@@ -20,7 +20,7 @@ public interface Juego {
 
     public UsuarioTO crearUsuario(Auth a) throws Exception;
     public List<UsuarioTO> dameUsuariosTO() throws Exception;
-    public LinkedList<Usuario> dameUsuarios() throws Exception;
+    public List<Usuario> dameUsuarios() throws Exception;
     public UsuarioTO dameUsuarioTOById(String id) throws Exception;
 
 
