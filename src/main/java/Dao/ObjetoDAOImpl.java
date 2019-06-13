@@ -32,9 +32,9 @@ public class ObjetoDAOImpl implements ObjetoDAO{
                     if(i ==1) { o.setId(rs.getString(i)); }
                     if(i ==2) { o.setNombre(rs.getString(i)); }
                     if(i ==3) { o.setDescripcion(rs.getString(i)); }
-                    if(i ==4) { o.setActivado(rs.getString(i)); }
+                    if(i ==4) { o.setFoto(rs.getString(i)); }
                     if(i ==5) { o.setDinero(rs.getInt(i)); }
-                    if(i ==5) { o.setFoto(rs.getString(i)); }
+                    if(i ==6) { o.setActivado(rs.getString(i)); }
 
                 }
 
