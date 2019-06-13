@@ -55,6 +55,7 @@ public interface Juego {
     public LinkedList<Inventario> dameInventarioPorID(String idUser) throws Exception;
     public void activarmeObjeto(String idObjeto, String idUser) throws Exception;
     public void desactivarmeObjetos(String idUser) throws Exception;
+    public String consultaActivado(String idUser, String idObjeto) throws Exception;
 
     //public void destruirInventario(String idUser); SE ELIMINA YA AL ELIMINAR UN USER
 
@@ -67,7 +68,7 @@ public interface Juego {
     public void crearObjetoNuevo(Objeto objeto) throws Exception;
     public void eliminarObjeto(String idObjeto);
     public LinkedList<Objeto> dameObjetos() throws Exception;
- public void comprarObjeto (String idUser, String idObjeto) throws Exception;
+ public String comprarObjeto (String idUser, String idObjeto) throws Exception;
 
 
 

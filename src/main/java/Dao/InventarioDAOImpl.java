@@ -28,7 +28,7 @@ public class InventarioDAOImpl implements InventarioDAO {
 
 
         //String query = "SELECT `idObjeto` FROM `inventario` WHERE (`id` = '" + idUser +  "')";
-        String query = "SELECT * FROM inventario";
+        String query = "SELECT * FROM `inventario` WHERE (`idUser` = '" + idUser + "')";
         ResultSet rs = st.executeQuery(query);
 
         try {
@@ -70,7 +70,6 @@ public class InventarioDAOImpl implements InventarioDAO {
 
 
     }
-
 
 
 

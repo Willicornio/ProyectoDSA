@@ -84,13 +84,8 @@ public class test {
 
     @Test
     public void comprarObjeto() throws Exception{
-        ju.comprarObjeto("idJulio", "c3");
 
-        Usuario u = ju.dameUsuarioById("idJulio");
-
-        LinkedList<Inventario> i = ju.dameInventarioPorID("idJulio");
-
-        Assert.assertEquals("true", i.get(1).getActivado());
+        Assert.assertEquals("null", ju.comprarObjeto("idVero", "idLinterna"));
     }
 
     @Test
@@ -102,6 +97,15 @@ public class test {
         LinkedList<Inventario> i = ju.dameInventarioPorID("idJulio");
 
         Assert.assertEquals("false", i.get(1).getActivado());
+    }
+
+    @Test
+    public void ConsultarActivado() throws Exception{
+
+
+      String activado = ju.consultaActivado("idVero","idGanzua");
+
+        Assert.assertEquals("false", activado);
     }
 
 

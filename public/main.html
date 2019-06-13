@@ -10,71 +10,156 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <script>
 	$(document).ready(function(){
+
+		$("#tabla").html(""); //primero vacio la tabla existente
+		$("#tablacompleta").show()
   
 
 		$("#nombre").append("Nombre: " + localStorage.getItem("nombre"));
 		$("#idUser").append("ID usuario: " + localStorage.getItem("idUser"));
 		$("#dinero").append("Dinero disponible: " + localStorage.getItem("dinero"));
 		$("#puntuacion").append("Puntuación total: " + localStorage.getItem("puntuacionTotal"));
-  
+
+		$.ajax({
+			type:'GET',
+			url:'/dsaApp/objetos',
+			dataType: 'json',
+			success: function(data){
+				console.log("OKKKKKKKK");
+				$.each(data, function(index, datos){
+
+								$.ajax({
+				            type: 'GET',
+				            //url: '/dsaApp/objetos/comprarObjeto/' + localStorage.getItem("idUser") + '/' + dato,
+				            url: '/dsaApp/inventario/consultaActivado/'+localStorage.getItem("idUser")+'/id'+datos.nombre+'',
+				            success: function(datos2) {
+				                console.log(datos2);
+				                
+
+				                    var num = index;																
+									$("#tabla").append("<tr><td class='col1'><div><img src='" + datos.foto + "' alt=''/> </div></td><td class='col2'>"+ datos.nombre + "</td><td class='col3'>"+ datos.dinero + "</td><td><button class='btn btn-light form-control' disabled>Comprado</button></td></tr>");
+				                
+
+				               
+				                               
+				            },
+				            error: function (xhr, ajaxOptions, thrownError) {
+					                if(xhr.status==404){
+					                    var num = index;																
+										$("#tabla").append("<tr><td class='col1'><div><img src='" + datos.foto + "' alt=''/> </div></td><td class='col2'>"+ datos.nombre + "</td><td class='col3'>"+ datos.dinero + "</td><td><button type='sumbit' class='btn btn-primary form-control'>Comprar</button></td></tr>");
+					                }
+				            },
+				            contentType: "application/json",
+				            dataType: 'json'
+				        })	
+					
+				});
+			}
+		})
+
+		$('#tabla').on('click','.btn-primary', function(){
+    		
+
+	  		var self = $(this).closest("tr");
+	  		var col2_value = self.find(".col2").text();
 
 
+	  		//var id = $("#1").val();
+	   
+	  		//var dato = "id" + id;
+	   		console.log(col2_value); 
+	    	
+	    
+	       $.ajax({
+	            type: 'POST',
+	            //url: '/dsaApp/objetos/comprarObjeto/' + localStorage.getItem("idUser") + '/' + dato,
+	            url: '/dsaApp/objetos/comprarObjeto/'+localStorage.getItem("idUser")+'/id'+ col2_value,
+	            success: function(data) {
+	                console.log(data);
+	                location.reload();
 
-  $('#btnDinero').click(function(e){
-  		e.preventDefault();
+	                if (localStorage.length > 0 ) {
+	                   localStorage.clear();
+	                  } 
 
-  		var añadirDinero = $("#añadirDinero").val();
+	               localStorage.setItem("idUser", data.idUser);
+	               localStorage.setItem("dinero", data.dinero);
+	               localStorage.setItem("nombre", data.nombre);
+	               localStorage.setItem("puntuacionTotal", data.puntuacionTotal);
 
-   
-  		var params = localStorage.getItem("idUser")+"/"+ añadirDinero;
-   		console.log(params); 
-    	
-    
-        $.ajax({
-            type: 'POST',
-            url: '/dsaApp/usuarios/modificardinero/' + params,
-            
-            success: function(data) {
-                console.log(data);
-
-                if (localStorage.length > 0 ) {
-                   localStorage.clear();
-                  } 
-
-               localStorage.setItem("idUser", data.idUser);
-               localStorage.setItem("dinero", data.dinero);
-               localStorage.setItem("nombre", data.nombre);
-               localStorage.setItem("puntuacionTotal", data.puntuacionTotal);
-
-               $("#dinero").empty();
-               $("#dinero").append("Dinero disponible: " + localStorage.getItem("dinero"));
+	               $("#dinero").empty();
+	               $("#dinero").append("Dinero disponible: " + localStorage.getItem("dinero"));
 
 
-                               
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                if(xhr.status==404){
-                    alert("error");
-                }
-            },
-            contentType: "application/json",
-            dataType: 'json'
-        });  
-  });
+	               
+	                               
+	            },
+	            error: function (xhr, ajaxOptions, thrownError) {
+	                if(xhr.status==403){
+	                    alert("No tienes dinero suficiente para comprar este objeto");
+	                }else if(xhr.status == 408){
+	                	alert("Ya has comprado este objeto")
+	                }else if(xhr.status == 404){
+	                	alert("No existe el usuario o objeto")
+	                }
+	            },
+	            contentType: "application/json",
+	            dataType: 'json'
+	        }); 
+	  });
 
-    $('#cerrarSesion').click(function(e){
-  		e.preventDefault();
+	  $('#btnDinero').click(function(e){
+	  		e.preventDefault();
 
-  		if (localStorage.length > 0 ) {
-               localStorage.clear();
-            } 
+	  		var añadirDinero = $("#añadirDinero").val();
 
-        location.href = "/login.html";
+	   
+	  		var params = localStorage.getItem("idUser")+"/"+ añadirDinero;
+	   		console.log(params); 
+	    	
+	    
+	        $.ajax({
+	            type: 'POST',
+	            url: '/dsaApp/usuarios/modificardinero/' + params,
+	            
+	            success: function(data) {
+	                console.log(data);
+
+	                if (localStorage.length > 0 ) {
+	                   localStorage.clear();
+	                  } 
+
+	               localStorage.setItem("idUser", data.idUser);
+	               localStorage.setItem("dinero", data.dinero);
+	               localStorage.setItem("nombre", data.nombre);
+	               localStorage.setItem("puntuacionTotal", data.puntuacionTotal);
+
+	               $("#dinero").empty();
+	               $("#dinero").append("Dinero disponible: " + localStorage.getItem("dinero"));
 
 
+	                               
+	            },
+	            error: function (xhr, ajaxOptions, thrownError) {
+	                if(xhr.status==404){
+	                    alert("error");
+	                }
+	            },
+	            contentType: "application/json",
+	            dataType: 'json'
+	        });  
+	  });
 
-  		
-  });
+	    $('#cerrarSesion').click(function(e){
+	  		e.preventDefault();
+
+	  		if (localStorage.length > 0 ) {
+	               localStorage.clear();
+	            } 
+
+	        location.href = "/login.html";
+	  		
+	  });
 
 
 
@@ -85,7 +170,7 @@
 </head>
 <body>
 <div class="container emp-profile">
-            <form method="post">
+            
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
@@ -124,39 +209,23 @@
                     <div class="col-md-8">                        
                         <div class="table-responsive">   
                         <p>Inventario</p>       
-                          <table class="table">
+                          <table id="tablacompleta" class="table">
                             <thead>
                               <tr>
-                                <th>Objeto</th>
-                                <th>Nombre</th>
-                                <th>Precio</th>
-                                <th>Comprar</th>
+                                <th scope="col">Objeto</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Comprar</th>
                               </tr>
                             </thead>
                             <tbody id="tabla">
-                              <tr>
-                                <td><div>
-                            <img src="https://li7.rightinthebox.com/images/50x50/201007/inkbis1279251303760.jpg " alt=""/>
-                        </div></td>
-                                <td>Anna</td>
-                                <td>Pitt</td>
-                                <td><div class="form-group"><button id="btn1" type="sumbit" class="btn btn-primary form-control">Comprar</button></div></td>
-                              </tr>
-                              <tr>
-                                <td>1</td>
-                                <td>Anna</td>
-                                <td><div class="form-group"><button id="btn2" type="sumbit" class="btn btn-primary form-control">Comprar</button></div></td>
-                                <td> <div class="form-group"><button id="btn3" type="sumbit" class="btn btn-primary form-control">Comprar</button></div></td>
-                              </tr>
                             </tbody>
                           </table>
                           
                       </div>                       
                     </div>
                 </div>
-                <div class="row-top-buffer"></div>
-                <div class="row"> </div>
-                <div class="row"></div>
+
                 <div class="row">
                 	<form>
 		                <div class="col-md-4">
@@ -170,7 +239,7 @@
 		                </div>
 	            	</form>
             	</div>
-            </form>           
+                       
         </div>
 </body>
 </html>

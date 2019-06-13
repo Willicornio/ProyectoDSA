@@ -34,20 +34,26 @@ import java.util.List;
     @POST
     @ApiOperation(value = "Comprar obejeto", notes = "Compramos el objeto")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Successful",response = Objeto.class),
-            @ApiResponse(code = 404, message = "No se ha podido realizar")
+            @ApiResponse(code = 201, message = "Comprado",response = UsuarioTO.class),
+            @ApiResponse(code = 404, message = "No existe el usuario o objeto especificado"),
+            @ApiResponse(code = 403, message = "Dinero insuficiente"),
+            @ApiResponse(code = 408, message = "Ya se ha comprado este objeto")
     })
     @Path("/comprarObjeto/{idUser}/{idObjeto}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response comprarObjeto(@PathParam("idUser") String idUser, @PathParam("idObjeto") String idObjeto) throws Exception {
 
-        ju.comprarObjeto(idUser, idObjeto);
-        Objeto u= ju.dameObjetoPorId(idObjeto);
+        String check = ju.comprarObjeto(idUser, idObjeto);
+        UsuarioTO u= ju.dameUsuarioTOById(idUser);
 
-        if(u != null){
-            GenericEntity<Objeto> entity = new GenericEntity<Objeto>(u){};
+        if(check.equals("ok")){
+            GenericEntity<UsuarioTO> entity = new GenericEntity<UsuarioTO>(u){};
             return Response.status(201).entity(entity).build();
 
+        }else if(check.equals("Dinero inferior")){
+            return  Response.status(403).build();
+        }else if(check.equals("Ya comprado")){
+            return  Response.status(408).build();
         }
         else{
             return Response.status(404).build();

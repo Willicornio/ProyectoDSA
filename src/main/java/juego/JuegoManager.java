@@ -246,6 +246,22 @@ public class JuegoManager  implements Juego {
 
     }
 
+    public String consultaActivado(String idUser, String idObjeto) throws Exception{
+
+        InventarioDAO dao = new InventarioDAOImpl();
+        List<Inventario> lista = dao.dameInventario(idUser);
+        String activado = "false";
+
+        for(Inventario i: lista) {
+            if(i.getIdObjeto().equals(idObjeto) && i.getActivado().equals("true")){
+                activado = "true";
+            }
+
+        }
+        return activado;
+
+    }
+
     @Override
     public void crearInventario(String idUser, List<Objeto> listaObjetos) throws Exception {
 
@@ -289,11 +305,41 @@ public class JuegoManager  implements Juego {
     }
 
 
-    public void comprarObjeto (String idUser, String idObjeto) throws Exception {
+    public String comprarObjeto (String idUser, String idObjeto) throws Exception {
 
         UsersDAO dao = new UsersDAOImpl();
+        ObjetoDAO odao = new ObjetoDAOImpl();
+        InventarioDAO idao = new InventarioDAOImpl();
 
-        ((UsersDAOImpl) dao).comprarObjeto(idUser, idObjeto);
+        String check = null;
+
+        if(consultaActivado(idUser,idObjeto).equals("false")) {
+
+            juego.Usuario user = dao.getUser(idUser);
+            juego.Objeto objeto = odao.getObjeto(idObjeto);
+
+
+            if (user.getDinero() >= objeto.getDinero()) {
+                idao.cambiarActivado(idUser, idObjeto);
+                dao.modificarDinero(idUser, objeto.getDinero() * (-1));
+                check = "ok";
+
+            } else if (user.getId() == null || objeto.getId() == null) {
+
+                check = "null";
+
+            } else {
+                check = "Dinero inferior";
+
+            }
+
+            return check;
+        }else{
+
+            return "Ya comprado";
+        }
+
+
 
     }
 

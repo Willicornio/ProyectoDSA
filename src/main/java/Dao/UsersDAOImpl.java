@@ -258,7 +258,7 @@ public class UsersDAOImpl implements UsersDAO {
 
 
 
-    public void comprarObjeto (String idUser, String idObjeto) throws Exception{
+    /*public String comprarObjeto (String idUser, String idObjeto) throws Exception{
 
         Session s = Factoria.getSession();
         Statement st = s.getStatement();
@@ -301,7 +301,7 @@ public class UsersDAOImpl implements UsersDAO {
                 s.close();
             }
             }
-        }
+        }*/
 
 
     }
