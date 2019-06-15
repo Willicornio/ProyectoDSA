@@ -229,6 +229,11 @@ public class JuegoManager  implements Juego {
         return list;
     }
 
+    public  LinkedList<Mapa> dameMapas() throws Exception{
+
+        return MapaDAOImpl.dameMapas();
+    }
+
 
 
     @Override

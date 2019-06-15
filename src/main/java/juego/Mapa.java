@@ -3,17 +3,17 @@ package juego;
 public class Mapa {
 
     String id;
-    String mapatodo;
+    String mapa;
 
     public Mapa(){
 
         this.id = null;
-        this.mapatodo = null;
+        this.mapa = null;
     }
 
-    public Mapa (String id, String mapatodo){
+    public Mapa (String id, String mapa){
         this.id = id;
-        this.mapatodo = mapatodo;
+        this.mapa = mapa;
     }
 
     public String getId() {
@@ -24,11 +24,11 @@ public class Mapa {
         this.id = id;
     }
 
-    public String getMapatodo() {
-        return mapatodo;
+    public String getMapa() {
+        return mapa;
     }
 
-    public void setMapatodo(String mapatodo) {
-        this.mapatodo = mapatodo;
+    public void setMapa(String mapa) {
+        this.mapa = mapa;
     }
 }

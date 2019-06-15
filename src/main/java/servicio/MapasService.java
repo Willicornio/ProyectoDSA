@@ -27,30 +27,24 @@ import java.util.List;
     public MapasService() throws Exception {
         this.ju = JuegoManager.getInstance();
 
-
-
-
-
-
-
-
     }
 
 
 
     @GET
-    @ApiOperation(value = "Dame un mapa por su id")
+    @ApiOperation(value = "get all mapas")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Successful", response = Mapa.class),
-            @ApiResponse(code = 404, message = "No existe este mapa")
+            @ApiResponse(code = 201, message = "Successful", response = Mapa.class, responseContainer="List"),
+            @ApiResponse(code = 404, message = "No se ha podido realizar")
     })
-    @Path("/{idMapa}")
+    @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response dameMapaById(@PathParam("idMapa") String id) {
+    public Response dameMapas() {
         try{
-            Mapa u = this.ju.getMapa(id);
-            GenericEntity<Mapa> entity = new GenericEntity<Mapa>(u) {};
-            return Response.status(201).entity(entity).build()  ;
+
+            List<Mapa> mapas = ju.dameMapas();
+            GenericEntity<List<Mapa>> entity = new GenericEntity<List<Mapa>>(mapas) {};
+            return Response.status(201).entity(entity).build();
 
         }catch (Exception e){
             return Response.status(404).build();

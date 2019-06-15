@@ -68,7 +68,7 @@ public interface Juego {
     public void crearObjetoNuevo(Objeto objeto) throws Exception;
     public void eliminarObjeto(String idObjeto);
     public LinkedList<Objeto> dameObjetos() throws Exception;
- public String comprarObjeto (String idUser, String idObjeto) throws Exception;
+    public String comprarObjeto (String idUser, String idObjeto) throws Exception;
 
 
 
@@ -79,6 +79,7 @@ public Objeto dameObjetoPorId(String id) throws Exception;
  public void addMapa(String id, String mapatodo) throws Exception;
  public Mapa getMapa(String id) throws Exception;
  public void borrarMapa (String idMapa) throws Exception;
+ public LinkedList<Mapa> dameMapas() throws Exception;
 
 
  void clear();

@@ -6,8 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class MapaDAOImpl implements MapaDAO {
+    private Logger log = Logger.getLogger(MapaDAOImpl.class.getName());
 
     public void addMapa(String id, String mapatodo) throws Exception {
 
@@ -29,10 +31,19 @@ public class MapaDAOImpl implements MapaDAO {
         juego.Mapa u = new juego.Mapa();
         try {
             u = (juego.Mapa) s.get(id, juego.Mapa.class);
-            System.out.println("DAO: " + u);
+
+            if(u.getId() == null){
+                u = null;
+                log.info("No existe este mapa");
+
+            }else{
+                log.info("DAO: " + u);
+            }
 
         }catch (Exception e){
-            System.out.println("ese mapa no estaa Loloololo");
+            log.info("ERROR");
+            u = null;
+
         }finally {
             s.close();
         }
@@ -40,21 +51,54 @@ public class MapaDAOImpl implements MapaDAO {
     }
 
 
-    public boolean borrarMapa (String idMapa) throws Exception {
-        boolean resultado = false;
-        Session s = Factoria.getSession();
-        Statement st = s.getStatement();
-        try {
-            String query = "DELETE FROM mapa WHERE id='" + idMapa + "'";
-            st.executeUpdate(query);
-            resultado = true;
-        } catch (SQLException ex) {
-            throw new Exception("No se no va");
-        } finally {
-            st.close();
-            s.close();
-            return resultado;
+        public boolean borrarMapa (String idMapa) throws Exception {
+            boolean resultado = false;
+            Session s = Factoria.getSession();
+            Statement st = s.getStatement();
+            try {
+                String query = "DELETE FROM mapa WHERE id='" + idMapa + "'";
+                st.executeUpdate(query);
+                resultado = true;
+            } catch (SQLException ex) {
+                throw new Exception("No se no va");
+            } finally {
+                st.close();
+                s.close();
+                return resultado;
+            }
         }
-    }
+
+        public static LinkedList<juego.Mapa> dameMapas() throws Exception {
+
+
+            Session s = Factoria.getSession();
+            Statement st = s.getStatement();
+            String query = "SELECT * FROM mapa";
+            LinkedList <juego.Mapa> listaMapas = new LinkedList<juego.Mapa>();
+            ResultSet rs = st.executeQuery(query);
+
+            try {
+                while (rs.next()){
+                    juego.Mapa m = new juego.Mapa();
+                    ResultSetMetaData rsmd = rs.getMetaData();
+                    int nCols = rsmd.getColumnCount();
+                    for (int i = 1; i <= nCols;i++){
+
+                        if(i ==1) { m.setId(rs.getString(i)); }
+                        if(i ==2) { m.setMapa(rs.getString(i)); }
+                    }
+
+                    listaMapas.add(m);
+
+                }
+
+                return listaMapas;
+
+            }catch(Exception e){
+                throw e;
+            }
+
+
+        }
     }
 
