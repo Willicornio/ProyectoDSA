@@ -43,17 +43,20 @@ import java.util.logging.Logger;
     @Path("/comprarObjeto/{idUser}/{idObjeto}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response comprarObjeto(@PathParam("idUser") String idUser, @PathParam("idObjeto") String idObjeto) throws Exception {
-
+        Logger log = Logger.getLogger(ObjetosService.class.getName());
         String check = ju.comprarObjeto(idUser, idObjeto);
         UsuarioTO u= ju.dameUsuarioTOById(idUser);
 
         if(check.equals("ok")){
+            log.info("Ok");
             GenericEntity<UsuarioTO> entity = new GenericEntity<UsuarioTO>(u){};
             return Response.status(201).entity(entity).build();
 
         }else if(check.equals("Dinero inferior")){
+            log.info("Dinero inferior");
             return  Response.status(403).build();
         }else if(check.equals("Ya comprado")){
+            log.info("Ya comprado");
             return  Response.status(408).build();
         }
         else{
@@ -90,7 +93,7 @@ import java.util.logging.Logger;
 
 
     @GET
-    @ApiOperation(value = "get all obejtos")
+    @ApiOperation(value = "get all objetos")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successful", response = Objeto.class, responseContainer="List"),
             @ApiResponse(code = 404, message = "No se ha podido realizar")

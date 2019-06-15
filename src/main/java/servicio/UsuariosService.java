@@ -42,15 +42,18 @@ import java.util.logging.Logger;
     @Path("/crear")
     @Produces(MediaType.APPLICATION_JSON)
     public Response crearUsuario(Auth a) throws Exception {
+        Logger log = Logger.getLogger(UsuariosService.class.getName());
 
             UsuarioTO u = this.ju.crearUsuario(a);
 
         if(u != null){
+            log.info("Usuario creado correctamente");
             GenericEntity<UsuarioTO> entity = new GenericEntity<UsuarioTO>(u){};
             return Response.status(201).entity(entity).build();
 
         }
         else{
+            log.info("Error al crear, ya existe el usuario ");
             return Response.status(404).build();
         }
 
@@ -73,7 +76,7 @@ import java.util.logging.Logger;
 
         if(u != null){
 
-            log.info ("Puntuacion modificada de " + u.getNombre() + ", puntuacion :" + u.getDinero());
+            log.info ("Puntuacion modificada de " + u.getNombre() + ", puntuacion :" + u.getPuntuacionTotal());
             GenericEntity<UsuarioTO> entity = new GenericEntity<UsuarioTO>(u){};
             return Response.status(201).entity(entity).build();
 
