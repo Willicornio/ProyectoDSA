@@ -61,7 +61,7 @@ import java.util.logging.Logger;
 
 
     @POST
-    @ApiOperation(value = "modificar dinero", notes = "suma o resta")
+    @ApiOperation(value = "modificar puntuacion", notes = "suma o resta")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successful",response = UsuarioTO.class),
             @ApiResponse(code = 404, message = "No se ha podido realizar")
