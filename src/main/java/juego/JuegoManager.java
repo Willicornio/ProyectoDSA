@@ -59,6 +59,7 @@ public class JuegoManager  implements Juego {
                 break;
             }
         }
+
         return check;
     }
 
@@ -82,7 +83,6 @@ public class JuegoManager  implements Juego {
 
         if(user == null){
             Usuario u = new Usuario(a.getNombre(),a.getPass());
-            //this.usuarios.put(u.idUser,u); //LO EQUIVALENTE EN DAO AL SAVE
             UsersDAOImpl.addUser(new Usuario(a.getNombre(),a.getPass()));
             this.crearInventario(u.getId(), ObjetoDAOImpl.dameTodosObjetos());
 
@@ -189,38 +189,6 @@ public class JuegoManager  implements Juego {
         dao.modificarPuntuacion(idUser, puntuacion);
     }
 
-   /* @Override
-    public void iniciarPartida(String idUser) {
-
-    }
-
-    @Override
-    public void finalizarPartida(String idUser) {
-
-    }
-*/
-    @Override
-    public void construirMapa(Mapa mapa, String idUser) {
-
-    }
-/*
-    @Override
-    public void guardarPartida(String idUser) {
-
-    }
-
-    @Override
-    public void moodificarVida(String idUser){
-
-    }
-*/
-
-
-   /* @Override
-    public void añadirUsuario(String idUser, String pass) {
-
-    }
-*/
     @Override
     public LinkedList<Objeto> dameObjetos() throws Exception{
 
@@ -374,11 +342,5 @@ public class JuegoManager  implements Juego {
         return mapa;
 
     }
-    public void borrarMapa (String idMapa) throws Exception{
-
-        MapaDAO dao = new MapaDAOImpl();
-        dao.borrarMapa(idMapa);
-
-
     }
-}
+

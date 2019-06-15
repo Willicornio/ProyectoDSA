@@ -9,7 +9,7 @@ public interface MapaDAO {
 
     public void addMapa(String id, String mapatodo) throws Exception;
     public juego.Mapa getMapa(String id) throws Exception;
-    public boolean borrarMapa (String idMapa) throws Exception;
+
 
 
 

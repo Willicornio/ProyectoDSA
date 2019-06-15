@@ -43,7 +43,7 @@ public class Session {
                             + "user=root&password=dsa2019");
             */
            /* PARA USAR LA BASE DE DATOS QUE TENGO CREADA UTILIZAR ESTA LINIA Y CAMBIAR LA PASS*/
-           session = DriverManager.getConnection("jdbc:mysql://localhost/dsa", "root", "DSA2019");
+           session = DriverManager.getConnection("jdbc:mysql://localhost/feedback", "root", "dsa2019");
 
             return session;
 
@@ -113,42 +113,6 @@ public class Session {
     }
 
 
-    /*if ( a == "Usuario"){
-
-        String nombre;
-
-
-
-        e.getName();
-
-        preparedStatement = session
-                .prepareStatement("insert into  feedback." + a +"values (default, ?, ?)");
-        // "myuser, webpage, datum, summary, COMMENTS from feedback.comments");
-        // Parameters start with 1
-        preparedStatement.setString(1, Nombre);
-        preparedStatement.setString(2, apellido);
-        preparedStatement.executeUpdate();
-    }
-
-
-}catch (Exception fatal){
-    throw fatal;
-}
-
-
-}
-
-
-
-
-}
-
-
-
-
-
-
-*/
     public void update ( Object o, String id) throws Exception {
 
         statement = session.createStatement();
@@ -179,10 +143,6 @@ public class Session {
             if (i == fields.length)
                 preparedQuery += "? =? ";
         }
-
-        query = "UPDATE " + table + " SET nombre = caracaola WHERE ( id = " + id + " )";
-
-        // UPDATE `feedback`.`usuario` SET `nombre` = 'este' WHERE (`id` = 'Willi25');
 
 
         query = "UPDATE " + table + " SET (" + preparedQuery + ") WHERE id =" + id;
@@ -226,8 +186,6 @@ public class Session {
         String query = null;
         int contador = 1;
 
-
-        //Field[] fields = o.getClass().getDeclaredFields();
         Field[] fields = clase.getDeclaredFields();
 
         query = "SELECT * FROM " + table + " WHERE id =?";
@@ -236,12 +194,6 @@ public class Session {
         System.out.println(id);
         PreparedStatement ps = this.session.prepareStatement(query);
         ps.setString(1, id);
-/*
-        for(Field f : fields){
-            ps.setString(contador, new PropertyDescriptor(fields[contador - 1].getName(),o.getClass()).getReadMethod().invoke(o).toString() );
-            contador++;
-
-        }*/
 
         resultSet = ps.executeQuery();
         if (resultSet!=null) {
@@ -257,30 +209,15 @@ public class Session {
 
 
         return  o;
-
-
     }
-
-
-
 
     private Object writeResultSet(ResultSet resultSet, Object instancia) throws Exception {
         try{
             int contador = 1 ;
             int p = 0;
 
-//        if (resultSet!=null && resultSet.next()) {
-            //else
-
             ResultSetMetaData rsmd = resultSet.getMetaData();
             int nCols = rsmd.getColumnCount();
-
-            System.out.println(rsmd.getColumnCount());
-            System.out.println(rsmd.getColumnName(1));
-            System.out.println(rsmd.getColumnName(2));
-            System.out.println(rsmd.getColumnTypeName(1));
-            System.out.println(rsmd.getColumnTypeName(2));
-
             int i =1;
             String property = null;
 
@@ -337,34 +274,6 @@ public class Session {
         m.invoke(a, result);
         return a;
     }
-
-
-
-
-//--------------------------------------------PRUEBAS ADRI-----------------------------------------------------
-
-//Esto se pone directamente en el DAO de OBJETOS (TE AHORRAS MUCHO PONIENDOLO AHÍ)
-
-
-
-
-
-
-
-//ESTO ESTA EN EL DAO DE USUARIOS (TE AHORRAS MUCHO PONIENDOLO AHI)
-
-
-
-
-
-
-
-
-
-    //----------------------------------------PRUEBAS ADRI-----------------------------------------------------
-
-
-
 
     public Statement getStatement () throws Exception{
 

@@ -3,16 +3,18 @@ package Dao;
 
 import juego.Objeto;
 import juego.Usuario;
+import org.w3c.dom.UserDataHandler;
 
 
 import java.sql.*;
 import java.util.*;
+import java.util.logging.Logger;
 
 public class UsersDAOImpl implements UsersDAO {
 
 
     Factoria factoria;
-
+    final static Logger log = Logger.getLogger(UsersDAOImpl.class.getName());
 
 
 
@@ -23,9 +25,6 @@ public class UsersDAOImpl implements UsersDAO {
         try  {
 
             a.save(u);
-
-
-
 
         }catch (Exception e){
             throw e;
@@ -56,10 +55,6 @@ public class UsersDAOImpl implements UsersDAO {
         try  {
             Session a = Factoria.getSession();
             a.save(u);
-
-
-
-
         }catch (Exception e){
             throw e;
         }
@@ -84,13 +79,9 @@ public class UsersDAOImpl implements UsersDAO {
                     if(i ==3) { u.setPass(rs.getString(i)); }
                     if(i==4) { u.setDinero(rs.getInt(i)); }
                     if(i==5) { u.setPuntuacion(rs.getInt(i)); }
-
-
                 }
                 listaUsuarios.add(u);
-
             }
-
             List<juego.Usuario> lista = new ArrayList<juego.Usuario>(listaUsuarios);
             Collections.sort(lista, new Comparator<juego.Usuario>(){
                 public int compare( juego.Usuario p1, juego.Usuario p2){
@@ -99,8 +90,6 @@ public class UsersDAOImpl implements UsersDAO {
             });
 
             return lista;
-
-
 
         }catch(Exception e){
             throw e;

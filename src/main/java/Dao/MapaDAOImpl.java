@@ -51,22 +51,7 @@ public class MapaDAOImpl implements MapaDAO {
     }
 
 
-        public boolean borrarMapa (String idMapa) throws Exception {
-            boolean resultado = false;
-            Session s = Factoria.getSession();
-            Statement st = s.getStatement();
-            try {
-                String query = "DELETE FROM mapa WHERE id='" + idMapa + "'";
-                st.executeUpdate(query);
-                resultado = true;
-            } catch (SQLException ex) {
-                throw new Exception("No se no va");
-            } finally {
-                st.close();
-                s.close();
-                return resultado;
-            }
-        }
+
 
         public static LinkedList<juego.Mapa> dameMapas() throws Exception {
 
