@@ -36,14 +36,8 @@ public class Session {
     private Connection getConnection() throws Exception {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            // Setup the connection with the DB
-           /*
-            session = DriverManager
-                    .getConnection("jdbc:mysql://localhost/feedback?"
-                            + "user=root&password=dsa2019");
-            */
-           /* PARA USAR LA BASE DE DATOS QUE TENGO CREADA UTILIZAR ESTA LINIA Y CAMBIAR LA PASS*/
-           session = DriverManager.getConnection("jdbc:mysql://localhost/dsa", "root", "DSA2019");
+
+           session = DriverManager.getConnection("jdbc:mysql://localhost/dsa", "root", "Mazinger72");
 
             return session;
 
