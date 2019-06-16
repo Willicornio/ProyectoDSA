@@ -23,6 +23,7 @@ public interface Juego {
     public Usuario dameUsuarioById(String id) throws Exception;
     public void modificarDinero(String idUser, int cantidad) throws Exception;
     public void sumarPuntuacionFinal(String idUser,int puntuacion) throws Exception;
+    public boolean borrarUsuaio (String id) throws Exception;
 
 
 

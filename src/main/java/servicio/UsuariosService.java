@@ -59,6 +59,27 @@ import java.util.logging.Logger;
 
     }
 
+    @DELETE
+    @ApiOperation(value = "Borrar usuario", notes = "Borrar el usuario")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful"),
+            @ApiResponse(code = 404, message = "No se ha podido realizar")
+    })
+    @Path("/borrar/{idUser}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response borrarUsuario(@PathParam("idUser") String id) throws Exception {
+        Logger log = Logger.getLogger(UsuariosService.class.getName());
+        boolean borrado  = ju.borrarUsuaio(id);
+        if(borrado == true){
+            log.info("Usuario borrado correctamente");
+            return Response.status(201).build();
+        }
+        else{
+            log.info("Error al borrar");
+            return Response.status(404).build();
+        }
+    }
+
 
     @POST
     @ApiOperation(value = "modificar puntuacion", notes = "suma o resta")

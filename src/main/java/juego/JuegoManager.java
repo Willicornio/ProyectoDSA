@@ -235,12 +235,16 @@ public class JuegoManager  implements Juego {
 
     }
 
+    public boolean borrarUsuaio (String id) throws Exception{
+
+        UsersDAO dao = new UsersDAOImpl();
+        boolean resultado;
+        resultado = dao.borrarUsuario(id);
+        return resultado;
+    }
+
     @Override
     public void crearInventario(String idUser, List<Objeto> listaObjetos) throws Exception {
-
-        //SELECT * FROM objeto --> pasarlo a una lista de objetos
-         //simulo el select
-
 
         for(Objeto o: listaObjetos){
             Inventario i = new Inventario(idUser,o.getId());

@@ -28,7 +28,7 @@ public class test {
     public void crearUsuario() throws Exception {
 
 
-        UsuarioTO u = this.ju.crearUsuario(new Auth("Neus","1234"));
+        UsuarioTO u = this.ju.crearUsuario(new Auth("Julio","1234"));
         Assert.assertEquals("Neus",u.getNombre());
     }
 

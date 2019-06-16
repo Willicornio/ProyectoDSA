@@ -137,26 +137,50 @@ public class UsersDAOImpl implements UsersDAO {
         }
     }
 
-///////////////////////////BORRAR USER////////////////////////////////////
-    public boolean borrarUsuario (juego.Usuario user) throws Exception {
+   public boolean borrarInventario (String id) throws  Exception{
         boolean resultado = false;
+
+       Session s = Factoria.getSession();
+       Statement st = s.getStatement();
+        try {
+    String query = "DELETE FROM inventario WHERE iduser='" + id + "'";
+    st.execute(query);
+    resultado = true;
+    log.info("Eliminado correctamente");
+
+
+}catch (SQLException ex){
+            throw new Exception("No se ha podido eliminar");
+        }
+       return resultado;
+   }
+
+
+    public boolean borrarUsuario (String idUser) throws Exception {
+        boolean resultadoBorrarUsuario = false;
+        boolean resultadoBorrarInventario = false;
         Session s = Factoria.getSession();
         Statement st = s.getStatement();
-        try {
-            String query = "DELETE FROM usuario WHERE id='" + user.getId() + "'";
-            st.executeUpdate(query);
-            resultado = true;
-        } catch (SQLException ex) {
-            throw new Exception("No se no va");
-        } finally {
-            st.close();
-            s.close();
-            return resultado;
+        String id = idUser;
+
+            try {
+                String query = "DELETE FROM usuario WHERE id='" + id + "'";
+                st.execute(query);
+               resultadoBorrarInventario= borrarInventario(id);
+               if (resultadoBorrarInventario == true){
+                   resultadoBorrarUsuario = true;
+                   return resultadoBorrarUsuario;
+               }
+            } catch (SQLException ex) {
+                throw new Exception("No se ha podido eliminar");
+            }
+            finally {
+                st.close();
+                s.close();
+                return resultadoBorrarUsuario;
+            }
+
         }
-    }
-
-
-   ////////////////////////////////// CAMBIAR PASS/////////////////////////////
 
     public void cambiarPass(String nombre, String pass, String newpass, String id) throws  Exception {
         Session s = Factoria.getSession();
@@ -252,58 +276,6 @@ public class UsersDAOImpl implements UsersDAO {
 
 
 
-
-
-
-
-
-
-
-
-    /*public String comprarObjeto (String idUser, String idObjeto) throws Exception{
-
-        Session s = Factoria.getSession();
-        Statement st = s.getStatement();
-        juego.Usuario u = new juego.Usuario();
-        u =(juego.Usuario) s.get(idUser, juego.Usuario.class);
-
-        ObjetoDAO b = new ObjetoDAOImpl();
-
-        InventarioDAO a = new InventarioDAOImpl();
-        LinkedList<juego.Inventario> inventarios = a.dameInventario(idUser);
-
-        for (int i=0; i<inventarios.size(); i++){
-
-            try {
-
-                if (idObjeto.equals(inventarios.get(i).getIdObjeto())) {
-
-                    int dineroUsuario = u.getDinero();
-
-                    Objeto objeto = b.getObjeto(inventarios.get(i).getIdObjeto());
-
-                    int dineroObjeto = objeto.getDinero();
-
-                    if (dineroUsuario > dineroObjeto) {
-                        int dinerooperacion = 0 - dineroObjeto;
-
-                        modificarDinero(idUser, dinerooperacion);
-                        a.cambiarActivado(u.getId(), objeto.getId());
-
-                    }
-
-                }
-            }catch (Exception e){
-
-            throw new Exception("No hay dinerillos o el objeto no existe o el usuario tampoco o todo a la vez");
-
-                    }
-            finally {
-                st.close();
-                s.close();
-            }
-            }
-        }*/
 
 
     }
