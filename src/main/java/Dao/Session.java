@@ -37,7 +37,7 @@ public class Session {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
-           session = DriverManager.getConnection("jdbc:mysql://localhost/dsa", "root", "DSA2019");
+           session = DriverManager.getConnection("jdbc:mysql://localhost/dsa", "root", "Mazinger72");
 
             return session;
 
