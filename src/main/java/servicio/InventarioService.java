@@ -5,10 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import juego.Juego;
-import juego.JuegoManager;
-import juego.Objeto;
-import juego.UsuarioTO;
+import juego.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.GenericEntity;
@@ -51,6 +48,27 @@ public class InventarioService {
             return Response.status(201).entity(entity).build();
 
         } else {
+            return Response.status(404).build();
+        }
+
+    }
+
+    @GET
+    @ApiOperation(value = "dame el inventario de un usuario")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful", response = juego.Inventario.class, responseContainer="List"),
+            @ApiResponse(code = 404, message = "No se ha podido realizar")
+    })
+    @Path("/{idUser}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response dameInventarioByID(@PathParam("idUser") String id) {
+        try{
+
+            List<Inventario> inventario = this.ju.dameInventarioPorID(id);
+            GenericEntity<List<Inventario>> entity = new GenericEntity<List<Inventario>>(inventario) {};
+            return Response.status(201).entity(entity).build()  ;
+
+        }catch (Exception e){
             return Response.status(404).build();
         }
 

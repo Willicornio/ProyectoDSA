@@ -9,19 +9,21 @@ public class Objeto {
     String descripcion;
     String foto;
     int dinero;
+    int vida;
     String activado;
 
     public Objeto() {
 
     }
 
-    public Objeto(String id, String Nombre, String descripcion, int dinero, String foto){
+    public Objeto(String id, String Nombre, String descripcion, int dinero, int vida, String foto){
 
         this.dinero = dinero;
         this.id = id;
         this.nombre = Nombre;
         this.descripcion = descripcion;
-        this.foto=this.foto;
+        this.foto=foto;
+        this.vida = vida;
         this.activado = "false";
     }
 
@@ -41,7 +43,13 @@ public class Objeto {
         this.nombre = nombre;
     }
 
+    public int getVida() {
+        return vida;
+    }
 
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
 
     public int getDinero() {
         return dinero;
