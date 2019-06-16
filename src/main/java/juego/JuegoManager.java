@@ -264,7 +264,7 @@ public class JuegoManager  implements Juego {
         Objeto o = objeto;
 
 
-        dao.addObjeto(o.getId(),o.getNombre(),o.getDescripcion(), o.getFoto(), o.getDinero());
+        dao.addObjeto(o.getId(),o.getNombre(),o.getDescripcion(), o.getFoto(), o.getDinero(), o.getVida());
 
     }
 

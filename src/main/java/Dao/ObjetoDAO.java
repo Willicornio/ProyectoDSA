@@ -7,7 +7,7 @@ public interface ObjetoDAO {
 
 
     public juego.Objeto getObjeto (String id) throws Exception;
-    public void addObjeto (String id, String nombre, String descripcion, String foto, int dinero) throws Exception;
+    public void addObjeto (String id, String nombre, String descripcion, String foto, int dinero, int vida) throws Exception;
 
 
 }

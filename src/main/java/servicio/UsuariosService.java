@@ -87,7 +87,7 @@ import java.util.logging.Logger;
             @ApiResponse(code = 201, message = "Successful",response = UsuarioTO.class),
             @ApiResponse(code = 404, message = "No se ha podido realizar")
     })
-    @Path("/modifficarpuntuacion/{idUser}/{puntuacion}")
+    @Path("/modificarpuntuacion/{idUser}/{puntuacion}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response modificarPuntuacion(@PathParam("idUser") String id, @PathParam("puntuacion") int puntuacion) throws Exception {
         Logger log = Logger.getLogger(UsuariosService.class.getName());
