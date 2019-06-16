@@ -37,7 +37,7 @@ public class Session {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
-           session = DriverManager.getConnection("jdbc:mysql://localhost/dsa", "root", "Mazinger72");
+           session = DriverManager.getConnection("jdbc:mysql://localhost/dsa", "root", "DSA2019");
 
             return session;
 
@@ -185,11 +185,18 @@ public class Session {
         query = "SELECT * FROM " + table + " WHERE id =?";
 
         System.out.println("query :"+query);
-        System.out.println(id);
+
+
         PreparedStatement ps = this.session.prepareStatement(query);
         ps.setString(1, id);
 
+        System.out.println("1");
+
+
         resultSet = ps.executeQuery();
+
+        System.out.println("2");
+
         if (resultSet!=null) {
             if (resultSet.next()) {
                 o = writeResultSet(resultSet, o);
@@ -198,6 +205,7 @@ public class Session {
                 System.out.println("resulset VACIO!!!!!!");
             }
         }
+        System.out.println("3");
 
         ps.close();
 
