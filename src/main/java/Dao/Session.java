@@ -166,11 +166,6 @@ public class Session {
         }
     }
 
-
-
-
-
-
     public Object get( String id, Class clase) throws Exception {
 
         Object o = clase.newInstance();

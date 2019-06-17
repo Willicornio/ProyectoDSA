@@ -2,8 +2,8 @@ package juego;
 
 public class Auth {
 
-    String nombre;
-    String pass;
+    private String nombre;
+    private String pass;
 
     public Auth(String nombre, String pass) {
         this.nombre = nombre;

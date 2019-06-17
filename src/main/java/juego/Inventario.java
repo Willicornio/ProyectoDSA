@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Inventario {
 
-    String idUser;
-    String idObjeto;
-    String activado;
+    private String idUser;
+    private String idObjeto;
+    private String activado;
 
     public Inventario() {
 

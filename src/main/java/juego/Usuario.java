@@ -4,11 +4,11 @@ import java.util.LinkedList;
 public class Usuario {
 
 
-String id;
-String nombre;
-String pass;
-int dinero;
-int puntuacion;
+    private String id;
+    private String nombre;
+    private String pass;
+    private int dinero;
+    private int puntuacion;
 
     public Usuario() {
     }

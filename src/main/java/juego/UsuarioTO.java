@@ -1,13 +1,13 @@
 package juego;
 
 public class UsuarioTO {
-    String idUser;
-    String nombre;
-    int dinero;
-    int puntuacionTotal;
+
+    private String idUser;
+    private String nombre;
+    private int dinero;
+    private int puntuacionTotal;
 
     public UsuarioTO() {
-
 
     }
 
